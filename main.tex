@@ -1,0 +1,333 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The Legrand Orange Book
+% LaTeX Template
+% Version 1.3 (21/8/13)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Mathias Legrand (legrand.mathias@gmail.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+% Compiling this template:
+% This template uses biber for its bibliography and makeindex for its index.
+% When you first open the template, compile it from the command line with the 
+% commands below to make sure your LaTeX distribution is configured correctly:
+%
+% 1) pdflatex main
+% 2) makeindex main.idx -s StyleInd.ist
+% 3) biber main
+% 4) pdflatex main x 2
+%
+% After this, when you wish to update the bibliography/index use the appropriate
+% command above and make sure to compile with pdflatex several times 
+% afterwards to propagate your changes to the document.
+%
+% This template also uses a number of packages which may need to be
+% updated to the newest versions for the template to compile. It is strongly
+% recommended you update your LaTeX distribution if you have any
+% compilation errors.
+%
+% Important note:
+% Chapter heading images should have a 2:1 width:height ratio,
+% e.g. 920px width and 460px height.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[11pt,fleqn]{book} % Default font size and left-justified equations 
+\usepackage{logreq}
+\usepackage{pdflscape}
+\usepackage{ifthen}
+\newboolean{tablet}
+\newboolean{fullBook}
+\newboolean{includeCover}
+% Change the boolean below from true to false to disactivate tablet output.
+\setboolean{tablet}{false} 
+\setboolean{fullBook}{true}
+\setboolean{includeCover}{false}
+\newcommand{\ignore}[1]{ %ignored
+}
+%\usepackage[top=3cm,bottom=3cm,left=3.2cm,right=3.2cm,headsep=10pt,a4paper]{geometry} % Page margins
+%
+% define \iftablet and set its value:
+\ifthenelse {\boolean{tablet}}{
+% for tablets:
+\usepackage[papersize={5in,6in},margin=3mm]{geometry} 
+
+} {
+\usepackage[top=3cm,bottom=2.5cm,left=3.5cm,right=3.5cm,headsep=10pt,paperwidth=8.25in, paperheight=10.25in, hmarginratio=2:3]{geometry} % Page margins
+%Turn on to enable Bleed and Trim boxes
+\pdfpageattr{
+/MediaBox [0	0	594	738] 
+/BleedBox [9	9	585	729]
+/CropBox  [0	0	594	738]
+/TrimBox  [9	9	585	729]
+}
+}
+% Try to expand space between figure number and caption in listoffigures
+
+%\usepackage{tocstyle} 
+%\usetocstyle{standard}
+
+\usepackage{xcolor} % Required for specifying colors by name
+\definecolor{ocre}{RGB}{243,102,25} % Define the orange color used for highlighting throughout the book
+
+% Font Settings
+\usepackage{avant} % Use the Avantgarde font for headings
+%\usepackage{times} % Use the Times font for headings
+\usepackage{mathptmx} % Use the Adobe Times Roman as the default text font together with math symbols from the Sym­bol, Chancery and Com­puter Modern fonts
+
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+\usepackage[utf8]{inputenc} % Required for including letters with accents
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+
+% Use typewriter font that supports bold:
+\usepackage[scaled]{beramono}
+
+% Bibliography
+\usepackage[style=alphabetic,sorting=nyt,sortcites=true,autopunct=true,babel=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
+\addbibresource{bibliography.bib} % BibTeX bibliography file
+\defbibheading{bibempty}{}
+
+% Index
+\usepackage{calc} % For simpler calculation - used for spacing the index letter headings correctly
+\usepackage{makeidx} % Required to make an index
+\makeindex % Tells LaTeX to create the files required for indexing
+
+% Load side caption. See http://tex.stackexchange.com/questions/49979/put-text-to-the-right-of-figures
+\usepackage[innercaption]{sidecap}
+\sidecaptionvpos{figure}{t}
+
+%\usepackage{listings}
+\usepackage{fancyvrb}
+
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{lightblue}{rgb}{0.54,0.824,1}
+
+\usepackage{mathtools}
+\usepackage{stmaryrd}
+%----------------------------------------------------------------------------------------
+%\usepackage{layout}
+
+\ifthenelse {\boolean{tablet}}{
+\newcommand{\coverScalingFactor}[0]{0.625}
+\newcommand{\miniTocHeight}[0]{5cm}
+\newcommand{\roundChapterTitleXOffset}[0]{5cm}
+\newcommand{\roundChapterTitleYOffset}[0]{4cm}
+\newcommand{\NewChapterTextOffsetY}[0]{130\p@}
+\newcommand{\ChapterFontStyle}[0]{\Large}
+\newcommand{\sectionMarginPosition}[0]{-\textwidth}
+\newcommand{\widthProjectTabFigure}[0]{5cm}
+\newcommand{\XHeadingOffset}[0]{1cm}
+\newcommand{\YHeadingOffset}[0]{0.25cm}
+}{
+\newcommand{\coverScalingFactor}[0]{1.04}
+\newcommand{\miniTocHeight}[0]{6cm}
+\newcommand{\roundChapterTitleXOffset}[0]{8.5cm}
+\newcommand{\roundChapterTitleYOffset}[0]{6.5cm}
+\newcommand{\NewChapterTextOffsetY}[0]{180\p@}
+\newcommand{\ChapterFontStyle}[0]{\huge}
+\newcommand{\sectionMarginPosition}[0]{1em}
+\newcommand{\widthProjectTabFigure}[0]{7cm}
+\newcommand{\XHeadingOffset}[0]{0.8in}
+\newcommand{\YHeadingOffset}[0]{-0.5cm}
+}
+
+\newcommand{\mytilde}{\raise.17ex\hbox{$\scriptstyle\mathtt{\sim}$}}
+
+% When the first line is active, we print the questions to Jetbrains and mark the location in the index.
+%\newcommand{\questionToJetBrains}[1]{Q: #1\index{Question to Jetbrains}}
+\newcommand{\questionToJetBrains}[1]{}
+
+
+\input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
+
+\usepackage{hyperref}
+\hypersetup{hidelinks,backref=true,pagebackref=true,hyperindex=true,colorlinks=false,breaklinks=true,urlcolor=blue,bookmarks=true,bookmarksopen=false,pdftitle={book title},pdfauthor={book author}}
+% compression pdf
+\pdfminorversion=5
+\pdfobjcompresslevel=6 
+\pdfcompresslevel=9
+
+
+\usepackage{footmisc}
+\ifthenelse {\boolean{tablet}}{ % DO not adjust offset in tablet mode.
+} {
+\addtolength{\hoffset}{.3cm}
+}
+\begin{document}
+
+%\layout
+\ifthenelse {\boolean{includeCover}}{
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\begingroup
+\thispagestyle{empty}
+\AddToShipoutPicture*{\put(0,0)
+%{\includegraphics[scale=\coverScalingFactor]{Pictures/MPS-Book_Vol1_Cover-v2.pdf}}} % Image background
+{\includegraphics[scale=\coverScalingFactor]{Pictures/coverVolume1.png}}} % Image background
+\mbox{}
+\endgroup
+} {
+% do not produce a cover/title page
+}
+%----------------------------------------------------------------------------------------
+%	COPYRIGHT PAGE
+%----------------------------------------------------------------------------------------
+
+\newpage
+~\vfill
+\thispagestyle{empty}
+
+\noindent Copyright \copyright\ 2015 Fabien Campagne, The Weill Medical College of Cornell University\\ % Copyright notice
+
+\noindent \textsc{Published by Fabien Campagne}\\ % Publisher
+
+\noindent \textsc{http://books.campagnelab.org}\\ % URL
+\\
+\noindent All Rights Reserved. No part of this publication may be reproduced or transmitted in any form or by any means, electronic or mechanical, including photocopy, recording, or any information storage and retrieval system without permission in writing from the copyright owner. \\
+\noindent Unless required by applicable law or agreed to in writing, software listings provided in this book are distributed on an \textsc{``AS IS'' BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND}, either express or implied. \\
+Reproductions of program fragments from the JetBrains MPS platform are provided in accordance with terms of the Apache 2.0 license. \\
+See \url{http://www.jetbrains.com/mps/download/license.html} and\\
+\url{http://www.apache.org/licenses/LICENSE-2.0.html}.
+\vspace*{0.5cm}
+
+\noindent \textit{
+\ifthenelse {\boolean{tablet}}{Second Edition.}
+{First Edition.} Version 1.3.0, Nov 2014} % Printing/edition date 
+
+% Add an empty page in print edition to put credit on a new leaf
+\ifthenelse {\boolean{tablet}}{} 
+{\newpage\thispagestyle{empty}\hbox{}}
+
+%----------------------------------------------------------------------------------------
+%	CREDITS
+%----------------------------------------------------------------------------------------
+\newpage\thispagestyle{empty}
+\begin{empty}
+ \ifthenelse {\boolean{tablet}}{}{
+\vspace*{0.15\textheight}
+}
+\begin{center}\Large{Credits}\end{center}
+\normalsize 
+\hspace*{1cm} I want to thank the developers of the Meta Programming System, who have developed MPS since the early 2000. MetaR would not have been possible without them. \\
+\noindent\textbf{MPS Project leaders, in chronological order:}  Sergey Dmitriev,  Igor Alshannikov, Konstantin Solomatov and Alexander Shatalin. \textbf{Current team members:} Alexander Shatalin, Fedor Isakov, Mihail Muhin, Michael Vlassiev, Václav Pech, Simon Alperovich, Daniil Elovkov, Victor Matchenko, Artem Tikhomirov, Mihail Buryakov and Alexey Pyshkin. \textbf{Earlier members of the MPS team:} Evgeny Gryaznov, Timur Abishev, Julia Beliaeva, Cyril Konopko, Ilya Lintsbah, Gleb Leonov, Evgeny Kurbatsky, Sergey Sinchuk, Timur Zambalayev, Maxim Mazin, Vadim Gurov, Evgeny Geraschenko, Darja Chembrovskaya, Vyacheslav Lukianov and Alexander Anisimov. \textbf{And these external contributors:}  Sascha Lisson, Thiago Tonelli Bartolomei and Alexander Eliseyev.\\ 
+
+I also need to thank the many people who have taken the MetaR training sessions at the Clinical Translational Science Center (Weill Cornell Medical College, Memorial Sloan Kettering, and Hospital for Special Surgery and Hunter College). Their feedback during these sessions have been instrumental in tweaking MetaR to make it even more user-friendly.\\
+
+%\vspace*{\fill}
+\end{empty}
+
+\ifthenelse {\boolean{tablet}}{} 
+{\newpage\thispagestyle{empty}\hbox{}}
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+%latexml \providecommand\chapterimage[1]{#1}
+\chapterimage{blue-chapter-head_4-reduced.pdf} % Table of contents heading image
+
+\pagestyle{empty} % No headers
+
+\tableofcontents % Print the table of contents itself
+
+\cleardoublepage % Forces the first chapter to start on an odd page so it's on the right
+
+\pagestyle{fancy} % Print headers again
+
+\newcommand{\MPS}[0]{MPS\index{MPS} }
+\newcommand{\AST}[0]{AST\index{AST} }
+
+
+
+%\newcommand{\figWidthWide}[0]{16.5cm}
+\newcommand{\figWidthWide}[0]{1\textwidth}
+
+
+%\newcommand{\figWidthNarrow}[0]{10cm}
+\newcommand{\figWidthNarrow}[0]{0.66\textwidth}
+\newcommand{\figWidthSmall}[0]{0.5\textwidth}
+\newcommand{\figWidthTiny}[0]{0.33\textwidth}
+
+
+\newcommand{\mpsplaceholder}[0]{<<~...~>>}
+
+\newcommand{\mpsImprovementNeeded}[0]{}
+
+\newcommand{\navigateToKeys}[0]{[\keys{\ctrl+N} or \keys{\cmd+N}]}
+
+\newcommand{\mpsDocNotClear}[0]{\index{MPS documentation is not clear}}
+%trim option's parameter order: left bottom right top
+
+\newcommand{\intentionLightBulb}[0]{\includegraphics[trim=0mm 0mm 0mm 0mm, clip,scale=0.5]{Pictures/intentionLightBulb2.png}}
+
+\newcommand{\inspectorTabIcon}[0]{\includegraphics[trim=0mm 0mm 0mm 0mm, clip,scale=0.4]{Pictures/InspectorTabIcon-3.png}}
+
+\newcommand{\tabControlIcon}[0]{\includegraphics[trim=0mm 0mm 0mm 0mm, clip,scale=0.4]{Pictures/TabControlMPS3_1.png}}
+
+
+% The following commands do not work.
+%\newcommand{\exclamationToDot}[1]{\convertchar{#1}{!}{.}}
+%\newcommand{\qualifiedLanguageName}[1]{\convertchar[v]{#1}{.}{\allowbreak{}!}}
+%----------------------------------------------------------------------------------------
+%	CHAPTERS
+%----------------------------------------------------------------------------------------
+\ifthenelse {\boolean{fullBook}}{
+\input{chapter_Introduction}
+}{
+
+}
+
+\ifthenelse {\boolean{fullBook}}{
+\input{keymap}
+}{
+  % Put chapters that go in the reduced book here.
+
+}
+
+\ifthenelse {\boolean{tablet}}{ % no list of figures for tablet version. Page numbers are outside the page limit.
+} {
+%----------------------------------------------------------------------------------------
+%	LIST OF FIGURES
+%----------------------------------------------------------------------------------------
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\textcolor{ocre}{List of Figures}}
+\listoffigures
+}
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\textcolor{ocre}{Bibliography}}
+\printbibliography
+
+
+%----------------------------------------------------------------------------------------
+%	INDEX
+%----------------------------------------------------------------------------------------
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\textcolor{ocre}{Index}}
+\setlength{\columnsep}{0.75cm}
+\printindex
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

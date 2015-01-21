@@ -1,0 +1,294 @@
+
+%----------------------------------------------------------------------------------------
+%	The MPS Key Map
+%----------------------------------------------------------------------------------------
+
+\chapterimage{blue-chapter-head_4-reduced.pdf} % Chapter heading image
+
+\chapter{MPS Key Map}\label{chap:KeyMap}
+
+\begin{table}[!htbp]
+\centering
+    \begin{tabular}{llr}
+\toprule
+\textbf{Windows or Linux}  &  \textbf{MacOS}  &  \textbf{Action} \\
+\midrule
+\keys{ \Alt + 0-9 } &  \keys{ \Alt + 0-9 } &  Open corresponding tool window  \\
+\keys{ \ctrl + S } & \keys{ \cmd + S } &  Save all \\
+\keys{ \ctrl + \Alt + F11 } &  \keys{N} or \keys{A } &  Toggle full screen mode \\
+\keys{ \ctrl + \shift + F12 } &  \keys{N} or \keys{A } &  Toggle maximizing editor \\
+\keys{ \ctrl + BackQuote } &  \keys{\ctrl + BackQuote } &  Quick switch current scheme \\
+\keys{ \ctrl + \Alt + S } & \keys{ \cmd + Comma } &  Open Settings dialog \\
+\keys{ \ctrl + \Alt + C } & \keys{ \cmd + \Alt + C } & Model Checker \\
+\bottomrule
+\end{tabular}
+\caption{General}
+\end{table}
+
+
+\begin{table}[!htbp]
+\centering
+    \begin{tabular}{llr}
+\toprule
+\textbf{Windows or Linux}  &  \textbf{MacOS}  &  \textbf{Action} \\
+\midrule
+\keys{ \Alt + F7  } &  \keys{ \Alt + F7 } &  Find usages  \\
+\keys{ \ctrl + \Alt + \shift + F7 } & \keys{ \cmd + \Alt + \shift + F7 } &  Highlight cell dependencies \\
+\keys{ \ctrl + \shift + F6 } & \keys{ \cmd + \shift + F6 } &  Highlight instances \\
+\keys{ \ctrl + \shift + F7 } & \keys{ \cmd + \shift + F7 } &  Highlight usages \\
+\keys{ \ctrl + F } & \keys{ \cmd + F } &  Find text  \\
+\keys{F3 } & \keys{ F3 } &  Find next \\
+\keys{\shift + F3 } & \keys{ \shift + F3 } &  Find previous \\
+
+\end{tabular}
+\caption{Usage and Text Search}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{llr}
+\toprule
+\textbf{Windows or Linux}  &  \textbf{MacOS}  &  \textbf{Action} \\
+\midrule
+\keys{ \ctrl + M  } & \keys{ \cmd + M } &  Import model \\
+\keys{ \ctrl + L  } & \keys{ \cmd + L } &  Import language \\
+\keys{ \ctrl + R  } & \keys{ \cmd + R } &  Import model by root name \\
+\end{tabular}
+\caption{Import}
+\end{table}
+
+\ifthenelse {\boolean{tablet}}{\begin{landscape}}{}
+\begin{table}[!htbp]
+\centering
+    \begin{tabular}{llr}
+\toprule
+\textbf{Windows or Linux}  &  \textbf{MacOS}  &  \textbf{Action} \\
+\midrule
+\keys{ \ctrl + \space  } &  \keys{ \ctrl + \space } &  Code completion \\
+\keys{ \ctrl + \Alt + click  } &  \keys{ \cmd + \Alt + click } &  Show descriptions of error \\
+& & or warning at caret  \\
+\keys{ \Alt + \return  } &  \keys{ \Alt + \return } &  Show intention actions \\
+\keys{ \ctrl + \Alt + T  } & \keys{  \cmd + \Alt + T } &  Surround with... \\
+\keys{ \ctrl + X} or  \\
+\keys{ \ctrl + \shift + \del  } &  \keys{ \cmd + X } &  Cut current line \\
+& & or selected block to buffer \\
+\keys{ \ctrl + C  \ctrl + Insert  } & \keys{ \cmd + C } &  Copy current line \\
+& & or selected block to buffer \\
+\keys{ \ctrl + V \shift + Insert  } & \keys{ \cmd + V } &  Paste from buffer \\
+\keys{ \ctrl + D  } & \keys{ \cmd + D } & Up current line or \\ 
+& & selected block \\
+\keys{ \shift + F5 } & \keys{ \shift + F5 } &  Clone root \\
+\keys{ \ctrl + \arrowkeyup} or \keys{\arrowkeydown } & \keys{ \cmd + \arrowkeyup} or \keys{\arrowkeydown } &  Expand or Shrink block \\
+& & selection region \\
+\keys{ \ctrl + \shift + \arrowkeyup} or \keys{\arrowkeydown } & \keys{ \cmd + \shift + \arrowkeyup} or \keys{\arrowkeydown } &  Move statements Up or Down \\
+\keys{\shift + Arrows } & \keys{ \shift + Arrows } &  Extend the selected region \\
+& & to siblings \\
+\keys{ \ctrl + W } & \keys{ \cmd + W } &  Select successively increasing \\
+& & code blocks \\
+\keys{ \ctrl + \shift + W } & \keys{ \cmd + \shift + W } &  Decrease current selection \\
+& & to previous state \\
+\bottomrule
+\end{tabular}
+\caption{Editing (Part 1/2)}
+\end{table}
+\ifthenelse {\boolean{tablet}}{\end{landscape}}{}
+
+\begin{table}[!htbp]
+\centering
+    \begin{tabular}{llr}
+\toprule
+\textbf{Windows or Linux}  &  \textbf{MacOS}  &  \textbf{Action} \\
+\midrule
+\keys{ \ctrl + Y } &  \keys{\cmd + Y } &  Delete line \\
+\keys{ \ctrl + Z } &  \keys{\cmd + Z } &  Undo \\
+\keys{ \ctrl + \shift + Z } & \keys{ \cmd + \shift + Z } &  Redo \\
+\keys{ \Alt + F12 } &  \keys{ \Alt + F12 } &  Show note in AST explorer \\
+\keys{ F5 } &  \keys{ F5 } &  Refresh \\
+\keys{ \ctrl + MINUS } &  \keys{\cmd + MINUS } &  Collapse \\
+\keys{ \ctrl + \shift + MINUS } &  \keys{\cmd + \shift + MINUS } &  Collapse all \\
+\keys{ \ctrl + PLUS } &  \keys{\cmd + PLUS } &  Expand \\
+\keys{ \ctrl + \shift + PLUS } & \keys{ \cmd + \shift + PLUS } &  Expand all \\
+\keys{ \ctrl + \shift + 0-9 } &  \keys{\cmd + \shift + 0-9 } &  Set bookmark \\
+\keys{ \ctrl + 0-9 } &  \keys{ \ctrl + 0-9 } &  Go to bookmark \\
+\keys{ Tab } &  \keys{ Tab } &  Move to the next cell \\
+\keys{ \shift + Tab } &  \keys{ \shift + Tab } &  Move to the previous cell \\
+\keys{ Insert } &  \keys{ \ctrl + N } &  Create Root Node\\ & & (in the Project View) \\
+\bottomrule
+\end{tabular}
+\caption{Editing (Part 2/2)}
+\end{table}
+
+
+\begin{table}[!htbp]
+\centering
+    \begin{tabular}{llr}
+\toprule
+\textbf{Windows or Linux}  &  \textbf{MacOS}  &  \textbf{Action} \\
+\midrule
+\keys{ \ctrl + B } or & & Go to root node\\
+\keys{ \ctrl + click } & \keys{ \cmd + B } &  \\
+& or \keys{\cmd + click } &  Go to declaration \\
+\keys{ \ctrl + N } & \keys{ \cmd + N } & \\
+\keys{ \ctrl + \shift + N } & \keys{ \cmd + \shift + N } &  Go to file \\
+\keys{ \ctrl + G } & \keys{ \cmd + G } &  Go to node by id \\
+\keys{ \ctrl + \shift + A } & \keys{ \cmd + \shift + A } &  Go to action by name \\
+\keys{ \ctrl + \Alt + \shift + M } & \keys{ \cmd + \Alt + \shift + M } &  Go to model \\
+\keys{ \ctrl + \Alt + \shift + S } & \keys{ \cmd + \Alt + \shift + S } &  Go to solution \\
+\keys{ \ctrl + \shift + S } & \keys{ \cmd + \shift + S } &  Go to concept \\
+& & declaration \\
+\keys{ \ctrl + \shift + E } & \keys{ \cmd + \shift + E } &  Go to concept \\
+& & editor declaration \\
+\keys{ \Alt + Left} or \keys{Right} &  \keys{ \ctrl + Left} or \keys{Right} &  Go to next \\
+& & or previous editor tab \\
+\keys{Esc } & \keys{ Esc } &  Go to editor (from \\
+& & tool window) \\
+\keys{\shift + Esc } & \keys{ \shift + Esc } &  Hide active or \\
+& & last active window \\
+\keys{\shift + F12 } & \keys{ \shift + F12 } &  Restore default \\
+& & window layout \\
+\keys{ \ctrl + \shift + F12 } & \keys{ \cmd + \shift + F12 } &  Hide all tool windows \\
+\keys{F12 } & \keys{ F12 } &  Jump to the last \\
+& & tool window \\
+\bottomrule
+\end{tabular}
+\caption{Navigation (Part 1/2)}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+    \begin{tabular}{llr}
+\toprule
+\textbf{Windows or Linux}  &  \textbf{MacOS}  &  \textbf{Action} \\
+\midrule
+\keys{ \ctrl + E } & \keys{ \cmd + E } &  Recent nodes popup\\
+\keys{ \ctrl + \Alt + Left} & \keys{ \cmd + \Alt + Left} & \\
+or \keys{Right} & or \keys{ Right } & Navigate back or forward \\
+\keys{ \Alt + F1 } &  \keys{ \Alt + F1 } &  Select current \\
+& &node in any view \\\keys{ \ctrl + H  } & \keys{ \cmd + H } &  Concept or Class hierarchy  \\
+\keys{F4} or \keys{ \return } &  \keys{F4} or \keys{ \return } &  Edit source or View source \\
+\keys{ \ctrl + F4 } & \keys{ \cmd + F4 } &  Close active editor tab \\
+\keys{ \Alt + 2 } &  \keys{ \Alt + 2 } &  Go to inspector \\
+\keys{ \ctrl + F10 } & \keys{ \cmd + F10 } &  Show structure \\
+\keys{ \ctrl + \Alt + ] } & \keys{ \cmd + \Alt + ] } &  Go to next project window \\
+\keys{ \ctrl + \Alt + [ } & \keys{ \cmd + \Alt + [ } &  Go to previous project window \\
+\keys{ \ctrl + \shift + Right } &  \keys{ \ctrl + \shift + Right } &  Go to next aspect tab \\
+\keys{ \ctrl + \shift + Left } &  \keys{ \ctrl + \shift + Left } &  Go to previous aspect tab \\
+\keys{ \ctrl + \Alt + \shift + R } & \keys{ \cmd + \Alt + \shift + R } &  Go to type-system rules \\
+\keys{ \ctrl + \shift + T } & \keys{ \cmd + \shift + T } &  Show type \\
+\keys{ \ctrl + H } &  \keys{ \ctrl + H } &  Show in hierarchy view \\
+\keys{ \ctrl + I } & \keys{ \cmd + I } &  Inspect node \\
+\bottomrule
+\end{tabular}
+\caption{Navigation (Part 2/2)}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+    \begin{tabular}{llr}
+\toprule
+\textbf{Windows or Linux}  &  \textbf{MacOS}  &  \textbf{Action} \\
+\midrule
+\keys{ \ctrl + F9  } & \keys{ \cmd + F9 } &  Generate current module  \\
+\keys{ \ctrl + \shift + F9 } &  \keys{ \cmd + \shift + F9 } &  Generate current model \\
+\keys{\shift + F10 } & \keys{ \shift + F10 } &  Run \\
+\keys{\shift + F9 } & \keys{ \shift + F9 } &  Debug \\
+\keys{ \ctrl + \shift + F10 } & \keys{ \cmd + \shift + F10 } &  Run context configuration \\
+\keys{ \Alt + \shift + F10 } &  \keys{ \Alt + \shift + F10 } &  Select and run a configuration \\
+\keys{ \ctrl + \shift + F9 } & \keys{ \cmd + \shift + F9 } &  Debug context configuration \\
+\keys{ \Alt + \shift + F9 } &  \keys{ \Alt + \shift + F9 } &  Select and debug \\
+& & a configuration \\
+\keys{ \ctrl + \Alt + \shift + F9 } & \keys{ \cmd + \Alt + \shift + F9 } &  Preview generated text \\
+\keys{ \ctrl + \shift + X } & \keys{ \cmd + \shift + X } &  Show type-system trace \\
+\bottomrule
+\end{tabular}
+\caption{Generation}
+\end{table}
+%\ifthenelse {\boolean{tablet}}{\end{landscape}}{}
+
+%\ifthenelse {\boolean{tablet}}{\begin{landscape}}{}
+\begin{table}[!htbp]
+\centering
+    \begin{tabular}{llr}
+\toprule
+\textbf{Windows or Linux}  &  \textbf{MacOS}  &  \textbf{Action} \\
+\midrule
+\keys{\ctrl + O} & \keys{\cmd + O} & Override methods \\
+\keys{\ctrl + I} & \keys{\cmd + I} & Implement methods \\
+\keys{\ctrl + /} & \keys{ \cmd + /} & Comment or uncomment \\
+& & with block comment \\
+\keys{\ctrl + F12} & \keys{\cmd + F12} & Show nodes \\
+\keys{\ctrl + P} & \keys{\cmd + P} & Show parameters \\
+\keys{\ctrl + Q} & \keys{\ctrl + Q} & Show node information \\
+\keys{\ctrl + Insert} & \keys{\ctrl + N} & Create new ... \\
+\keys{\ctrl + \Alt + B} & \keys{\cmd + \Alt + B} & Go to overriding methods \\
+& & or Go to inherited classifiers \\
+\keys{\ctrl + U} & \keys{\cmd + U} & Go to overridden method \\
+\bottomrule
+\end{tabular}
+\caption{BaseLanguage and Editing}
+\end{table}
+%\ifthenelse {\boolean{tablet}}{\end{landscape}}{}
+
+\begin{table}[!htbp]
+\centering
+    \begin{tabular}{llr}
+\toprule
+\textbf{Windows or Linux}  &  \textbf{MacOS}  &  \textbf{Action} \\
+\midrule
+\keys{ \ctrl + K } & \keys{ \cmd + K } &  Commit project to VCS \\
+\keys{ \ctrl + T } & \keys{ \cmd + T } &  Update project from VCS \\
+\keys{ \ctrl + V } &  \keys{ \ctrl + V } &  VCS operations popup \\
+\keys{ \ctrl + \Alt + A } & \keys{ \cmd + \Alt + A } &  Add to VCS \\
+\keys{ \ctrl + \Alt + E } & \keys{ \cmd + \Alt + E } &  Browse history \\
+\keys{ \ctrl + D } & \keys{ \cmd + D } &  Show differences \\
+\bottomrule
+\end{tabular}
+\caption{Version Control System and Local History}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+    \begin{tabular}{llr}
+\toprule
+\textbf{Windows or Linux}  &  \textbf{MacOS}  &  \textbf{Action} \\
+\midrule
+\keys{F6 } & \keys{ F6 } &  Move \\
+\keys{\shift + F6 } & \keys{ \shift + F6 } &  Rename \\
+\keys{ \Alt + \del } &  \keys{ \Alt + \del } &  Safe Delete \\
+\keys{ \ctrl + \Alt + N } & \keys{ \cmd + \Alt + N } &  Inline \\
+\keys{ \ctrl + \Alt + M } & \keys{ \cmd + \Alt + M } &  Extract Method \\
+\keys{ \ctrl + \Alt + V } & \keys{ \cmd + \Alt + V } &  Introduce Variable \\
+\keys{ \ctrl + \Alt + C } & \keys{ \cmd + \Alt + C } &  Introduce constant \\
+\keys{ \ctrl + \Alt + F } & \keys{ \cmd + \Alt + F } &  Introduce field \\
+\keys{ \ctrl + \Alt + P } & \keys{ \cmd + \Alt + P } &  Extract parameter \\
+\keys{ \ctrl + \Alt + M } & \keys{ \cmd + \Alt + M } &  Extract method \\
+\keys{ \ctrl + \Alt + N } & \keys{ \cmd + \Alt + N } &  Inline \\
+\bottomrule
+\end{tabular}
+\caption{Refactoring}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+    \begin{tabular}{llr}
+\toprule
+\textbf{Windows or Linux}  &  \textbf{MacOS}  &  \textbf{Action} \\
+\midrule
+\keys{F8 } &  \keys{F8 } &  Step over \\
+\keys{F7 } &  \keys{F7 } &  Step into \\
+\keys{\shift + F8 } & \keys{ \shift + F8 } & Step out \\
+\keys{F9 } &  \keys{F9 } &  Resume \\
+\keys{ \Alt + F8 } &  \keys{ \Alt + F8 } &  Evaluate expression \\
+\keys{ \ctrl + F8 } & \keys{ \cmd + F8 } &  Toggle breakpoints \\
+\keys{ \ctrl + \shift + F8 } & \keys{ \cmd + \shift + F8 } &  View breakpoints \\
+\bottomrule
+\end{tabular}
+\caption{Debugger}
+\end{table}
+
+
+
+
+
+
+
