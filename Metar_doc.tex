@@ -51,7 +51,7 @@
 % Change the boolean below from true to false to disactivate tablet output.
 \setboolean{tablet}{false} 
 \setboolean{fullBook}{true}
-\setboolean{includeCover}{false}
+\setboolean{includeCover}{true}
 \newcommand{\ignore}[1]{ %ignored
 }
 %\usepackage[top=3cm,bottom=3cm,left=3.2cm,right=3.2cm,headsep=10pt,a4paper]{geometry} % Page margins
@@ -121,7 +121,7 @@
 %\usepackage{layout}
 
 \ifthenelse {\boolean{tablet}}{
-\newcommand{\coverScalingFactor}[0]{0.625}
+\newcommand{\coverScalingFactor}[0]{0.5}
 \newcommand{\miniTocHeight}[0]{5cm}
 \newcommand{\roundChapterTitleXOffset}[0]{5cm}
 \newcommand{\roundChapterTitleYOffset}[0]{4cm}
@@ -178,7 +178,7 @@
 \thispagestyle{empty}
 \AddToShipoutPicture*{\put(0,0)
 %{\includegraphics[scale=\coverScalingFactor]{Pictures/MPS-Book_Vol1_Cover-v2.pdf}}} % Image background
-{\includegraphics[scale=\coverScalingFactor]{Pictures/coverVolume1.png}}} % Image background
+{\includegraphics[scale=\coverScalingFactor]{Pictures/MetaRBookCover-v1.pdf}}} % Image background
 \mbox{}
 \endgroup
 } {
@@ -198,7 +198,7 @@
 
 \noindent \textsc{http://books.campagnelab.org}\\ % URL
 \\
-\noindent All Rights Reserved. No part of this publication may be reproduced or transmitted in any form or by any means, electronic or mechanical, including photocopy, recording, or any information storage and retrieval system without permission in writing from the copyright owner. \\
+\noindent All Rights Reserved. This booklet is licensed under the terms of the Creative Commons 4.0 license (CC BY 4.0, see \url{http://creativecommons.org/licenses/by/4.0}).\\
 \noindent Unless required by applicable law or agreed to in writing, software listings provided in this book are distributed on an \textsc{``AS IS'' BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND}, either express or implied. \\
 Reproductions of program fragments from the JetBrains MPS platform are provided in accordance with terms of the Apache 2.0 license. \\
 See \url{http://www.jetbrains.com/mps/download/license.html} and\\
@@ -207,7 +207,7 @@ See \url{http://www.jetbrains.com/mps/download/license.html} and\\
 
 \noindent \textit{
 \ifthenelse {\boolean{tablet}}{Second Edition.}
-{First Edition.} Version 1.0.0, Jan 2015} % Printing/edition date 
+{First Edition.} Version 1.0.1, Jan 2015} % Printing/edition date 
 
 % Add an empty page in print edition to put credit on a new leaf
 \ifthenelse {\boolean{tablet}}{} 
