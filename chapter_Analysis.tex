@@ -9,7 +9,7 @@
 
 
 \section{The MetaR Analysis Root Node}
-MetaR analyses are represented with an Analysis AST Root node. An analysis often imports one or more tables, performs data transformations and writes a table or generates some plots. 
+MetaR analyses are represented with an Analysis node. An analysis typically imports one or more tables, performs data transformations and writes a table or generates some plots as output. 
 You can create as many Analysis root nodes as needed in a model. You create an analysis by right-clicking on a model and selecting \menu{New > o.c.metar.tables > Analysis}. Analysis can exist as direct child of a model, and for this reason is called a root node. Figure~\ref{fig:NewAnalysis} presents a new Analysis root node. 
 
 \begin{SCfigure}
@@ -50,10 +50,10 @@ To enter a specific statement, you can type the \texttt{alias} of the statement 
 The \texttt{import table} statement makes it possible to import a table, defined in the model, into the analysis. The columns of the imported table will become visible to the statements that follow the import. You can create an import table statement by typing the alias \texttt{import table} on an empty line of Analysis. Once you have bound the reference to a table, the import statement will look like this: \includegraphics[height=2ex]{figures/SomeDataImportTable.pdf}. The name in green is the name of the table the statement imports. See Section\ref{sec:CreateATable} to learn how to create a Table Root node.
 \paragraph{table}
 
-The table attribute is a reference to an AST root node. You can set this reference by typing the name of the table you wish to import, or by using auto-completion \keys{\ctrl+\space} to locate the table AST root node.
+The table attribute is a reference to a Table root node previously created in the model. You can set this reference by typing the name of the table you wish to import, or by using auto-completion \keys{\ctrl+\space} to locate the Table node.
 
 \subsection{Write Table}
-MetaR analyses can create new tables. You can write the data in these tables to a file using the \texttt{write} statement (see Figure~\ref{fig:NewWriteTableStatement} for a new write statement). The write statement has two attributes: table and filename.
+MetaR analyses can create new tables. You can write the data in these tables to a file using the \texttt{write} statement (see Figure~\ref{fig:NewWriteTableStatement} for a new write statement). The write statement has two attributes: table and output.
 \begin{SCfigure}
   \centering
   \includegraphics[width=\figWidthNarrow]{figures/NewWriteStatement.pdf}
@@ -100,7 +100,7 @@ Figure~\ref{fig:ExampleSubsetRows} presents examples of subset row statements.
 \end{figure}
 
 \subsection{Boolean Expressions}
-One form of the subset rows statement accepts a boolean expression to determine which rows to keep. Boolean expression have one of two values: true or false, and can be constructed by comparing values with an operator. The following operators are supported by MetaR:
+One form of the subset rows statement (\texttt{when true:}) accepts a boolean expression to determine which rows to keep. Boolean expressions have one of two values: true or false, and can be constructed by comparing values with an operator. The following operators are supported by MetaR:
 \begin{itemize}
  \item \textbf{\$(} column \textbf{)} The value operator evaluates to the value of the column in the row currently considered.
 	\item expr1 \textbf{==} expr2 true when expr1 evaluates to the same value as expr2.

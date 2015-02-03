@@ -7,7 +7,7 @@
 
 \chapter{Tables}\label{chap:Tables}
 \section{Overview}
-Before you start an analysis, you will need to define Table nodes that will represent the data files needed in the analysis. MetaR explicitly represents files that contain tables of data. This is done so that you can easily refer to these tables, without having to remember where the file is located on your computer. 
+Before you start an analysis, you will need to define Table nodes that represent the data files needed in the analysis. MetaR explicitly models files that contain tables of data. This is done so that you can easily refer to these tables, without having to remember where the original file is located on your computer. 
 
 \noindent In this Chapter, you will learn how to 
 \begin{enumerate}
@@ -20,7 +20,7 @@ Before you start an analysis, you will need to define Table nodes that will repr
 \section{Create a Table}\label{sec:CreateATable}
 To create a Table, right-click on a model in the project tab and select \menu{right-click > New > o.c.metar.tables > Table}. This will create an empty table, as shown in Figure~\ref{fig:NewTable} 
 
-Tables have a name, a pathToResolve attribute and a list of columns. The following paragraph describe these attributes.
+Tables have a name, a pathToResolve attribute and a list of columns. The following paragraphs describe these attributes.
 \paragraph{name}
 The table name is set automatically from the path when you use the file selection button. You can change the name to match your analysis needs and make it easier to remember what is in the table.
 \paragraph{File Path (pathToResolve)}
@@ -31,9 +31,9 @@ Columns is an attribute that presents the list of columns identified in the TSV 
 MetaR supports the following column types, which map to the R data types:
 \begin{enumerate}
 	\item \textbf{Numeric}. Any number. Technically, can be a floating number or an integer.
-	\item \textbf{String}. A string of character.
+	\item \textbf{String}. A string of characters.
 	\item \textbf{Boolean}. A type that can only have two values: \texttt{true} or \texttt{false}.
-	\item \textbf{Category}. A type that can take only a limited number of values (e.g., \{\texttt{RED}, \texttt{GREEN}, \texttt{BLUE}\} would be a category with three values, \texttt{RED}, \texttt{GREEN} and \texttt{BLUE}.
+	\item \textbf{Category}. A type that can take only a limited number of values (e.g., \{\texttt{RED}, \texttt{GREEN}, \texttt{BLUE}\} would be a category with these values, (\texttt{RED}, \texttt{GREEN} and \texttt{BLUE} in our example).
 \end{enumerate}
 These types are automatically determined from the data in the table file. However, in case the automatic algorithm failed for a table, you can change the types manually. To do this, put the cursor over the name of the type in the column section, and use auto-completion in the inspector to change to the desired type.
  
@@ -53,8 +53,8 @@ Figure~\ref{fig:ExampleTable} presents a MetaR table annotated with groups.
 
 
 \section{Column Groups Container}\label{sec:ColumnGroupContainer}\index{Column Groups Container}
-Column Groups Container are used to define column groups and annotate these groups with group usages.
-To create a new Column Group Container, right-click on a model and select \menu{New > o.c.tables.ColumnGroupContainer}. This will create the empty container shown in Figure~\ref{fig:NewColumnGroupContainer}. You need and should have only one container per model. The container will hold the groups and group usages that you need across one or more MetaR Tables.
+Column Groups Containers are used to define column groups and annotate these groups with group usages.
+To create a new Column Group Container, right-click on a model and select \menu{New > o.c.tables.ColumnGroupContainer}. This will create the empty container shown in Figure~\ref{fig:NewColumnGroupContainer}. You need and should have only one container per model. The container will hold the groups and group usages that you need across the MetaR Tables defined in the model.
 \begin{SCfigure}
   \centering
   \includegraphics[width=\figWidthNarrow]{figures/NewColumnGroupContainer.pdf}
