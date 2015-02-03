@@ -9,7 +9,7 @@
 
 
 \section{The MetaR Analysis Root Node}
-MetaR analyses are represented with an Analysis node. An analysis typically imports one or more tables, performs data transformations and writes a table or generates some plots as output. 
+MetaR analyses are represented with an Analysis AST Root node. An analysis often imports one or more tables, performs data transformations and writes a table or generates some plots. 
 You can create as many Analysis root nodes as needed in a model. You create an analysis by right-clicking on a model and selecting \menu{New > o.c.metar.tables > Analysis}. Analysis can exist as direct child of a model, and for this reason is called a root node. Figure~\ref{fig:NewAnalysis} presents a new Analysis root node. 
 
 \begin{SCfigure}
@@ -50,10 +50,10 @@ To enter a specific statement, you can type the \texttt{alias} of the statement 
 The \texttt{import table} statement makes it possible to import a table, defined in the model, into the analysis. The columns of the imported table will become visible to the statements that follow the import. You can create an import table statement by typing the alias \texttt{import table} on an empty line of Analysis. Once you have bound the reference to a table, the import statement will look like this: \includegraphics[height=2ex]{figures/SomeDataImportTable.pdf}. The name in green is the name of the table the statement imports. See Section\ref{sec:CreateATable} to learn how to create a Table Root node.
 \paragraph{table}
 
-The table attribute is a reference to a Table root node previously created in the model. You can set this reference by typing the name of the table you wish to import, or by using auto-completion \keys{\ctrl+\space} to locate the Table node.
+The table attribute is a reference to an AST root node. You can set this reference by typing the name of the table you wish to import, or by using auto-completion \keys{\ctrl+\space} to locate the table AST root node.
 
 \subsection{Write Table}
-MetaR analyses can create new tables. You can write the data in these tables to a file using the \texttt{write} statement (see Figure~\ref{fig:NewWriteTableStatement} for a new write statement). The write statement has two attributes: table and output.
+MetaR analyses can create new tables. You can write the data in these tables to a file using the \texttt{write} statement (see Figure~\ref{fig:NewWriteTableStatement} for a new write statement). The write statement has two attributes: table and filename.
 \begin{SCfigure}
   \centering
   \includegraphics[width=\figWidthNarrow]{figures/NewWriteStatement.pdf}
@@ -110,7 +110,7 @@ Figure~\ref{fig:ExampleSubsetRows} presents examples of subset row statements.
 \end{figure}
 
 \subsection{Boolean Expressions}
-One form of the subset rows statement (\texttt{when true:}) accepts a boolean expression to determine which rows to keep. Boolean expressions have one of two values: true or false, and can be constructed by comparing values with an operator. The following operators are supported by MetaR:
+One form of the subset rows statement accepts a boolean expression to determine which rows to keep. Boolean expression have one of two values: true or false, and can be constructed by comparing values with an operator. The following operators are supported by MetaR:
 \begin{itemize}
  \item \textbf{\$(} column \textbf{)} The value operator evaluates to the value of the column in the row currently considered.
 	\item expr1 \textbf{==} expr2 true when expr1 evaluates to the same value as expr2.
@@ -138,23 +138,23 @@ When you perform data analysis, you often need to combine data from different ta
 \end{SCfigure}
 
 \paragraph{input tables}
-Use this attribute to enter references to tables you need to join. You can press \keys{\return} with the cursor inside the parentheses to create references to additional input tables (either imported ore created in the analysis up to that point).
+Use this attribute to enter references to tables you need to join. You can press \keys{\return} with the cursor inside the parentheses to create references to additional input tables.
 \paragraph{by}
-Use the by attribute to specify how to join the input tables. Joining tables requires knowing which rows of the input tables go together. This is done by identifying a set of columns whose values must match across rows of the input tables that go together. See Section~\ref{subsec:KeySelectionDescription} to learn how to select groups of columns in MetaR. You can select one of the following joining strategies as value of the by attribute:
+Use the by attribute to specify how to join the input tables. Joining tables require knowing which rows of the input tables go together. This is done by identifying a set of columns whose values must match across rows of the input tables that go together. See Section~\ref{subsec:KeySelectionDescription} to learn how to select groups of columns in MetaR.
 
 \begin{itemize}
 	\item \textbf{by columns:} The same column name must be defined in all the input tables.
-	\item \textbf{by group:} If each table has exactly one column annotated with this group, the names of the columns do not need to be the same. Otherwise, if more than one columns is in the group, their names must match across all the tables. 
+	\item \textbf{by group:} As long as each table has one or more columns annotated with this group, the name of the columns do not need to be the same. 
 	\item \textbf{by groups:} Similar to group, but with any (>=1) number of groups. Press \keys{\return} to insert new group references.
 \end{itemize}
  The group by columns are used to calculate a list of values. When rows of the input tables have the same group by values, they are joined in a single row, and the result put in the destination table. 
 
 \begin{remark}
-The join statement will create new columns if the input tables have columns with the same name. In this case the shared columns are renamed ``colname.TableName''. Place the cursor on result and look at the column preview in the inspector to see which column names are generated by a given join statement.
+The join statement will create new columns if the input tables have column with the same name. In this case the shared columns are renamed ``colanme.TableName''. Place the cursor of result and look at the column preview in the inspector to see which column names are generated by a given join.
 \end{remark}
 
 \paragraph{result}
-The output table is called Results by default. Feel free to rename this table to match the content of the destination table. Open the \inspectorTabIcon{} to see which columns will result from the join. Notice that the column groups are automatically transferred to the columns of the output table.
+The output table is called Results by default. Feel free to rename this table to match the content of the destination table. Open the \inspectorTabIcon{} to see which columns will result from the join. Notice that the column groups are transfered to the columns of the output table.
 
 
 \subsection{Example Join}
@@ -170,18 +170,18 @@ Figure~\ref{fig:ExampleJoinStatement} presents an example of join statement. The
 \begin{figure}[h!tbp]
   \centering
   \includegraphics[width=\figWidthWide]{figures/ExampleJoinColumnPreview.pdf}
-\caption[Column Preview for Result Table.]{\textbf{Column Preview for Result Table.} Notice that here all the columns were shared across the input tables and their names have be changed using the pattern ``colName.tableName''.}
+\caption[Column Preview for Result Table.]{\textbf{Column Preview for Result Table.} Notice that all these columns were shared across the input tables because their name follows the pattern ``colName.tableName''.}
 \label{fig:ColumnPreviewExample}
 \end{figure}
 
 
 \section{Plotting Data}
-MetaR provides simple plotting capabilities\footnote{These capabilities are simple, but can be extended very easily by adding new statements to draw other types of visualization. This is a key advantage of using Language Workbench technology.}. The following types of plots are currently supported: 
+MetaR provides simple plotting capabilities\footnote{These capabilities are simple, but can be extended very easily by adding new statements to draw other types of visualizaton. This is a key advantage of using Language Workbench technology.}. The following types of plots are currently supported: 
 \begin{itemize}
   \item boxplot alias \texttt{boxplot}
   \item histogram alias \texttt{histogram}
   \item scatterplot: alias \texttt{fit}
-  \item heatmap, alias \texttt{heatmap}
+  \item heatmap, alias \texttt{build heatmap}
   \item multiplot alias \texttt{multiplot}, makes it possible to organize other plots in a matrix of n columns by n rows.
 \end{itemize}
 Each type of plot statement will create a plot, identified with the \includegraphics[height=2ex]{figures/plot.png} icon when you are trying to auto-complete a reference to a plot. Plot names are also colored with the same dark blue as the icon.
@@ -209,7 +209,7 @@ Different kind of plots accept different types of styles. The boxplot accepts a 
 \subsection{histogram}
 Use this statement to plot a histogram of the values of one column.
 \paragraph{column}
-Indicate one column to plot a histogram for. Use auto-completion to locate the column from the imported tables, or the tables created by prior statements. 
+Indicate one to plot a histogram for.  Use auto-completion to locate the column from the imported tables, or the tables created by prior statements. 
 
 \paragraph{plot}
 The attribute after \texttt{->} is a plot. Enter a name for the histogram here. Plot names are colored blue to make them easier to recognize.
@@ -251,8 +251,8 @@ Styles will refactored in a future version of MetaR to improve their flexibility
 \end{SCfigure}
 
 
-\subsection{heatmap}\index{heatmap}
-Use this statement (\texttt{heatmap}) to construct a heatmap. Figure~\ref{fig:NewBuildHeatmap} presents a new \texttt{build heatmap} statement.
+\subsection{heatmap}\index{Heatmap}
+Use this statement (\texttt{heatmap}) to construct a heatmap. Figure~\ref{fig:NewBuildHeatmap} presents a new \texttt{heatmap} statement.
 
 \begin{figure}[h~tbp]
   \centering
@@ -262,7 +262,7 @@ Use this statement (\texttt{heatmap}) to construct a heatmap. Figure~\ref{fig:Ne
 \end{figure}
 
 \paragraph{table}
-Specify the table that contains the data that will be used to draw the heatmap. Note that the table must meet certain conditions. An error message will be displayed if these conditions are not met:
+You can specify the table that contains the data that will be used to draw the heatmap. Note that the table must meet certain conditions. An error message will be displayed if these conditions are not met:
 
 \begin{itemize}
   \item Some columns of the table must be annotated with at least one group whose usage is ``heatmap''. Such columns are used to provide data values for the heatmap. If you don't have a heatmap usage, just create one and add it to the groups you would like to include on the heatmap.
@@ -294,13 +294,44 @@ You can use the ``Attach Annotations'' intention (\intentionLightBulb) when the 
 \begin{figure}[h!tbp]
   \centering
   \includegraphics[width=\figWidthWide]{figures/heatmap_Example.pdf}
-\caption[Example of Heatmap Plot.]{\textbf{Example of Heatmap Plot.} This heatmap has been customized with annotations. The \texttt{LPS\_Treatment} group usage is shown in the legend, with two groups: \texttt{LPS=yes} and \texttt{LPS=no}. The values plotted have been scaled by rows, and the rows clustered. }
+\caption[Example of Heatmap Plot.]{\textbf{Example of Heatmap Plot.} This heatmap has been customized with annotations. The \texttt{LPS\_Treatment} group usage is shown in the legend, with two groups: \texttt{LPS=yes} and \texttt{LPS=no}. The values plotted have been scaled by rows, and the rows clustered. Data are from \url{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE59364}.}
 \label{fig:ExampleHeatmapPlot}
 \end{figure}
 
-Figure~\ref{fig:ExampleHeatmapPlot} presents a heatmap constructed with the heatmap statement, using annotations and row clustering. 
+Figure~\ref{fig:ExampleHeatmapPlot} presents a heatmap constructed with the build heatmap statement, using annotations and row clustering. 
+
+\subsection{multiplot}\index{multiplot}
+This statement (alias \texttt{multiplot}) makes it possible to assemble a plot as a matrix of $m$ x $n$ plots. This is convenient if you would like to create a figure from panels of individual plots. In addition, multiplot provides a preview of the multi-panel plot that you can turn on and off at the click of a button. Figure~\ref{fig:NewMultiplot} presents a new Multiplot.
 
 
+\begin{figure}[h!tbp]
+  \centering
+  \includegraphics[width=\figWidthWide]{figures/NewMultiplot.pdf}
+\caption[New Multiplot Statement.]{\textbf{New Multiplot Statement.} Click on the Preview/Hide Preview button to toggle the plot preview.}
+\label{fig:NewMultiplot}
+\end{figure}
 
+\paragraph{plot}
+The plot name is shown immediately after \texttt{->} (initially \texttt{<no name>}). Name the mutliplot to be able to refer to it from other statements (such as render to make a PDF from it).
+\paragraph{$m$ cols x $n$ rows}
+Define the number of columns and rows that you wish the multiplot to have. 
+The product of $m$ and $n$ determines how many plot references must be filled in to construct the multiplot.
+
+\paragraph{Preview/Hide Preview}
+These buttons will make it possible to preview/ hide the preview for the multiplot. Note that a preview is only available after you have run the analysis. If you don't see the image being refreshed after running the script, remember to hide the preview and show it again to refresh.
+
+\paragraph{plot references}
+After you set the number of columns and rows, you need to link  $m$ x $n$ references to plots that you have already constructed. Do this in table attribute (shown as \texttt{<<emptyTable>>} initially).
+
+
+\subsection{Multiplot Example}
+Figure~\ref{fig:ExampleMultiplot} presents an example of multiplot.
+
+\begin{figure}[h!tbp]
+  \centering
+  \includegraphics[width=\figWidthWide]{figures/MutliplotExample.png}
+\caption[Example of Multiplot.]{\textbf{Example of Multiplot.} This example shows a multiplot composed of two columns and one row. In the preview,  a fit x by y plot is shown on the left, and a heatmap on the right. }
+\label{fig:ExampleMultiplot}
+\end{figure}
 
   
