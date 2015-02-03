@@ -251,8 +251,8 @@ Styles will refactored in a future version of MetaR to improve their flexibility
 \end{SCfigure}
 
 
-\subsection{build heatmap}\index{heatmap}
-Use this statement (\texttt{build heatmap}) to construct a heatmap. Figure~\ref{fig:NewBuildHeatmap} presents a new \texttt{build heatmap} statement.
+\subsection{heatmap}\index{Heatmap}
+Use this statement (\texttt{heatmap}) to construct a heatmap. Figure~\ref{fig:NewBuildHeatmap} presents a new \texttt{heatmap} statement.
 
 \begin{figure}[h~tbp]
   \centering
@@ -294,13 +294,44 @@ You can use the ``Attach Annotations'' intention (\intentionLightBulb) when the 
 \begin{figure}[h!tbp]
   \centering
   \includegraphics[width=\figWidthWide]{figures/heatmap_Example.pdf}
-\caption[Example of Heatmap Plot.]{\textbf{Example of Heatmap Plot.} This heatmap has been customized with annotations. The \texttt{LPS\_Treatment} group usage is shown in the legend, with two groups: \texttt{LPS=yes} and \texttt{LPS=no}. The values plotted have been scaled by rows, and the rows clustered. }
+\caption[Example of Heatmap Plot.]{\textbf{Example of Heatmap Plot.} This heatmap has been customized with annotations. The \texttt{LPS\_Treatment} group usage is shown in the legend, with two groups: \texttt{LPS=yes} and \texttt{LPS=no}. The values plotted have been scaled by rows, and the rows clustered. Data are from \url{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE59364}.}
 \label{fig:ExampleHeatmapPlot}
 \end{figure}
 
 Figure~\ref{fig:ExampleHeatmapPlot} presents a heatmap constructed with the build heatmap statement, using annotations and row clustering. 
 
+\subsection{multiplot}\index{multiplot}
+This statement (alias \texttt{multiplot}) makes it possible to assemble a plot as a matrix of $m$ x $n$ plots. This is convenient if you would like to create a figure from panels of individual plots. In addition, multiplot provides a preview of the multi-panel plot that you can turn on and off at the click of a button. Figure~\ref{fig:NewMultiplot} presents a new Multiplot.
 
 
+\begin{figure}[h!tbp]
+  \centering
+  \includegraphics[width=\figWidthWide]{figures/NewMultiplot.pdf}
+\caption[New Multiplot Statement.]{\textbf{New Multiplot Statement.} Click on the Preview/Hide Preview button to toggle the plot preview.}
+\label{fig:NewMultiplot}
+\end{figure}
+
+\paragraph{plot}
+The plot name is shown immediately after \texttt{->} (initially \texttt{<no name>}). Name the mutliplot to be able to refer to it from other statements (such as render to make a PDF from it).
+\paragraph{$m$ cols x $n$ rows}
+Define the number of columns and rows that you wish the multiplot to have. 
+The product of $m$ and $n$ determines how many plot references must be filled in to construct the multiplot.
+
+\paragraph{Preview/Hide Preview}
+These buttons will make it possible to preview/ hide the preview for the multiplot. Note that a preview is only available after you have run the analysis. If you don't see the image being refreshed after running the script, remember to hide the preview and show it again to refresh.
+
+\paragraph{plot references}
+After you set the number of columns and rows, you need to link  $m$ x $n$ references to plots that you have already constructed. Do this in table attribute (shown as \texttt{<<emptyTable>>} initially).
+
+
+\subsection{Multiplot Example}
+Figure~\ref{fig:ExampleMultiplot} presents an example of multiplot.
+
+\begin{figure}[h!tbp]
+  \centering
+  \includegraphics[width=\figWidthWide]{figures/MutliplotExample.png}
+\caption[Example of Multiplot.]{\textbf{Example of Multiplot.} This example shows a multiplot composed of two columns and one row. In the preview,  a fit x by y plot is shown on the left, and a heatmap on the right. }
+\label{fig:ExampleMultiplot}
+\end{figure}
 
   
