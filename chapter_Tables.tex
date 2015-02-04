@@ -18,9 +18,7 @@ Before you start an analysis, you will need to define Table nodes that represent
 \end{enumerate}
 
 \section{Create a Table}\label{sec:CreateATable}
-To create a Table, right-click on a model in the project tab and select \menu{right-click > New > o.c.metar.tables > Table}. This will create an empty table, as shown in Figure~\ref{fig:NewTable} 
-
-Tables have a name, a pathToResolve attribute and a list of columns. The following paragraphs describe these attributes.
+To create a Table, right-click on a model in the project tab and select \menu{right-click > New > o.c.metar.tables > Table}. This will create an empty table, as shown in Figure~\ref{fig:NewTable}. Tables have a \texttt{name}, a \texttt{pathToResolve} attribute and a list of columns. The following paragraphs describe these attributes.
 \paragraph{name}
 The table name is set automatically from the path when you use the file selection button. You can change the name to match your analysis needs and make it easier to remember what is in the table.
 \paragraph{File Path (pathToResolve)}
@@ -39,8 +37,8 @@ These types are automatically determined from the data in the table file. Howeve
  
 \begin{SCfigure}
   \includegraphics[width=\figWidthTiny]{figures/NewTable.pdf}
-  \caption[New Table.]{\textbf{New Table.} This figure presents a freshly created Table AST Root node. You can use the button located to the right, after the <no name> red label (\keys{...}), to open a file selection dialog. Use this dialog to locate a TSV file to configure this table.}
-\end{SCfigure}\label{fig:NewTable}
+  \caption[New Table.]{\textbf{New Table.} This figure presents a freshly created Table AST Root node. You can use the button located to the right, after the <no name> red label (\keys{...}), to open a file selection dialog. Use this dialog to locate a TSV file to configure this table.}\label{fig:NewTable}
+\end{SCfigure}
 
 Figure~\ref{fig:ExampleTable} presents a MetaR table annotated with groups. 
 
