@@ -17,7 +17,7 @@ Before you start an analysis, you will need to define Table nodes that represent
 	\item link groups in column group usage.
 \end{enumerate}
 
-\section{Create a Table}\label{sec:CreateATable}
+\section{Create a Table}\label{sec:CreateATable}\index{Create a Table}
 To create a Table, right-click on a model in the project tab and select \menu{right-click > New > o.c.metar.tables > Table}. This will create an empty table, as shown in Figure~\ref{fig:NewTable}. Tables have a \texttt{name}, a \texttt{pathToResolve} attribute and a list of columns. The following paragraphs describe these attributes.
 \paragraph{name}
 The table name is set automatically from the path when you use the file selection button. You can change the name to match your analysis needs and make it easier to remember what is in the table.
@@ -40,7 +40,7 @@ These types are automatically determined from the data in the table file. Howeve
   \caption[New Table.]{\textbf{New Table.} This figure presents a freshly created Table AST Root node. You can use the button located to the right, after the <no name> red label (\keys{...}), to open a file selection dialog. Use this dialog to locate a TSV file to configure this table.}\label{fig:NewTable}
 \end{SCfigure}
 
-Figure~\ref{fig:ExampleTable} presents a MetaR table annotated with groups. 
+Figure~\ref{fig:ExampleTable} presents a MetaR table annotated with groups. \index{Example}
 
 \begin{figure}[h!tbp]
   \centering
@@ -60,7 +60,7 @@ To create a new Column Group Container, right-click on a model and select \menu{
 \label{fig:NewColumnGroupContainer}
 \end{SCfigure}
 
-\section{Column Groups}\index{Column Groups}
+\section{Column Groups}\index{Column Groups}\label{sec:ColumnGroups}
 Column Groups can be defined by pressing \keys{\return} either on top of the \mpsplaceholder{} (immediately below \texttt{Define Groups:}), when the list of groups is empty, or with the cursor immediately before the name of an existing group. Each group has a name and an optional set of group usages. Figure~\ref{fig:NewGroup} presents a new column group (group for short).
 
 \begin{SCfigure}
@@ -83,7 +83,7 @@ Column groups can be annotated with a set of group usages. You can enter referen
 \section{Column Group Usage}\label{sec:ColumnGroupUsage}
 A Column Group Usage can be defined by pressing \keys{\return} either on top of the \mpsplaceholder{} (immediately below \texttt{Define Usages:}), when the list of group usages is empty, or with the cursor immediately before the name of an existing group usage. When the list already contains one or more group usages, you can add more by placing the cursor over a group usage name and pressing \keys{\enter}. Keep pressing \keys{\enter} to add more empty group usages.
 
-\section{Example Column Group Container}
+\section{Example Column Group Container}\index{Example}
 Figure~\ref{fig:ExampleGroupContainer} presents an example of a configured Column Group Container. This container defines two groups \texttt{LPS=yes} and \texttt{LPS=no}, which can be used to annotate Table columns that contain data about gene expression of samples treated with LPS or not.  The group usage \texttt{LPS\_Treatment} is associated to both groups to indicate that they belong together and are two kinds of treatment.
 
 \begin{SCfigure}
