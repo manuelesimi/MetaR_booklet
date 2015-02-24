@@ -319,7 +319,7 @@ Indicate one or more columns to plot. The values of the columns will be plotted 
 \paragraph{plot}
 The attribute after \texttt{->} is a plot. Enter a name for the boxplot here. Plot names are colored blue to make them easier to recognize.
 
-\paragraph{style}
+\paragraph{style} \label{ColorPaletteDesc}
 If a style is bound to the box plot (see section \ref{styles}),  the statement will use a \texttt{Color\allowbreak{}Palette} item from the style to draw the plot. A Color Palette is an AST Root Node identified with the  \includegraphics[height=2ex]{figures/palette.png} icon. 
 
 MetaR comes with several pre-defined palettes and colors ready for use. Figure shows the auto-completion menu for a Color Palette item listing the default palettes available.
@@ -355,8 +355,14 @@ Indicate one column to plot a histogram for. Use auto-completion to locate the c
 The attribute after \texttt{->} is a plot. Enter a name for the histogram here. Plot names are colored blue to make them easier to recognize.
 
 \paragraph{style}
-Different kind of plots accept different types of styles. The histogram accepts a \texttt{Color\allowbreak{}Plot\allowbreak{}Style}. You can create this node in the model and bind the histogram statement to it to customize the colors that will be used to draw this plot. 
+The statement uses a \texttt{Color\allowbreak{}Palette} item (see \ref{ColorPaletteDesc}) from the associated style (see section \ref{styles}) to draw the plot. Figure \ref{fig:2Histo} shows the same histogram with 2 different color palettes applied.
 
+\begin{SCfigure}
+  \centering
+  \includegraphics[width=\figWidthNarrow]{figures/2Histograms.png}
+\caption[Same Histogram with 2 palettes.]{\textbf{ Rendering of the same Histogram with different Color Palettes.}}
+\label{fig:2Histo}
+\end{SCfigure}
 
 \subsection{fit x by y}
 Use this statement (alias \texttt{fit}) to plot a scatter plot of x (one column) vs y (another column). A fit is performed, and the R2 adjusted, and P-value corresponding to the linear regression is shown on the plot. Figure~\ref{fig:NewFitXByY} presents a new \texttt{fit} statement.
@@ -375,15 +381,16 @@ Indicate which columns should be plotted. Use auto-completion to locate the x an
 The attribute after \texttt{->} is a plot. Enter a name for the scatterplot here. Plot names are colored blue to make them easier to recognize.
 
 \paragraph{style}
-Different kind of plots accept different types of styles. The fit statement accepts a \texttt{Scatter\allowbreak{}Plot\allowbreak{}Style}. You can create this node in the model and bind the fit statement to it to customize the title, axes and range of data in the scatterplot. Figure~\ref{fig:NewScatterPlotStyle} shows the attributes of the \texttt{ScatterPlotStyle} node.
-
-\begin{SCfigure}
-  \centering
-  \includegraphics[width=\figWidthNarrow]{figures/NewScatterPlotStyle.pdf}
-\caption[New Scatterplot Style.]{\textbf{New Scatterplot Style.}}
-\label{fig:NewScatterPlotStyle}
-\end{SCfigure}
-
+The fit statement uses the following items from the associated style (see section \ref{styles}) to customize the scatterplot:
+\begin{itemize}
+\item \textbf{ \texttt{Title}}. The main title on top of the plot.
+\item \textbf{ \texttt{X label}}. A title for the x axis.
+\item \textbf{ \texttt{Y label}}. A title for the y axis.
+\item \textbf{ \texttt{X range}}. Range of values for the x axis.
+\item \textbf{ \texttt{Y range}}. Range of values for the y axis.
+\item \textbf{ \texttt{Width}}. Width in pixels of the output image with the plot.
+\item \textbf{ \texttt{Height}}. Height in pixels of the output image with the plot. 
+\end{itemize}
 
 \subsection{heatmap}\index{Heatmap}
 Use this statement (\texttt{heatmap}) to construct a heatmap. Figure~\ref{fig:NewBuildHeatmap} presents a new \texttt{heatmap} statement.
@@ -408,6 +415,14 @@ Use this attribute to customize the set of columns to plot on the heatmap. See S
 
 \paragraph{plot}
 The \texttt{<no name>} attribute listed after \texttt{->} makes it possible to name the plot that will hold the heatmap. Use any name you like. This name will be used to refer to the heatmap plot, for instance if you wish to assemble panels of different heatmaps into one figure.
+
+\paragraph{style}
+The statement uses the following items from the associated style (see section \ref{styles}) to customize the heatmap:
+\begin{itemize}
+\item \textbf{ \texttt{Color palette}}. The colors to use in the heat map (see \ref{ColorPaletteDesc}).
+\item \textbf{ \texttt{Draw border}}. A boolean value to enable or disable borders in the heatmap. By default ,borders are enabled.
+\item \textbf{ \texttt{Border color}}. The color to use for the border (see section \ref{ColorPaletteDesc} to check out how to create/refer colors). If not set, the default color is \emph{grey60}.
+\end{itemize}
 
 \paragraph{annotations}
 You can use the ``Attach Annotations'' intention (\intentionLightBulb) when the cursor is on top of \texttt{heatmap} to customize heatmap annotations. Figure~\ref{fig:BuildHeatmapWithAnnotations} shows a heatmap statement with annotations.
