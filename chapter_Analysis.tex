@@ -474,4 +474,25 @@ Figure~\ref{fig:ExampleMultiplot} presents an example of multiplot.
 \label{fig:ExampleMultiplot}
 \end{figure}
 
+\subsection{render}\index{Render}
+This statement (alias \texttt{render}) makes it possible to save a plot or a multiplot in a local file according to a selected output format and style. Figure~\ref{fig:NewRender} presents a new Render.
+
+
+\begin{figure}[h!tbp]
+  \centering
+  \includegraphics[width=\figWidthWide]{figures/NewRender.pdf}
+\caption[New Render Statement.]{\textbf{New Render Statement.}}
+\label{fig:NewRender}
+\end{figure}
+
+\paragraph{plot}
+The \texttt{<no plot>} attribute listed after the alias allows you to select the plot or multiplot to render.    
+
+\paragraph{rendering format}
+The rendering format is the format in which the plot will be stored on the file system. The current version of MetaR allows to use only PDF as format. 
+
+\paragraph{path}
+The \texttt{<no path>} attribute has to be set to a filename where you want the rendering is stored. Its extension must be compatible with the selected format (e.g. ".pdf" for PDF). If only a filename is specified
+
+\paragraph{style}
   
