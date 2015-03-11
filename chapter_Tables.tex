@@ -102,9 +102,14 @@ The structure of an annotation table requires the following two columns:
 \item \textit{Groups}: values of this column are comma-separated lists of group names
 \end{itemize}
 
-When annotation tables are available in the current model, the user can open the Table to annotate and use the "Use Column Groups From Table: <table name>" intention (\intentionLightBulb) when the cursor is on top of \texttt{Table}.  Sample IDs are matched with the column names and the groups listed in the same row are attached to the Column. In addition, if the groups are not defined in the ColumnGroupContainer, they are created in the annotation process. The Column Group Container is also created if it does not exist.
+When annotation tables are available in the current model, the user can
+\begin{enumerate}
+\item  open the Table to annotate 
+\item use the "Use Column Groups From Table: <table name>" intention (\intentionLightBulb) when the cursor is on top of the \texttt{Table} node
+\end{enumerate}
+This way, Sample IDs are matched with the column names and the groups listed in the same row are attached to the corresponding Column. In addition, if the groups are not defined in the ColumnGroupContainer, they are created in the annotation process. The Column Group Container is also created if it does not exist.
 
-To see how they work in practice, Figure ~\ref{fig:AnnotateTableSample} shows the content of a sample annotation table that can be used to create the same groups shown in Figure ~\ref{fig:ExampleTable}.
+To see how they work in practice, we will create the same groups shown in Figure ~\ref{fig:ExampleTable} using an annotation table. To do that, we firstly need to create a CVS file with the content shown in Figure ~\ref{fig:AnnotateTableSample}.
 
 \begin{figure}[h!tbp]
   \centering
@@ -113,7 +118,7 @@ To see how they work in practice, Figure ~\ref{fig:AnnotateTableSample} shows th
 \label{fig:AnnotateTableSample}
 \end{figure}
 
-As first step, we create a corresponding Table node in the model (Figure ~\ref{fig:NewAnnotationTable}).   
+The next step is to load this table in a Table node (Figure ~\ref{fig:NewAnnotationTable}).   
 \begin{figure}[h!tbp]
   \centering
   \includegraphics[width=\figWidthWide]{figures/AnnotationTable.png}
@@ -121,7 +126,7 @@ As first step, we create a corresponding Table node in the model (Figure ~\ref{f
 \label{fig:NewAnnotationTable}
 \end{figure}
 
-Then, we invoke the ... intention as shown in Figure ~\ref{fig:AnnotateTableIntention}
+Finally, we invoke the "Use Column Groups From Table: <table name>" intention as shown in Figure ~\ref{fig:AnnotateTableIntention} to apply the group names from the table to our destination Table. 
 \begin{figure}[h!tbp]
   \centering
   \includegraphics[width=\figWidthWide]{figures/AnnotateTableIntention.png}
@@ -129,4 +134,4 @@ Then, we invoke the ... intention as shown in Figure ~\ref{fig:AnnotateTableInte
 \label{fig:AnnotateTableIntention}
 \end{figure}
 
-These steps will result in the same annotated table shown in Figure ~\ref{fig:ExampleTable}.
+These steps will result in exactly the same annotated table shown in Figure ~\ref{fig:ExampleTable}.
