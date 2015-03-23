@@ -135,3 +135,31 @@ Finally, we invoke the "Use Column Groups From Table: AnnotationTableForGSE59364
 \end{figure}
 
 These steps will result in exactly the same annotated table shown in Figure ~\ref{fig:ExampleTable}.
+
+
+\section{Table Viewer Tool}\label{sec:TableViewerTool}\index{Table Viewer Tool}
+The content of a Table can be inspected with the Table Viewer Tool distributed with MetaR. The tool adds to the MPS interface the capabilities to load the table's content and show it in a graphical context.
+Wherever a table name appears (in a Table node or in an Analysis script, see Chapter ~\ref{chap:Analyses}), the tool can be open to see the rows and columns of that table along with their values. Figure ~\ref{fig:ActivateTableViewer} shows how to activate the tool on a Table node. 
+
+\begin{figure}[h!tbp]
+  \centering
+  \includegraphics[width=\figWidthNarrow]{figures/ActivateTableViewer.png}
+\caption[How to activate the Table Viewer Tool]{\textbf{How to activate the Table Viewer Tool}. The Table Viewer Tool can be activated by right-clicking on the Table and select \"View Content\" from the menu. An alternative way is to put the cursor on the Table node and press \keys{\shift+T}.  }
+\label{fig:ActivateTableViewer}
+\end{figure}
+
+The first time is activated, the tool appears at the bottom of the MPS UI, as shown in Figure ~\ref{fig:TableViewerInMPS}. Different visualization options are available for it. By right clicking on the tool name in the Tool Buttons bar (if not visible, select View > Tool Buttons from the MPS menu), a use can explore them and choose the one that best fits the project needs.   
+
+\begin{figure}[h!tbp]
+  \centering
+  \includegraphics[width=\figWidthWide]{figures/TableViewerInMPS.png}
+\caption[The Table Viewer Tool in the MPS UI]{\textbf{The Table Viewer Tool in the MPS UI.} }
+\label{fig:TableViewerInMPS}
+\end{figure}
+
+\begin{figure}[h!tbp]
+  \centering
+  \includegraphics[width=\figWidthTiny]{figures/ToolVisualizationOptions.png}
+\caption[Visualization Options for Table Viewer Tool]{\textbf{Visualization Options for Table Viewer Tool}. The tool (as other tools in MPS) can be visualized in different ways. In our experience, the floating mode or the Docked/Pinned mode with the panel on the right are very likely to be the most useful ones.}
+\label{fig:ToolVisualizationOptions}
+\end{figure}
