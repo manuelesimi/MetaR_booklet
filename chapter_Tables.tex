@@ -158,7 +158,7 @@ Wherever a table name appears (in a Table node or in an Analysis script, see Cha
 \begin{figure}[h!tbp]
   \centering
   \includegraphics[width=\figWidthTiny]{figures/ToolVisualizationOptions.png}
-\caption[Visualization Options for Table Viewer Tool]{\textbf{Visualization Options for Table Viewer Tool}. Different visualization options are available for the Table Viewer Tool. By right clicking on the tool name in the Tool Buttons bar (if not visible, select View > Tool Buttons from the MPS menu), a use can explore them and choose the one that best fits the project needs. In our experience, the floating mode or the Docked/Pinned mode with the panel on the right are very likely to be the most useful ones.}
+\caption[Visualization Options for Table Viewer Tool]{\textbf{Visualization Options for Table Viewer Tool}. Different visualization options are available for the Table Viewer Tool. By right clicking on the tool name in the Tool Buttons bar (if not visible, select  \menu{View > Tool Buttons} from the MPS menu), a user can explore them and choose the one that best fits a project needs. In our experience, the floating mode or the Docked/Pinned mode with the panel on the right are very effective.}
 \label{fig:ToolVisualizationOptions}
 \end{figure}
 
@@ -168,5 +168,7 @@ Wherever a table name appears (in a Table node or in an Analysis script, see Cha
 \caption[The Table Viewer Tool]{\textbf{The Table Viewer Tool}. The tool displays the content of the selected table. At the top, we can see the name of the table and the number of records loaded. Columns can be resized and rows scrolled for a full visualization of their values.}
 \label{fig:ToolVisualizationOptions}
 \end{figure}
+
+The tool is immediately available for those tables directly loaded from the file system (e.g. Table nodes) and their references. Other tables are instead created by Analysis scripts. In this latter case, the tool is available after the first script execution (see see Chapter ~\ref{chap:Analyses}). Moreover, if the structure or content of a table change, the script must be executed again in order to reflect such changes in the tool.
 
 
