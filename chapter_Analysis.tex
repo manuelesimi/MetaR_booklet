@@ -439,6 +439,58 @@ You can use the ``Attach Annotations'' intention (\intentionLightBulb) when the 
 \end{figure}
 
 Figure~\ref{fig:ExampleHeatmapPlot} presents a heatmap constructed with the build heatmap statement, using annotations and row clustering. 
+%Start here and delete me at the end
+\subsection{venn diagram}\index{Venn Diagram}
+Use this statement (\texttt{venn}) to draw a venn diagram. Figure~\ref{fig:NewVennDiagram} presents a new \texttt{venn diagram} statement. 
+
+
+\begin{figure}[h!tbp]
+  \centering
+  \includegraphics[width=\figWidthWide]{figures/NewBuildVennDiagram.pdf}
+\caption[New Venn Diagram.]{\textbf{New Venn Diagram.} You can custom your color by using auto-completion in \textit{default color}.}
+\label{fig:NewVennDiagram}
+\end{figure}
+
+\paragraph{name}
+The \texttt{<no name>} attribute listed after \texttt{set} makes possible to choose your own set name which will be display on the venn diagram to represent your set.
+
+\paragraph{set}
+Up to five sets can be shown on a venn diagram. The data set are divided in two types Figure~\ref{fig:SetsVennDiagram} :
+\begin{itemize}
+\item ids from a user defined set,
+\item ids from an annotated table.
+\end{itemize}
+\begin{figure}[h!tbp]
+  \centering
+  \includegraphics[width=\figWidthWide]{figures/SetsVennDiagram.pdf}
+\caption[Sets type of venn diagram.]{\textbf{Sets type of Venn Diagram.} Here you can see  different type of sets which can be used for a venn diagram: a user defined set and from an annotated table.}
+\label{fig:SetsVennDiagram}
+\end{figure}
+You can use auto-completion to go from one set to another and keep your \textit{(if define)} set name and color.
+\subparagraph{ids from a defined set}
+contains only one atribute which is \texttt{<set of ids>}. It is a reference to a user defined set. 
+
+\subparagraph{ids from an annotated table}
+ contains two attributes:
+\begin{itemize}
+\item \texttt{<no table>} the annotated table with a column \textit{"ID"}
+\item \texttt{<expression>} the boolean expression used to filter the table rows when true. 
+
+\end{itemize}
+
+
+\paragraph{color}
+The \texttt{default color} attribute listed after \textbf{with} show from the auto-completion a menu listing the default colors avalaible and allow the user to customize a venn diagram, by picking up one of them for each set.
+
+\paragraph{plot}
+The \texttt{<no name>} attribute listed after \texttt{->} makes it possible to name the plot that will hold the venn diagram. Use any name you like. This name will be used to refer to the venn plot Figure~\ref{fig:Plot3SetsVennDiagram}, for instance if you wish to assemble panels of different venn into one figure.
+\begin{figure}[h!tbp]
+  \centering
+  \includegraphics[scale=0.8]{figures/Venn3Sets.pdf}
+\caption[Exemple of a three sets Venn Diagram.]{\textbf{Exemple of a three sets Venn Diagram.}}
+\label{fig:Plot3SetsVennDiagram}
+\end{figure}
+%Finish here and delete me at the end
 
 \subsection{multiplot}\index{Multiplot}
 This statement (alias \texttt{multiplot}) makes it possible to assemble a plot as a matrix of $m$ x $n$ plots. This is convenient if you would like to create a figure from panels of individual plots. In addition, multiplot provides a preview of the multi-panel plot that you can turn on and off at the click of a button. Figure~\ref{fig:NewMultiplot} presents a new Multiplot.
