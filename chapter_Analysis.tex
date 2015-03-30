@@ -134,6 +134,30 @@ Several types of statements require the user to select one or more columns of a 
 
 \noindent{}Each strategy identifies a set of columns, which may contain one or more columns.
 
+\section{Define Sets of Ids}\index{Sets of Ids}\index{define a set}\label{sec:defineSetsOfIds}
+You can use this statement (alias \texttt{define Sets of Ids}) to  define your own set of ids. This user define set can be used after to draw some Venn diagram(\ref{subsec:VennDiagram}).   Figure~\ref{fig:NewSetsOfIds} shows a new \texttt{define Sets of Ids} statement.
+
+\begin{SCfigure}
+  \centering
+  \includegraphics[width=\figWidthNarrow]{figures/NewSetsOfIds.pdf}
+\caption[New Sets of Ids.]{\textbf{New Set of Ids Statement.} Use this statement to define your own set of ids.}
+\label{fig:NewSetsOfIds}
+\end{SCfigure}
+
+\paragraph{SetName}
+The Set of Ids must have a name. You can define you own name in the  \texttt{<SetName>} attribute. 
+\paragraph{Ids}
+By pressing \keys{\return} in the \texttt{<< ... >>} attribute you can associated an id in you set. To add a new one, you just have to press again \keys{\return}.
+Figure~\ref{fig:ExampleSetOfIds} shows an exemple of \texttt{Sets of Ids}.
+
+\begin{SCfigure}
+  \centering
+  \includegraphics[width=\figWidthNarrow]{figures/ExampleSetOfIds.pdf}
+\caption[Example of a user define Sets of Ids.]{\textbf{Example of a user define Sets of Ids.} }
+\label{fig:ExampleSetOfIds}
+\end{SCfigure}
+
+
 \section{Subset Rows}\index{Subset rows}\index{Filter rows}
 You can use this statement (alias \texttt{subset rows}) to filter a table and produce a new table with a subset of the rows of the input table. Figure~\ref{fig:NewSubsetRows} shows a new \texttt{subset rows} statement.
 
@@ -143,6 +167,14 @@ You can use this statement (alias \texttt{subset rows}) to filter a table and pr
 \caption[New Subset Rows Statement.]{\textbf{New Subset Rows Statement.} Use this statement to filter the rows of a table.}
 \label{fig:NewSubsetRows}
 \end{SCfigure}
+
+\begin{figure}[h!tbp]
+  \centering
+  \includegraphics[width=\figWidthWide]{figures/ExampleSubsetRows.pdf}
+\caption[Subset Rows Examples.]{\textbf{Subset Rows Examples.} This figure illustrates the two alternatives available for filtering rows: by expression (with \texttt{when true:}, or with a set of ID values).}
+\label{fig:ExampleSubsetRows}
+\end{figure}
+
 
 \paragraph{table}
 The input table reference must be set to a table. The table must be either imported or produced by another statement.
@@ -440,26 +472,32 @@ You can use the ``Attach Annotations'' intention (\intentionLightBulb) when the 
 
 Figure~\ref{fig:ExampleHeatmapPlot} presents a heatmap constructed with the build heatmap statement, using annotations and row clustering. 
 %Start here and delete me at the end
-\subsection{venn diagram}\index{Venn Diagram}
-Use this statement (\texttt{venn}) to draw a venn diagram. Figure~\ref{fig:NewVennDiagram} presents a new \texttt{venn diagram} statement. 
+\subsection{Venn diagram}\index{Venn Diagram}\label{subsec:VennDiagram}
+Use this statement (\texttt{venn}) to draw a Venn diagram. Figure~\ref{fig:NewVennDiagram} presents a new \texttt{Venn diagram} statement. 
 
 
 \begin{figure}[h!tbp]
   \centering
   \includegraphics[width=\figWidthWide]{figures/NewBuildVennDiagram.pdf}
-\caption[New Venn Diagram.]{\textbf{New Venn Diagram.} You can custom your color by using auto-completion in \textit{default color}.}
+\caption[New Venn Diagram.]{\textbf{New Venn Diagram.} Up to five sets can be shown on a Venn diagram. The set name will be shown on the Venn diagram to identify this set.}
 \label{fig:NewVennDiagram}
 \end{figure}
 
 \paragraph{name}
-The \texttt{<no name>} attribute listed after \texttt{set} makes possible to choose your own set name which will be display on the venn diagram to represent your set.
+The \texttt{<no name>} attribute listed after \texttt{set} specify your set name.A set must have a name. You can define you own name.
+The set name will be shown on the Venn diagram to identify this set.
 
 \paragraph{set}
-Up to five sets can be shown on a venn diagram. The data set are divided in two types Figure~\ref{fig:SetsVennDiagram} :
+Up to five sets can be shown on a Venn diagram. The data set are divided in two types Figure~\ref{fig:SetsVennDiagram} :
+\begin{description}
+\item[ids from a user defined set] contains only one atribute which is \texttt{<set of ids>}. It is a reference to a user defined set. see section  \ref{sec:defineSetsOfIds}
+\item[ids from an annotated table]  contains two attributes:
 \begin{itemize}
-\item ids from a user defined set,
-\item ids from an annotated table.
+\item \texttt{<no table>} the annotated table with a column \textit{"ID"}
+\item \texttt{<expression>} the boolean expression used to filter the table rows. see section. 
 \end{itemize}
+\end{description}
+
 \begin{figure}[h!tbp]
   \centering
   \includegraphics[width=\figWidthWide]{figures/SetsVennDiagram.pdf}
@@ -467,23 +505,14 @@ Up to five sets can be shown on a venn diagram. The data set are divided in two 
 \label{fig:SetsVennDiagram}
 \end{figure}
 You can use auto-completion to go from one set to another and keep your \textit{(if define)} set name and color.
-\subparagraph{ids from a defined set}
-contains only one atribute which is \texttt{<set of ids>}. It is a reference to a user defined set. 
-
-\subparagraph{ids from an annotated table}
- contains two attributes:
-\begin{itemize}
-\item \texttt{<no table>} the annotated table with a column \textit{"ID"}
-\item \texttt{<expression>} the boolean expression used to filter the table rows when true. 
-
-\end{itemize}
 
 
 \paragraph{color}
-The \texttt{default color} attribute listed after \textbf{with} show from the auto-completion a menu listing the default colors avalaible and allow the user to customize a venn diagram, by picking up one of them for each set.
+The \texttt{default color} attribute listed after \textbf{with}allow the user to customize a color set which will appears on the Venn diagram. By using the auto-completion, a menu listing the default colors avalaibl will appear. You just have to pick up one of them for each set. If you don't use this attribute. default colors will be used.
 
 \paragraph{plot}
-The \texttt{<no name>} attribute listed after \texttt{->} makes it possible to name the plot that will hold the venn diagram. Use any name you like. This name will be used to refer to the venn plot Figure~\ref{fig:Plot3SetsVennDiagram}, for instance if you wish to assemble panels of different venn into one figure.
+The \texttt{<no name>} attribute listed after \texttt{->} makes it possible to name the plot that will hold the Venn diagram. Use any name you like. This name will be used to refer to the Venn plot Figure~\ref{fig:Plot3SetsVennDiagram}, for instance if you wish to assemble panels of different Venn into one figure.
+
 \begin{figure}[h!tbp]
   \centering
   \includegraphics[scale=0.8]{figures/Venn3Sets.pdf}
