@@ -135,7 +135,7 @@ Several types of statements require the user to select one or more columns of a 
 \noindent{}Each strategy identifies a set of columns, which may contain one or more columns.
 
 \section{Define Sets of Ids}\index{Sets of Ids}\index{define a set}\label{sec:defineSetsOfIds}
-You can use this statement (alias \texttt{define Sets of Ids}) to  define your own set of ids. This user define set can be used after to draw some Venn diagram(\ref{subsec:VennDiagram}).   Figure~\ref{fig:NewSetsOfIds} shows a new \texttt{define Sets of Ids} statement.
+You can use this statement (alias \texttt{define Sets of Ids}) to  define your own set of ids. This user define set can be used after to draw some Venn diagram (\ref{subsec:VennDiagram}).   Figure~\ref{fig:NewSetsOfIds} shows a new \texttt{define Sets of Ids} statement.
 
 \begin{SCfigure}
   \centering
@@ -145,9 +145,9 @@ You can use this statement (alias \texttt{define Sets of Ids}) to  define your o
 \end{SCfigure}
 
 \paragraph{SetName}
-The Set of Ids must have a name. You can define you own name in the  \texttt{<SetName>} attribute. 
+The set of ids must have a name. You can define you own name in the  \texttt{<SetName>} attribute. 
 \paragraph{Ids}
-By pressing \keys{\return} in the \texttt{<< ... >>} attribute you can associated an id in you set. To add a new one, you just have to press again \keys{\return}.
+By pressing \keys{\return} in the \texttt{<< ... >>} attribute you can add a new id in your set. To add another id, you just have to press again \keys{\return}.
 Figure~\ref{fig:ExampleSetOfIds} shows an exemple of \texttt{Sets of Ids}.
 
 \begin{SCfigure}
@@ -484,13 +484,13 @@ Use this statement (\texttt{venn}) to draw a Venn diagram. Figure~\ref{fig:NewVe
 \end{figure}
 
 \paragraph{name}
-The \texttt{<no name>} attribute listed after \texttt{set} specify your set name.A set must have a name. You can define you own name.
-The set name will be shown on the Venn diagram to identify this set.
+The \texttt{<no name>} attribute listed after \texttt{set} specify your set name. A set must have a name. You can define you own name.
+The set name will be shown on the Venn diagram to identify this particular set.
 
 \paragraph{set}
 Up to five sets can be shown on a Venn diagram. The data set are divided in two types Figure~\ref{fig:SetsVennDiagram} :
 \begin{description}
-\item[ids from a user defined set] contains only one atribute which is \texttt{<set of ids>}. It is a reference to a user defined set. see section  \ref{sec:defineSetsOfIds}
+\item[ids from a user defined set] contains only one attribute which is \texttt{<set of ids>}. It is a reference to a user defined set. \textit{see section } \ref{sec:defineSetsOfIds}
 \item[ids from an annotated table]  contains two attributes:
 \begin{itemize}
 \item \texttt{<no table>} the annotated table with a column \textit{"ID"}
@@ -501,17 +501,17 @@ Up to five sets can be shown on a Venn diagram. The data set are divided in two 
 \begin{figure}[h!tbp]
   \centering
   \includegraphics[width=\figWidthWide]{figures/SetsVennDiagram.pdf}
-\caption[Sets type of venn diagram.]{\textbf{Sets type of Venn Diagram.} Here you can see  different type of sets which can be used for a venn diagram: a user defined set and from an annotated table.}
+\caption[Sets type of venn diagram.]{\textbf{Sets type of Venn Diagram.} Here you can see  the two types of sets which can be used for a Venn diagram: a user defined set and a set from an annotated table.}
 \label{fig:SetsVennDiagram}
 \end{figure}
-You can use auto-completion to go from one set to another and keep your \textit{(if define)} set name and color.
+You can use auto-completion to go from one set to another and keep your \textit{(if defined)} set name and color.
 
 
 \paragraph{color}
-The \texttt{default color} attribute listed after \textbf{with}allow the user to customize a color set which will appears on the Venn diagram. By using the auto-completion, a menu listing the default colors avalaibl will appear. You just have to pick up one of them for each set. If you don't use this attribute. default colors will be used.
+The \texttt{default color} attribute listed after \textbf{with} vallow the user to customize a color set which will appears on the Venn diagram. By using the auto-completion, a menu listing the default colors avalaible will appear. You just have to pick up one of them for each set. If you don't use this attribute, default colors will be used.
 
 \paragraph{plot}
-The \texttt{<no name>} attribute listed after \texttt{->} makes it possible to name the plot that will hold the Venn diagram. Use any name you like. This name will be used to refer to the Venn plot Figure~\ref{fig:Plot3SetsVennDiagram}, for instance if you wish to assemble panels of different Venn into one figure.
+The \texttt{<no name>} attribute listed after \texttt{->} makes it possible to name the plot that will hold the Venn diagram. Use any name you like. This name will be used to refer to the Venn diagram plot Figure~\ref{fig:Plot3SetsVennDiagram}.
 
 \begin{figure}[h!tbp]
   \centering
