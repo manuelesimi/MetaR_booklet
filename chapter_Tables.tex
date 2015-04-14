@@ -84,7 +84,6 @@ Column groups can be annotated with a set of group usages. You can enter referen
 A Column Group Usage can be defined by pressing \keys{\return} either on top of the \mpsplaceholder{} (immediately below \texttt{Define Usages:}), when the list of group usages is empty, or with the cursor immediately before the name of an existing group usage. When the list already contains one or more group usages, you can add more by placing the cursor over a group usage name and pressing \keys{\enter}. Keep pressing \keys{\enter} to add more empty group usages.
 
 \section{Example Column Group Container}\index{Example}
-Figure~\ref{fig:ExampleGroupContainer} presents an example of a configured Column Group Container. This container defines two groups \texttt{LPS=yes} and \texttt{LPS=no}, which can be used to annotate Table columns that contain data about gene expression of samples treated with LPS or not.  The group usage \texttt{LPS\_Treatment} is associated to both groups to indicate that they belong together and are two kinds of treatment.
 
 \begin{SCfigure}
   \centering
@@ -92,6 +91,9 @@ Figure~\ref{fig:ExampleGroupContainer} presents an example of a configured Colum
 \caption[Example Group Container.]{\textbf{Example Group Container.} This example presents a container with several groups and group usages.}
 \label{fig:ExampleGroupContainer}
 \end{SCfigure}
+
+Figure~\ref{fig:ExampleGroupContainer} presents an example of a configured Column Group Container. This container defines two groups \texttt{LPS=yes} and \texttt{LPS=no}, which can be used to annotate Table columns that contain data about gene expression of samples treated with LPS or not.  The group usage \texttt{LPS\_Treatment} is associated to both groups to indicate that they belong together and are two kinds of treatment.
+
 
 \section{Column Groups from a Table}\index{Column Groups Table}\label{sec:ColumnGroupsTable}
 An alternative way to automatically create Column Groups and attach them to Columns at the same time is to use a so-called \texttt{annotation table}. These tables are normal Table nodes (created as specified \ref{sec:CreateATable}) with a special structure and content. When created, MetaR is able to recognize them and allows the user to use these tables to annotate other tables. 
@@ -101,24 +103,27 @@ The structure of an annotation table requires the following two columns:
 \item \textit{SampleID}: values of this column are sample names
 \item \textit{Groups}: values of this column are comma-separated lists of group names
 \end{itemize}
+\begin{SCfigure}
+  \centering
+  \includegraphics[width=\figWidthTiny]{figures/AnnotationTableSample.pdf}
+\caption[Content of a Sample Annotation Table]{\textbf{Content of a Sample Annotation Table} The \texttt{SampleID} column provides the name of the column to which the groups should be assigned. The \texttt{Groups} column provides the names of the groups, separated by a comma, which will be assigned to the column identified by \texttt{SampleID}.}
+\label{fig:AnnotateTableSample}
+\end{SCfigure}
 
-When annotation tables are available in the current model, the user can
+
+\noindent{}When annotation tables are available in the current model, the user can
 \begin{enumerate}
 \item  open the Table to annotate 
 \item use the "Use Column Groups From Table: <table name>" intention (\intentionLightBulb) when the cursor is on top of the \texttt{Table} node
 \end{enumerate}
-This way, Sample IDs are matched with the column names and the groups listed in the same row are attached to the corresponding Column. In addition, if the groups are not defined in the ColumnGroupContainer, they are created in the annotation process. The Column Group Container is also created if it does not exist.
+This way, Sample IDs are matched with the column names and the groups listed in the same row are attached to the corresponding \texttt{Column}. In addition, if the groups are not defined in the \texttt{ColumnGroupContainer}, they are created in the annotation process. The \texttt{Column\allowbreak{}Group\allowbreak{}Container} is also created if it does not exist.
 
-To see how they work in practice, we will create the same groups shown in Figure ~\ref{fig:ExampleTable} using an annotation table. To do that, we firstly need to create a CVS file with the content shown in Figure ~\ref{fig:AnnotateTableSample}.
 
-\begin{figure}[h!tbp]
-  \centering
-  \includegraphics[width=\figWidthTiny]{figures/AnnotationTableSample.pdf}
-\caption[Content of a Sample Annotation Table]{\textbf{Content of a Sample Annotation Table} }
-\label{fig:AnnotateTableSample}
-\end{figure}
+To see how this intention works in practice, we will create the same groups shown in Figure~\ref{fig:ExampleTable} using an annotation table. To do that, we firstly need to create a TSV file with the content shown in Figure~\ref{fig:AnnotateTableSample}. The next step is to load this table in a Table node (Figure~\ref{fig:NewAnnotationTable}).  Finally, we invoke the ``Use Column Groups From Table: Annotation\allowbreak{}Table\allowbreak{}For\allowbreak{}GSE59364\_DC\_all.cvs'' intention as shown in Figure~\ref{fig:AnnotateTableIntention} to apply the group names from the table to the destination Table. These steps will result in exactly the same annotated table shown in Figure~\ref{fig:ExampleTable}.
 
-The next step is to load this table in a Table node (Figure ~\ref{fig:NewAnnotationTable}).   
+
+
+ 
 \begin{figure}[h!tbp]
   \centering
   \includegraphics[width=\figWidthWide]{figures/AnnotationTable.png}
@@ -126,7 +131,7 @@ The next step is to load this table in a Table node (Figure ~\ref{fig:NewAnnotat
 \label{fig:NewAnnotationTable}
 \end{figure}
 
-Finally, we invoke the "Use Column Groups From Table: AnnotationTableForGSE59364\_DC\_all.cvs" intention as shown in Figure ~\ref{fig:AnnotateTableIntention} to apply the group names from the table to our destination Table. 
+
 \begin{figure}[h!tbp]
   \centering
   \includegraphics[width=\figWidthWide]{figures/AnnotateTableIntention.png}
@@ -134,19 +139,22 @@ Finally, we invoke the "Use Column Groups From Table: AnnotationTableForGSE59364
 \label{fig:AnnotateTableIntention}
 \end{figure}
 
-These steps will result in exactly the same annotated table shown in Figure ~\ref{fig:ExampleTable}.
 
 
-\section{Table Viewer Tool}\label{sec:TableViewerTool}\index{Table Viewer Tool}
+\section{Table Viewer Tool}\label{sec:TableViewerTool}\index{Table Viewer Tool}\index{New in MetaR 1.3}
+\begin{remark}
+The TableViewer Tool was introduced in MetaR version 1.3.
+\end{remark}
+
 The content of a Table can be inspected with the Table Viewer Tool distributed with MetaR. The tool adds to the MPS interface the capabilities to load the table's content and show it in a graphical context.
-Wherever a table name appears (in a Table node or in an Analysis script, see Chapter ~\ref{chap:Analyses}), the tool can be open to see the rows and columns of that table along with their values. Figure ~\ref{fig:ActivateTableViewer} shows how to activate the tool on a Table node. The first time is activated, the tool appears at the bottom of the MPS UI, as shown in Figure ~\ref{fig:TableViewerInMPS}.
+Wherever a table name appears (in a Table node or in an Analysis script, see Chapter ~\ref{chap:Analyses}), the tool can be opened to see the rows and columns of that table along with their values. Figure~\ref{fig:ActivateTableViewer} shows how to activate the tool on a Table node. The first time it is activated, the tool appears at the bottom of the MPS window, as shown in Figure~\ref{fig:TableViewerInMPS}.
 
-\begin{figure}[h!tbp]
+\begin{SCfigure}
   \centering
   \includegraphics[width=\figWidthNarrow]{figures/ActivateTableViewer.png}
-\caption[How to activate the Table Viewer Tool]{\textbf{How to activate the Table Viewer Tool}. The Table Viewer Tool can be activated by right-clicking on the Table and select \"View Content\" from the menu. An alternative way is to put the cursor on the Table node and press \keys{\shift+T}.  }
+\caption[How to activate the Table Viewer Tool]{\textbf{How to activate the Table Viewer Tool}. The Table Viewer Tool can be activated by right-clicking on the Table and selecting ``View Content'' from the menu. An alternative way is to put the cursor on the Table node and pressing \keys{\shift+T}.}
 \label{fig:ActivateTableViewer}
-\end{figure}  
+\end{SCfigure}  
 
 \begin{figure}[h!tbp]
   \centering
@@ -155,20 +163,20 @@ Wherever a table name appears (in a Table node or in an Analysis script, see Cha
 \label{fig:TableViewerInMPS}
 \end{figure}
 
-\begin{figure}[h!tbp]
+\begin{SCfigure}
   \centering
   \includegraphics[width=\figWidthTiny]{figures/ToolVisualizationOptions.png}
 \caption[Visualization Options for Table Viewer Tool]{\textbf{Visualization Options for Table Viewer Tool}. Different visualization options are available for the Table Viewer Tool. By right clicking on the tool name in the Tool Buttons bar (if not visible, select  \menu{View > Tool Buttons} from the MPS menu), a user can explore them and choose the one that best fits a project needs. In our experience, the floating mode or the Docked/Pinned mode with the panel on the right are very effective.}
 \label{fig:ToolVisualizationOptions}
-\end{figure}
+\end{SCfigure}
 
 \begin{figure}[h!tbp]
   \centering
   \includegraphics[width=\figWidthWide]{figures/TableViewerToolDetails.png}
-\caption[The Table Viewer Tool]{\textbf{The Table Viewer Tool}. The tool displays the content of the selected table. At the top, we can see the name of the table and the number of records loaded. Columns can be resized and rows scrolled for a full visualization of their values.}
+\caption[The Table Viewer Tool]{\textbf{The Table Viewer Tool}. The tool displays the content of the selected table. At the top, you can see the name of the table and the number of records loaded. Columns can be resized and rows scrolled for a full visualization of their values.}
 \label{fig:ToolVisualizationOptions}
 \end{figure}
 
-The tool is immediately available for those tables directly loaded from the file system (e.g. Table nodes) and their references. Other tables are instead created by Analysis scripts. In this latter case, the tool is available after the first script execution (see see Chapter ~\ref{chap:Analyses}). Moreover, if the structure or content of a table change, the script must be executed again in order to reflect such changes in the tool.
+The tool is immediately available for those tables directly loaded from the file system (e.g. Table nodes) and their references. Other Tables become visible after an Analysis script has been run and the content of the table has been created. In this latter case, the tool is available after the first script execution (see Chapter~\ref{chap:Analyses}). Note that in this case, if the structure and/or content of a table changes, the Analysis script must be executed again before the tool will show the latest table data.
 
 
