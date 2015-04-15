@@ -245,7 +245,7 @@ The join statement will create new columns if the input tables have columns with
 \paragraph{result}
 The output table is called Results by default. Feel free to rename this table to match the content of the destination table. Open the \inspectorTabIcon{} to see which columns will result from the join. Notice that the column groups are transferred to the columns of the output table.
 
-\subsection{How Join works}\index{HowJoinWorks}\index{Join}
+\subsection{How Join works}\index{How Join Works}\index{Join}
 The output table produced by the \texttt{join} statement can be very different, depending on the strategy selected to join the input tables and their structure. The statement takes also care to produce unique columns from columns common to all the input tables but not used in the joining strategy. To explain how \texttt{join} works we will apply two different strategies to the input tables (named A and B) presented in Figure~\ref{fig:SourceTablesJoinStatement} and check the structure and content of the output table.
 \begin{figure}[h!tbp]
   \centering
