@@ -29,12 +29,12 @@ Define the alias of the concept. Use \texttt{heatmap2}. An instance of the conce
 \paragraph{reference to a table}
 To plot a heatmap, we will take data from a MetaR table. This can be achieved by adding a TableRef child to the \texttt{Heatmap2} concept.
 \paragraph{heatmap produces a plot}
-The heatmap2 statement will produce a plot, so you need to add a child of type \texttt{Plot}. You may call this child `plot' for simplicity.
+The \texttt{heatmap2} statement will produce a plot, so you need to add a child of type \texttt{Plot}. You may call this child `plot' for simplicity.
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\figWidthNarrow]{figures/Heatmap2Concept.pdf}
-\caption[Heatmap2 Concept.]{\textbf{Heatmap2 Concept.} The Heatmap2 concept extends Statement. When the language is composed with MetaR, Heatmap2 will become available for auto-completion whenever a MetaR Statement can be used.}
+\caption[Heatmap2 Concept.]{\textbf{Heatmap2 Concept.} The \texttt{Heatmap2} concept extends Statement. When the language is composed with MetaR, \texttt{Heatmap2} will become available for auto-completion whenever a MetaR Statement can be used.}
 \label{fig:Heatmap2Concept}
 \end{figure}
 
@@ -59,7 +59,7 @@ In the first step, we create a reduction rule, see Figure~\ref{fig:GeneratorHowT
 \label{fig:GeneratorHowToStep1}
 \end{figure}
 
-The simplest template we can build for the \texttt{Heatmap2} concept is shown on Figure~\ref{fig:SimplestTemplate}. Simply calling the heatmap.2 function is a good start, but trying to run this will fail because the function is not part of a plain R distribution. The next section explains how to install the gplot R package which provides the function and activate it. 
+The simplest template we can build for the \texttt{Heatmap2} concept is shown on Figure~\ref{fig:SimplestTemplate}. Simply calling the \texttt{heatmap.2} function is a good start, but trying to run this will fail because the function is not part of a plain R distribution. The next section explains how to install the gplot R package which provides the function and activate it. 
 
 \begin{figure}[h!tbp]
   \centering
@@ -69,7 +69,7 @@ The simplest template we can build for the \texttt{Heatmap2} concept is shown on
 \end{figure}
 
 \subsection{Adding package and library support}
-MetaR makes it easy to install R packages as they are needed by an analysis. For this to work, we need to declare that the \texttt{Heatmap2} concept depends on the \textit{gplots} R package.  We can do this by adding overriding the default Statement behavior method called \texttt{dependencies()}. This method must return a list of package names that must be installed and loaded before the statement can execute. To override the method, navigate to the Heatmap2 concept in the editor, select the behavior tab, create the behavior and when the empty behavior is shown, select Override Behavior Method (see Figure~\ref{fig:CreateBehaviorAndOverride}).
+MetaR makes it easy to install R packages as they are needed by an analysis. For this to work, we need to declare that the \texttt{Heatmap2} concept depends on the \textit{gplots} R package.  We can do this by adding overriding the default Statement behavior method called \texttt{dependencies()}. This method must return a list of package names that must be installed and loaded before the statement can execute. To override the method, navigate to the \texttt{Heatmap2} concept in the editor, select the behavior tab, create the behavior and when the empty behavior is shown, select Override Behavior Method (see Figure~\ref{fig:CreateBehaviorAndOverride}).
 Replace the body of the method with 
 \begin{lstlisting}
 return new singleton<string>("gplots");
@@ -107,7 +107,7 @@ Adjust the generator priorities as shown in Figure~\ref{fig:Generator_Properties
 \begin{figure}[h!tbp]
   \centering
   \includegraphics[width=\figWidthWide]{figures/Generator_Properties_your_domain_heatmap2.png}
-\caption[Adjust Generator Priorities.]{\textbf{Adjust Generator Priorities.} Generation of the Heatmap2 concept need to happen in the same generation phase as the generation of the  \textit{org.campagnelab.metar.tables} concepts. Failure to adjust priorities may result in table names not being correctly inserted in the \texttt{heatmap.2} function call.}
+\caption[Adjust Generator Priorities.]{\textbf{Adjust Generator Priorities.} Generation of the \texttt{Heatmap2} concept need to happen in the same generation phase as the generation of the  \textit{org.campagnelab.metar.tables} concepts. Failure to adjust priorities may result in table names not being correctly inserted in the \texttt{heatmap.2} function call.}
 \label{fig:Generator_Properties_your_domain_heatmap2}
 \end{figure}
 
@@ -144,23 +144,22 @@ new RPath(node.plot.getPath()).toString();
 
 
 \subsection{Handling errors}
-Accurate error reporting is important to the end-user. when things do not go well and the R code fails, it is useful to know precisely which MetaR statement generated the error. In MetaR, this is done by taking advantage of the tryCatch R functions (see \url{http://mazamascience.com/WorkingWithData/?p=912}. 
+Accurate error reporting is important to the end-user. When things do not go well and the R code fails, it is useful to know precisely which MetaR statement generated the error. In MetaR, this is done by taking advantage of the \texttt{tryCatch} R functions (see \url{http://mazamascience.com/WorkingWithData/?p=912}. 
 
-Because \texttt{tryCatch} is not particularly intuitive and is rather verbose, MetaR extends the \textit{org.campagnelab.TextOutput} language with the \texttt{tryForNode} statement. The tryForNode statement attempts to execute some lines of R code, and reports any errors that occur in these lines with a link to the statement that produced the error or warning. The \texttt{tryForNode} statement is also responsible for showing the \texttt{STATEMENT\_EXECUTED/8289224569309332962/} lines in the Run tool, which are hyperlinked to statements in the editor. 
+Because \texttt{tryCatch} is not particularly intuitive and is rather verbose, MetaR extends the \textit{org.campagnelab.TextOutput} language with the \texttt{tryForNode} statement (concept name: \texttt{TryAndReport}). The \texttt{tryForNode} statement attempts to execute some lines of R code, and reports any errors that occur in these lines with a link to the statement that produced the error or warning. The \texttt{tryForNode} statement is also responsible for showing the \texttt{STATEMENT\_EXECUTED/\allowbreak{}8289224\allowbreak{}569309332962/} lines in the Run tool, which are hyperlinked to statements in the editor. 
 
-The statement tryForNode takes an ID, which is the result of the id() method defined for each MetaR statement. The value of the ID can be set as usual with a property macro (its value should be \texttt{node.id()}). Figure~\ref{fig:Heatmap2GeneratorComplete} shows the completed template for Heatmap2. While the statement only needs to call the \texttt{heatmap.2} function, handling possible errors and producing plots that can be reused to build multi-panel figures has added quite a few lines to the output.
+The statement \texttt{tryForNode} takes an ID, which is the result of the \texttt{id()} method defined for each MetaR statement. The value of the ID can be set as usual with a property macro (its value should be \texttt{node.id()}). Figure~\ref{fig:Heatmap2GeneratorComplete} shows the completed template for \texttt{Heatmap2}. While the statement only needs to call the \texttt{heatmap.2} function, handling possible errors and producing plots that can be reused to build multi-panel figures has added quite a few lines to the output.
 
 \begin{figure}[h!tbp]
   \centering
   \includegraphics[width=\figWidthWide]{figures/Heatmap2GeneratorComplete.png}
-\caption[Complete Generator for Heatmap2.]{\textbf{Complete Generator for Heatmap2.} This template wraps the heatmap.2 function call inside a plot function (needed when building figures with multiple panels) and inside a tryFoNode statement. The tryForNode statement generates to the tryCatch R language construct and appropriately reports errors to the end-user.}
+\caption[Complete Generator for Heatmap2.]{\textbf{Complete Generator for Heatmap2.} This template wraps the \texttt{heatmap.2} function call inside a plot function (needed when building figures with multiple panels) and inside a \texttt{tryForNode} statement. The \texttt{tryForNode} statement generates to the \texttt{tryCatch} R language construct and appropriately reports errors to the end-user.}
 \label{fig:Heatmap2GeneratorComplete}
 \end{figure}
-
  
 \begin{figure}[h!tbp]
   \centering
   \includegraphics[width=\figWidthWide]{figures/Heatmap2_Execution.png}
-\caption[Heatmap2 Execution.]{\textbf{Heatmap2 Execution.} This figure presents an Analysis using the new heatmap2 concept and shows the resulting plot preview in the inspector (bottom right). Error handling and progress indicators can be seen on the bottom left.}
+\caption[Heatmap2 Execution.]{\textbf{Heatmap2 Execution.} This figure presents an Analysis using the new \texttt{Heatmap2} concept and shows the resulting plot preview in the inspector (bottom right). Error handling and progress indicators can be seen on the bottom left.}
 \label{fig:Heatmap2_Execution}
 \end{figure}
