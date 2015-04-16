@@ -121,8 +121,6 @@ This way, Sample IDs are matched with the column names and the groups listed in 
 
 To see how this intention works in practice, we will create the same groups shown in Figure~\ref{fig:ExampleTable} using an annotation table. To do that, we firstly need to create a TSV file with the content shown in Figure~\ref{fig:AnnotateTableSample}. The next step is to load this table in a Table node (Figure~\ref{fig:NewAnnotationTable}).  Finally, we invoke the ``Use Column Groups From Table: Annotation\allowbreak{}Table\allowbreak{}For\allowbreak{}GSE59364\_DC\_all.cvs'' intention as shown in Figure~\ref{fig:AnnotateTableIntention} to apply the group names from the table to the destination Table. These steps will result in exactly the same annotated table shown in Figure~\ref{fig:ExampleTable}.
 
-
-
  
 \begin{figure}[h!tbp]
   \centering
@@ -139,7 +137,31 @@ To see how this intention works in practice, we will create the same groups show
 \label{fig:AnnotateTableIntention}
 \end{figure}
 
+\section{Column Group Annotations}\index{Column Group Annotations}\index{New in MetaR 1.3}\label{sec:ColumnGroupAnnotations}
+Sometimes, a covariate has different values for different samples (know as "continuous covariate"). This kind of covariate is very frequent when building linear models (see Chapter ~\ref{chap:EdgeR} and \ref{chap:LimmaVoom}). 
 
+In this case, instead of creating a Column Group for each possible value of the covariate, MetaR offers the capability to use values coming from a selected column of a special type of table called Covariate Table.  A covariate table is a normal \texttt{Table} node in metaR with the following characteristics:
+\begin{enumerate}
+\item a column annotated with a group called "sample-key": 
+\item values of this key column must match the sample names 
+\item one or more additional columns from which covariate values are extracted 
+\end{enumerate}
+Figure~\ref{fig:CovariateTable} shows a simple covariate table.
+
+\begin{figure}[h!tbp]
+  \centering
+  \includegraphics[width=\figWidthWide]{figures/CovariateTable.pdf}
+\caption[Covariate Table]{\textbf{Sample Covariate Table} }
+\label{fig:CovariateTable}
+\end{figure}
+
+A covariate table can be associated to a column group by pressing \keys{\lbrack} at the end of the group in the editor or by using the intention shown in Figure~\ref{fig:AddCovariateTable}. 
+\begin{figure}
+\centering
+  \includegraphics[width=\figWidthNarrow]{figures/IntentionForAddingCovariateTable.png}
+\caption[Intention to add a Covariate Table]{\textbf{Intention to Add a Covariate Table} }
+\label{fig:AddCovariateTable}
+\end{figure}
 
 \section{Table Viewer Tool}\label{sec:TableViewerTool}\index{Table Viewer Tool}\index{New in MetaR 1.3}
 \begin{remark}
@@ -147,7 +169,7 @@ The TableViewer Tool was introduced in MetaR version 1.3.
 \end{remark}
 
 The content of a Table can be inspected with the Table Viewer Tool distributed with MetaR. The tool adds to the MPS interface the capabilities to load the table's content and show it in a graphical context.
-Wherever a table name appears (in a Table node or in an Analysis script, see Chapter ~\ref{chap:Analyses}), the tool can be opened to see the rows and columns of that table along with their values. Figure~\ref{fig:ActivateTableViewer} shows how to activate the tool on a Table node. The first time it is activated, the tool appears at the bottom of the MPS window, as shown in Figure~\ref{fig:TableViewerInMPS}.
+Wherever a table name appears (in a Table node or in an Analysis script, see Chapter~\ref{chap:Analyses}), the tool can be opened to see the rows and columns of that table along with their values. Figure~\ref{fig:ActivateTableViewer} shows how to activate the tool on a Table node. The first time it is activated, the tool appears at the bottom of the MPS window, as shown in Figure~\ref{fig:TableViewerInMPS}.
 
 \begin{SCfigure}
   \centering
