@@ -18,18 +18,21 @@ Let's assume that you have just learned about the \texttt{heatmap.2} function pr
 \end{enumerate}
 
 \section{Create a new Language}
-Let's create a new language. To do this, select the project and do \menu{right-click>New>Language}. Name the language something like \texttt{your.domain.\allowbreak{}heatmap}.When the language has been created, select its name under the Project Tab and adjust Dependencies to include \textit{org.campagnelab.metaR.tables}. Set the Scope to Extend (this will allow statements of this new language to extend concepts of \textit{org.campagnelab.metaR.tables}). 
+Let's create a new language. To do this, select the project and do \menu{right-click>New>Language}. Name the language something like \texttt{your.domain.\allowbreak{}heatmap}.When the language has been created, select its name under the Project Tab and adjust Dependencies to include \textit{org.campagnelab.metaR.tables}. Set the Scope to Extends (this will allow statements of this new language to extend concepts of \textit{org.campagnelab.metaR.tables}). 
 
 \section{Create a new Language Concept}
-Select the Structure Aspect of the \textit{your.domain.\allowbreak{}heatmap} language and do \menu{right-click>New >Concept}. Name the concept \texttt{Heatmap2}. Define the extends clause to be \texttt{Statement} (from language \textit{org.campagnelab.metar.tables}). The resulting concept should appear as shown in Figure~\ref{fig:Heatmap2Concept}.
+Select the Structure Aspect of the \textit{your.domain.\allowbreak{}heatmap} language and do \menu{right-click>New >Concept}.\footnote{You can create a new language in an existing project, or use the New Project Dialog to create a Project with type ``Language''.} Name the concept \texttt{Heatmap2}. Define the extends clause to be \texttt{Statement} (from language \textit{org.campagnelab.metar.tables}). The resulting concept should appear as shown in Figure~\ref{fig:Heatmap2Concept}.
 
 \paragraph{concept alias}
 Define the alias of the concept. Use \texttt{heatmap2}. An instance of the concept will be created when you type this keyword in the editor. 
 
 \paragraph{reference to a table}
-To plot a heatmap, we will take data from a MetaR table. This can be achieved by adding a TableRef child to the \texttt{Heatmap2} concept.
+To plot a heatmap, we will take data from a MetaR table. This can be achieved by adding a TableRef child to the \texttt{Heatmap2} concept. Set the cardinality to exactly one child (\texttt{[1]}).
+
 \paragraph{heatmap produces a plot}
-The \texttt{heatmap2} statement will produce a plot, so you need to add a child of type \texttt{Plot}. You may call this child `plot' for simplicity.
+The \texttt{heatmap2} statement will produce a plot, so you need to add a child of type \texttt{Plot}. You may call this child `plot' for simplicity. Set the cardinality to exactly one child (\texttt{[1]}).
+
+
 
 \begin{figure}[htbp]
   \centering
@@ -38,6 +41,15 @@ The \texttt{heatmap2} statement will produce a plot, so you need to add a child 
 \label{fig:Heatmap2Concept}
 \end{figure}
 
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\figWidthNarrow]{figures/Heatmap2Concept_Complete.pdf}
+\caption[Complete Heatmap2 Concept.]{\textbf{Complete Heatmap2 Concept.} This figure shows the completed \texttt{Heatmap2} concept with an alias and children for table and plot.}
+\label{fig:Heatmap2ConceptCompleted}
+\end{figure}
+
+Figure~\ref{fig:Heatmap2ConceptCompleted} presents the completed concept after adding alias, table and plot. 
 \section{Define the Editor}
 An MPS editor customizes how a node appears in the editor. Create an editor for \texttt{Heatmap2} (see~\cite{campagne2014mps}) and define its content as shown in Figure~\ref{fig:EditorForHeatmap2}.
 \begin{SCfigure}
@@ -69,7 +81,7 @@ The simplest template we can build for the \texttt{Heatmap2} concept is shown on
 \end{figure}
 
 \subsection{Adding package and library support}
-MetaR makes it easy to install R packages as they are needed by an analysis. For this to work, we need to declare that the \texttt{Heatmap2} concept depends on the \textit{gplots} R package.  We can do this by adding overriding the default Statement behavior method called \texttt{dependencies()}. This method must return a list of package names that must be installed and loaded before the statement can execute. To override the method, navigate to the \texttt{Heatmap2} concept in the editor, select the behavior tab, create the behavior and when the empty behavior is shown, select Override Behavior Method (see Figure~\ref{fig:CreateBehaviorAndOverride}).
+MetaR makes it easy to install R packages as they are needed by an analysis. For this to work, we need to declare that the \texttt{Heatmap2} concept depends on the \textit{gplots} R package.  We can do this by overriding the default Statement behavior method called \texttt{dependencies()}. This method is expected to return the list of package names that must be installed and loaded before the statement can execute. To override the method, navigate to the \texttt{Heatmap2} concept in the editor, select the behavior tab, create the behavior and when the empty behavior is shown, select Override Behavior Method (see Figure~\ref{fig:CreateBehaviorAndOverride}).
 Replace the body of the method with 
 \begin{lstlisting}
 return new singleton<string>("gplots");
@@ -102,18 +114,18 @@ trying URL ....
 \end{SCfigure}
 
 \subsection{Adjust Generator Priorities}
-Adjust the generator priorities as shown in Figure~\ref{fig:Generator_Properties_your_domain_heatmap2}. You set priorities, you need to define a Design dependency on \textit{org.campagnelab.metar.tables} in the generator aspect Module Properties dialog. 
+Adjust the generator priorities as shown in Figure~\ref{fig:Generator_Properties_your_domain_heatmap2}. To set priorities, you need to define a Design dependency on \textit{org.campagnelab.metar.tables} in the generator aspect Module Properties dialog. 
 
 \begin{figure}[h!tbp]
   \centering
   \includegraphics[width=\figWidthWide]{figures/Generator_Properties_your_domain_heatmap2.png}
-\caption[Adjust Generator Priorities.]{\textbf{Adjust Generator Priorities.} Generation of the \texttt{Heatmap2} concept need to happen in the same generation phase as the generation of the  \textit{org.campagnelab.metar.tables} concepts. Failure to adjust priorities may result in table names not being correctly inserted in the \texttt{heatmap.2} function call.}
+\caption[Adjust Generator Priorities.]{\textbf{Adjust Generator Priorities.} Generation of the \texttt{Heatmap2} concept has to happen in the same generation phase as the generation of the  \textit{org.campagnelab.metar.tables} concepts. Failure to adjust priorities may result in table names not being correctly inserted in the \texttt{heatmap.2} function call.}
 \label{fig:Generator_Properties_your_domain_heatmap2}
 \end{figure}
 
 \subsection{Redirecting the plot output}
 The next problem with the simple template is that it fails to write the image of the plot in  location where MetaR can find it. This is needed to display the plot preview, or to make it possible to use plots with the \texttt{multiplot} statement.
-The strategy we use to handle both cases is to wrap the actual ploting code inside a \texttt{plot\_xxx} function. The function is named with the id of the statement that generates the plot, so that we can easily refer to it in other places where the plot should be reused. We start by defining this function:
+The strategy we use to handle both cases is to wrap the actual plotting code inside a \texttt{plot\_xxx} function. The function is named with the id of the statement that generates the plot, so that we can easily refer to it in other places where the plot should be reused. We start by defining this function:
 
 \begin{lstlisting}
 plot_ $[id]=function(t){                        
@@ -128,7 +140,7 @@ The number of arguments is up to you, since you will generate both the function 
 
 \end{remark}
 
-The next step is to plot to a png file to show a preview of the plot in the inspector. To this end, we redirect the plot output with png(), call the plot function, and close the graphics output (dev.off()):
+The next step is to add the R code for generating a PNG file with the plot to show a preview in the inspector. To this end, we redirect the plot output with png(), call the plot function, and close the graphics output (dev.off()):
 
 \begin{lstlisting}
 png(file=" $[plot.png]", width= $[w], height= $[h])
@@ -144,11 +156,11 @@ new RPath(node.plot.getPath()).toString();
 
 
 \subsection{Handling errors}
-Accurate error reporting is important to the end-user. When things do not go well and the R code fails, it is useful to know precisely which MetaR statement generated the error. In MetaR, this is done by taking advantage of the \texttt{tryCatch} R functions (see \url{http://mazamascience.com/WorkingWithData/?p=912}. 
+Accurate error reporting is important to the end-user. When things do not go well and the R code fails, it is useful to know precisely which MetaR statement generated the error. In MetaR, this is done by taking advantage of the \texttt{tryCatch} R functions (see \url{http://mazamascience.com/WorkingWithData/?p=912}). 
 
 Because \texttt{tryCatch} is not particularly intuitive and is rather verbose, MetaR extends the \textit{org.campagnelab.TextOutput} language with the \texttt{tryForNode} statement (concept name: \texttt{TryAndReport}). The \texttt{tryForNode} statement attempts to execute some lines of R code, and reports any errors that occur in these lines with a link to the statement that produced the error or warning. The \texttt{tryForNode} statement is also responsible for showing the \texttt{STATEMENT\_EXECUTED/\allowbreak{}8289224\allowbreak{}569309332962/} lines in the Run tool, which are hyperlinked to statements in the editor. 
 
-The statement \texttt{tryForNode} takes an ID, which is the result of the \texttt{id()} method defined for each MetaR statement. The value of the ID can be set as usual with a property macro (its value should be \texttt{node.id()}). Figure~\ref{fig:Heatmap2GeneratorComplete} shows the completed template for \texttt{Heatmap2}. While the statement only needs to call the \texttt{heatmap.2} function, handling possible errors and producing plots that can be reused to build multi-panel figures has added quite a few lines to the output.
+The statement \texttt{tryForNode} takes an ID, which is the result of the \texttt{id()} method defined for each MetaR statement. The value of the ID can be set as usual with a property macro (its value should be \texttt{node.id()}). Figure~\ref{fig:Heatmap2GeneratorComplete} shows the completed template for \texttt{Heatmap2}. While the statement only needs to call the \texttt{heatmap.2} function, handling possible errors and producing plots that can be reused to build multi-panel figures have added quite a few lines to the output.
 
 \begin{figure}[h!tbp]
   \centering
@@ -157,7 +169,7 @@ The statement \texttt{tryForNode} takes an ID, which is the result of the \textt
 \label{fig:Heatmap2GeneratorComplete}
 \end{figure}
  
-\section{Language Extension}
+\section{Using the New Language}
 Using the \textit{your.domain.heatmap2} language in MetaR analyses  requires adding the language under Used Languages, as shown here:
 
   \includegraphics[width=\figWidthNarrow]{figures/LanguageExtensionUsedLanguages.png}
@@ -174,5 +186,8 @@ Once the language is added, you can create statements by typing the \texttt{Heat
 
 
 \section{Git Repository}\index{Git}
-This concludes this tutorial. You can find a project with the heatmap2 language extension described in this Chapter at \newline
-\url{https://bitbucket.org/campagnelaboratory/metar_extension_tutorial}.
+This concludes this tutorial. You can find a project with the \textit{heatmap2} language extension described in this Chapter at: \newline
+\begin{flushright}
+\texttt{https://bitbucket.org/\allowbreak{}campagnelaboratory\allowbreak{}/}\newline\texttt{metar\allowbreak{}\_extension\allowbreak{}\_tutorial}
+\end{flushright}
+
