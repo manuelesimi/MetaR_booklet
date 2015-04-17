@@ -151,16 +151,24 @@ Figure~\ref{fig:CovariateTable} shows a simple covariate table.
 \begin{figure}[h!tbp]
   \centering
   \includegraphics[width=\figWidthWide]{figures/CovariateTable.pdf}
-\caption[Covariate Table]{\textbf{Sample Covariate Table} }
+\caption[Covariate Table]{\textbf{Sample Covariate Table.} A covariate table must have a column annotated with the \texttt{sample-key} group, whose values are the sample names of the table that will be annotated with the Covariate table. The other columns hold the values that will be associated to each sample when they are selected.}
 \label{fig:CovariateTable}
 \end{figure}
 
-A covariate table can be associated to a column group by pressing \keys{\lbrack} at the end of the group in the editor or by using the intention shown in Figure~\ref{fig:AddCovariateTable}. 
+A covariate table can be associated to a column group by pressing \keys{\lbrack} at the end of the group in the editor or by using the intention shown in Figure~\ref{fig:AddCovariateTable}.  The annotation added to the group allows to refer a covariate table in the current model and then select a column from that table with the covariate values (Figure~\ref{fig:GroupAnnotation}).
+
 \begin{figure}
 \centering
-  \includegraphics[width=\figWidthNarrow]{figures/IntentionForAddingCovariateTable.png}
+  \includegraphics[width=\figWidthTiny]{figures/IntentionForAddingCovariateTable.png}
 \caption[Intention to add a Covariate Table]{\textbf{Intention to Add a Covariate Table} }
 \label{fig:AddCovariateTable}
+\end{figure}
+
+\begin{figure}
+\centering
+  \includegraphics[width=\figWidthWide]{figures/GroupAnnotation.png}
+\caption[Column Group Annotation]{\textbf{Column Group Annotation} Using auto-completion (\keys{\ctrl+\space} in the \texttt{no table} field, all the tables matching the covariate requirements are proposed. Once selected, a similar action can be used in the  \texttt{no useCovariate} field to select a column from that table. Values from that column are matched with the samples when a statement needs to build a linear model.}
+\label{fig:GroupAnnotation}
 \end{figure}
 
 \section{Table Viewer Tool}\label{sec:TableViewerTool}\index{Table Viewer Tool}\index{New in MetaR 1.3}
