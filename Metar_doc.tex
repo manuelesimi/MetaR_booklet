@@ -121,6 +121,7 @@
 %\usepackage{layout}
 
 \ifthenelse {\boolean{tablet}}{
+\setboolean{includeCover}{false}
 \newcommand{\coverScalingFactor}[0]{0.63}
 \newcommand{\miniTocHeight}[0]{5cm}
 \newcommand{\roundChapterTitleXOffset}[0]{5cm}
@@ -178,7 +179,7 @@
 \thispagestyle{empty}
 \AddToShipoutPicture*{\put(0,0)
 %{\includegraphics[scale=\coverScalingFactor]{Pictures/MPS-Book_Vol1_Cover-v2.pdf}}} % Image background
-{\includegraphics[scale=\coverScalingFactor]{Pictures/MetaRBookCover-v1.pdf}}} % Image background
+{\raisebox{4cm}{\includegraphics[scale=\coverScalingFactor]{Pictures/MetaRBookCover-v2.pdf}}}} % Image background
 \mbox{}
 \endgroup
 } {
