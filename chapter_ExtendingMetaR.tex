@@ -62,7 +62,7 @@ An MPS editor customizes how a node appears in the editor. Create an editor for 
 \section{Generate R Code}
 In order to generate the statement to R code, we will use the MPS Generator aspect. 
 
-In the first step, we create a reduction rule, see Figure~\ref{fig:GeneratorHowToStep1} and~\cite{campagne2014mps} (Generator Aspect chapter). The rule indicates that nodes of the \texttt{Heatmap2} concept will be transformed with the \texttt{reduce\_Heatmap2} template. The template was created using the \textbf{New Template} intention found on the reduction rule node. See detailed instructions in~\cite{campagne2014mps}.
+In the first step, we create a reduction rule, see Figure~\ref{fig:GeneratorHowToStep1} and~\cite{campagne2014mps} (Generator Aspect chapter). The rule indicates that nodes of the \texttt{Heatmap2} concept will be transformed with the \texttt{reduce\_Heatmap2} template. The template was created using the \textbf{New Template} intention found on the reduction rule node. See detailed instructions in~\cite{campagne2014mps}. When configuring the type of the output node (under \texttt{content node:}), use \texttt{Lines}, from the language \textit{org.campagnelab.textoutput} to produce text with the MPS Generator aspect.
 
 \begin{figure}[h!tbp]
   \centering
@@ -161,6 +161,9 @@ Accurate error reporting is important to the end-user. When things do not go wel
 Because \texttt{tryCatch} is not particularly intuitive and is rather verbose, MetaR extends the \textit{org.campagnelab.TextOutput} language with the \texttt{tryForNode} statement (concept name: \texttt{TryAndReport}). The \texttt{tryForNode} statement attempts to execute some lines of R code, and reports any errors that occur in these lines with a link to the statement that produced the error or warning. The \texttt{tryForNode} statement is also responsible for showing the \texttt{STATEMENT\_EXECUTED/\allowbreak{}8289224\allowbreak{}569309332962/} lines in the Run tool, which are hyperlinked to statements in the editor. 
 
 The statement \texttt{tryForNode} takes an ID, which is the result of the \texttt{id()} method defined for each MetaR statement. The value of the ID can be set as usual with a property macro (its value should be \texttt{node.id()}). Figure~\ref{fig:Heatmap2GeneratorComplete} shows the completed template for \texttt{Heatmap2}. While the statement only needs to call the \texttt{heatmap.2} function, handling possible errors and producing plots that can be reused to build multi-panel figures have added quite a few lines to the output.
+\begin{remark}
+MetaR 1.3.1.1 makes it easier to wrap \textit{TextOutput} \texttt{Lines} into a \texttt{tryForNode} block. Select a node of type \texttt{Lines} (highlighted in blue braces) and invoke the intention \texttt{Wrap Lines in a TryForNode Block}. Note that this intention is not available for lines already inside a \texttt{tryForNode} block.
+\end{remark}
 
 \begin{figure}[h!tbp]
   \centering

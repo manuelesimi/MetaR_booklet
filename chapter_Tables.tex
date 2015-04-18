@@ -138,16 +138,15 @@ To see how this intention works in practice, we will create the same groups show
 \end{figure}
 
 \section{Column Group Annotations}\index{Column Group Annotations}\index{New in MetaR 1.3}\label{sec:ColumnGroupAnnotations}
-Sometimes, a covariate has different values for different samples (know as "continuous covariate"). This kind of covariate is very frequent when building linear models (see Chapter ~\ref{chap:EdgeR} and \ref{chap:LimmaVoom}). 
+Sometimes, a covariate is a continuous variable that can take  different values across samples. This kind of covariate can also be used to estimate  linear models (see Chapter ~\ref{chap:EdgeR} and \ref{chap:LimmaVoom}). 
 
-In this case, instead of creating a Column Group for each possible value of the covariate, MetaR offers the capability to use values coming from a selected column of a special type of table called Covariate Table.  A covariate table is a normal \texttt{Table} node in metaR with the following characteristics:
+MetaR 1.3 supports continous covariates. Instead of creating a Column Group for each possible value of the covariate, you can indicate that values of the column group are determined  using a special type of table called \textit{Covariate Table}.  A covariate table is a normal \texttt{Table} node in metaR with the following characteristics:
 \begin{enumerate}
-\item a column annotated with a group called "sample-key": 
-\item values of this key column must match the sample names 
-\item one or more additional columns from which covariate values are extracted 
+\item a column annotated with a group called "sample-key",
+\item values of this \textit{sample-key} column must match the column/sample names of the primary table,
+\item one or more additional columns from which covariate values are extracted. 
 \end{enumerate}
-Figure~\ref{fig:CovariateTable} shows a simple covariate table.
-
+Figure~\ref{fig:CovariateTable} shows a simple covariate table with two columns: the \texttt{SampleName} column is marked as the \textit{sample-key}. The \texttt{Age} column provides the age covariate values, for each sample identified by SampleName.
 \begin{figure}[h!tbp]
   \centering
   \includegraphics[width=\figWidthWide]{figures/CovariateTable.pdf}
@@ -155,16 +154,16 @@ Figure~\ref{fig:CovariateTable} shows a simple covariate table.
 \label{fig:CovariateTable}
 \end{figure}
 
-A covariate table can be associated to a column group by pressing \keys{\lbrack} at the end of the group in the editor or by using the intention shown in Figure~\ref{fig:AddCovariateTable}.  The annotation added to the group allows to refer a covariate table in the current model and then select a column from that table with the covariate values (Figure~\ref{fig:GroupAnnotation}).
+A covariate table can be associated to a column group by pressing \keys{\lbrack} at the end of the group in the editor or by using the intention shown in Figure~\ref{fig:AddCovariateTable}.  The annotation added to the group allows to refer to a covariate table in the current model and then select a column from that table with the covariate values (Figure~\ref{fig:GroupAnnotation}).
 
-\begin{figure}
+\begin{SCfigure}
 \centering
-  \includegraphics[width=\figWidthTiny]{figures/IntentionForAddingCovariateTable.png}
-\caption[Intention to add a Covariate Table]{\textbf{Intention to Add a Covariate Table} }
+  \includegraphics[width=\figWidthSmall]{figures/IntentionForAddingCovariateTable.png}
+\caption[Intention to add a Covariate Table]{\textbf{Intention to Add a Covariate Table} Use this intention when the values of the Age covariate are provided by in a secondary table: the covariate table.}
 \label{fig:AddCovariateTable}
-\end{figure}
+\end{SCfigure}
 
-\begin{figure}
+\begin{figure}[h!tbp]
 \centering
   \includegraphics[width=\figWidthWide]{figures/GroupAnnotation.png}
 \caption[Column Group Annotation]{\textbf{Column Group Annotation} Using auto-completion (\keys{\ctrl+\space} in the \texttt{no table} field, all the tables matching the covariate requirements are proposed. Once selected, a similar action can be used in the  \texttt{no useCovariate} field to select a column from that table. Values from that column are matched with the samples when a statement needs to build a linear model.}
