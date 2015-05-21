@@ -315,12 +315,12 @@ Figure~\ref{fig:ExampleJoinStatement} presents an example of join statement. The
 
 \begin{figure}[h!tbp]
   \centering
-  \includegraphics[width=\figWidthWide]{figures/ExampleJoinColumnPreview.pdf}
+  \includegraphics[width=\figWidthNarrow]{figures/ExampleJoinColumnPreview.pdf}
 \caption[Column Preview for Result Table.]{\textbf{Column Preview for Result Table.} Notice that all these columns were shared across the input tables because their name follows the pattern ``colName.tableName''.}
 \label{fig:ColumnPreviewExample}
 \end{figure}
 
-\section{With Tables}\index{Block with Tables}
+\section{Block with Selected Tables}\index{Block with Tables}
 Sometimes it can happen that many tables are created during your analysis and, at one point, you might want to work with a restricted set of tables.
 The statement \texttt{with tables} allows you to select specific tables defined in your analysis and execute metaR statements on them.
 Figure~\ref{fig:NewWithTablesStatement} presents a newly created \texttt{with tables} statement. All tables created inside the block will be available outside the block.
@@ -341,7 +341,7 @@ Here you can used all statements defined in MetaR.
 
  \begin{SCfigure}
   \centering
-  \includegraphics[width=\figWidthNarrow]{figures/ExampleWithTablesStatement.pdf}
+  \includegraphics[width=\figWidthWide]{figures/ExampleWithTablesStatement.pdf}
 \caption[Example of With Tables Statement.]{\textbf{Example of With Tables Statement.}}
 \label{fig:ExampleWithTablesStatement}
 \end{SCfigure}
