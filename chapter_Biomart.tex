@@ -10,9 +10,12 @@
 
 % introduction
 \section{Overview}
-The BioMart project provides free software and data services to the international scientific community. We choose to implement it in MetaR. Our User can now Download data from the Biomart Registry which contains  wide range of research data. Similarly to EdgeR an Limma, the language that provides the Biomart statement must be added to the model. To do so, you can pressed Control+L and write The name of the language, org.campagnelab.metar.biomart.
+The BioMart project develops software and data services that are made available to the international scientific community. Users of MetaR can access data Marts provided by BioMart, providing access to a wide range of research data . Similarly to EdgeR and Limma, BioMart support is provided in a MetaR language extension. This means that in order to access BioMart with MetaR, you first need to add the Biomart language to the model where you create the analysis. To do so, you can press~\keys{\ctrl+L} and add language \textit{org\allowbreak.campagnelab\allowbreak.metar\allowbreak.biomart}. After adding the biomart language to the model, you can create \texttt{query biomart} statements, described in the following sections. 
+
 \section{The Biomart Statement}
-The \texttt{query Biomart} statement allow you to download tables from the Biomart registry.It Implement both a java Classes to query the web service and the Biomart package to download the data. The statement has the following parameters. Figure~\ref{fig:NewLimmaVoom} presents a newly created Biomart statement.
+The \texttt{query biomart} statement makes it possible to interactively specify which data should be retrieved from a mart (using attributes and filters). Data downloaded from Biomart will be stored in a new table. 
+
+The \texttt{query biomart} statement has the following parameters. Figure~\ref{fig:NewLimmaVoom} presents a newly created Biomart statement.
 
  \begin{figure}[h!tbp]
   \centering
