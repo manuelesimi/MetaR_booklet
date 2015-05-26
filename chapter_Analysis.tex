@@ -216,13 +216,6 @@ One form of the subset rows statement accepts a boolean expression to determine 
 \begin{remark}
 MetaR infers the type of the expressions that you enter and will report type errors if the value of some values are not compatible with the test that your perform.
 \end{remark}
-\section{Transform Table}\index{Transform Table}
-
-\paragraph{drop column}
-\paragraph{drop columns which match}
-\paragraph{drop columns which have group}
-\paragraph{add column}
-\paragraph{rename}
 
 
 \section{Join Tables}\index{Join Tables}
@@ -327,6 +320,34 @@ Figure~\ref{fig:ExampleJoinStatement} presents an example of join statement. The
 \caption[Column Preview for Result Table.]{\textbf{Column Preview for Result Table.} Notice that all these columns were shared across the input tables because their name follows the pattern ``colName.tableName''.}
 \label{fig:ColumnPreviewExample}
 \end{figure}
+
+
+\section{Transform Table}\index{Transform Table}
+The statement transform table (alias \texttt{transform})  allow you to transform columns of an input table and produce a new table. Figure~\ref{fig:NewTransformTable} shows a new \texttt{transform} statement.
+
+\begin{SCfigure}
+  \centering
+  \includegraphics[width=\figWidthNarrow]{figures/NewTransformTable.pdf}
+\caption[New Transform Table  Statement.]{\textbf{New Transform Table Statement.} Use this statement to transform columns of an input table.}
+\label{fig:NewTransformTable}
+\end{SCfigure}
+
+\paragraph{table}
+Use this attribute to select a table to transform. You can press \keys{\crtl+\space} to open the autocompletion menu and display all available tables.
+
+\paragraph{operations}
+A set of table operation allow you ro transfrom your result table.
+
+\subparagraph{drop column} This operation allow you to delete a specific column. press \keys{\crtl+\space} to open the autocompletion menu and display all available columns, and \key{\return} to select one of them 
+\subparagraph{drop columns which match} This operation allow you to delete columns which contains a specific pattern. Type you pattern after match.
+\sudparagraph{drop columns which have group} This operation allow you to delete columns which have a specific group. To do so, press first \keys{\ctrl+space} to display the available group and \key{\return} to select one group.
+\subparagraph{add column}
+This operations allow you to add a column in your result table. First you have to write the name of your column. The second argument allow you to write the expression of the new column.  
+\subparagraph{rename} this operation allow you to rename a specific column from the input table. Once you have selected your column of interest, you just need to type a new name under the \textit{(newName)} argument.
+
+\paragraph{result}
+The output table is called TransformedTable by default. Feel free to rename this table.
+
 
 \section{Block with Selected Tables}\index{Block with Tables}
 Sometimes it can happen that many tables are created during your analysis and, at one point, you might want to work with a restricted set of tables.
