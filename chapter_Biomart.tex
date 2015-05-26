@@ -13,52 +13,75 @@
 The BioMart project develops software and data services that are made available to the international scientific community. Users of MetaR can access data Marts provided by BioMart, providing access to a wide range of research data . Similarly to EdgeR and Limma, BioMart support is provided in a MetaR language extension. This means that in order to access BioMart with MetaR, you first need to add the Biomart language to the model where you create the analysis. To do so, you can press~\keys{\ctrl+L} and add language \textit{org\allowbreak.campagnelab\allowbreak.metar\allowbreak.biomart}. After adding the biomart language to the model, you can create \texttt{query biomart} statements, described in the following sections. 
 
 \section{The Biomart Statement}
-The \texttt{query biomart} statement makes it possible to interactively specify which data should be retrieved from a mart (using attributes and filters). Data downloaded from Biomart will be stored in a new table. 
+The \texttt{query biomart} statement makes it possible to interactively specify which data should be retrieved from a mart (using attributes and filters). Data downloaded from Biomart will be stored in a new table. Figure~\ref{fig:NewBiomart} presents a newly created Biomart statement.
+The \texttt{query biomart} statement has the following parameters.
+\begin{itemize}
+\item database
+\item dataset
+\item attributes
+\item filters
+\end{itemize} 
 
-The \texttt{query biomart} statement has the following parameters. Figure~\ref{fig:NewLimmaVoom} presents a newly created Biomart statement.
 
  \begin{figure}[h!tbp]
   \centering
-  \includegraphics[width=\figWidthWide]{figures/NewLimmaVoom.pdf}
-\caption[New Limma Voom Statement.]{\textbf{New Limma Voom Statement.}}
-\label{fig:NewLimmaVoom}
+  \includegraphics[width=\figWidthWide]{figures/NewBiomart.pdf}
+\caption[New Query Biomart Statement.]{\textbf{New Query Biomart Statement.}}
+\label{fig:NewBiomart}
 \end{figure}
 
 
-\subsection{Database}
-The first Time you will used the \texttt{query Biomart} statement, you will automatically download the available Biomart Databases. They will be stored as an Analysis attributes. To choose your database, go to \textit{select a database} and press control + space.This action will display you all the available database. You will have to choose one from this list. 
-\subsection{Dataset}
-When a database  is selected, you will download the associated datasets. To choose your datasets you just have to pick up one from the list display when you press control space.
-A dataset has two children kinds.
+\paragraph{database}
+The first time you will create the \texttt{query biomart} statement, you will automatically download the available Biomart databases. To choose one of them, go to the text \textit{select a database}. Then, press \keys{\ctrl+\space} to display all available databases. Select one of them by pressing \keys{\return}. 
+
+ 
+\paragraph{dataset} %Once
+Once a database is selected, you need to choose a dataset. To choose one, press \keys{\ctrl+\space} to display all available datasets, on the text \textit{select a dataset}. Then, press \keys{\return}, to select your dataset. \newline
+A dataset as two childrens:
 \begin{itemize}
-\item attributes which will be the column of your output table
-\item filters which allow you to filter your results for some criteria
+\item attributes, which will be the column of your result table.
+\item filters, which allow you to restrict your result table for some criteria.
 \end{itemize}
-It can append that a dataset is not associated to attributes or filters. If a text \textit{"No available filter or attributes in this dataset"}, that means you need to change your dataset selection or may be the database. 
+\begin{remark}
+Sometimes, a dataset cannot be associated with attributes or filters. In this case, in the auto completion menu for both attributes and filters will display the message \textit{"No available filter or attributes in this dataset"}. The selected dataset is no more available in Biomart. You must change your dataset or database. 
+\end{remark}
 
-\subsection{Attributes}
-Attributes are the table columns of your futur table. An attribute has three arguments:
-\begin{description}
-\item [attribute] the attribute name you want to retrieve on the output table
-\item [type] the column type of the data. It exist 3 types:
+\paragraph{attributes}
+Attributes are columns of your result table. Figure~\ref{fig:attributeBiomart} presents a new biomart attribute. An attribute has three parameters:
 \begin{itemize}
-\item string 
-\item boolean 
-\item numeric
+\item attribute, a column you want to retrieve on your result table. Press \keys{\ctrl+\space} to display the available column.
+\item type, the value type of the attribute. It exist 3  value types
+boolean, numeric and string (\textit{ by default}). To change the type, press \keys{\ctrl+\space}.
+\item column group, an attribute can have a group such as "ID". The user can display the autocompletion menu by pressing \keys{\ctrl+\space}. Group must be defined in the Column Group Container to be added to the result table.
 \end{itemize}
 
-\item [Column Group usage] by pressing control space you can choose a group usage define in the Column group Container and add it to your futur table
-\end{description}
+\begin{remark}
+You must select at least one column to run your query biomart Statement.
+\end{remark}
 
-\subsection{Filters}
-Filters are datasets Children. They allow you to filters your results. it exist 4 filters types
-\begin{description}
-\item[boolean] if this criteria is present or not on your ouput table
-\item[text] you have to enter a text in this place for example GO term
-\item[list] if this criteria is present, you can filters your results from a set of predifine values
-\item[id list] you can restric your results from a set of ids. This ID can come from a Set Of IDs define before the statement, or directly from an annotated with an (ID column) table.  
-\end{description}
-\subsection{Table}
+ \begin{figure}[h!tbp]
+  \centering
+  \includegraphics[width=\figWidthWide]{figures/BiomartAttribute.pdf}
+\caption[Select an attribute in a biomart dataset.]{\textbf{Select an attribute in a biomart dataset.} explain the figure and how works this part}
+\label{fig:attributeBiomart}
+\end{figure}
+\paragraph{Filters}
+Filters allow you to restrict your result for some criteria. this criteria are link directly to your dataset. Figure~\ref{fig:BiomartFilter} presents a new biomart filter. It exist four filter categories: 
+\begin{itemize}
+\item boolean, you want to retrieve or excluded only data which have an information. \textit{for example, if this gene has or no a Mirbase ID.}
+\item text, you have to enter a text in this area. the Query will return only informations which match your text. \textit{For example  a specific GO term.}
+\item list,  you need to choose a value from a define biomart list. \textit{For example a specific chromosome in a specie.}
+\item id list, you can restrict your results from a set of ids. This ids can come from a set of ids define before the statement, or directly from an annotated table with an (ID group).  
+\end{itemize}
 
+ \begin{figure}[h!tbp]
+  \centering
+  \includegraphics[width=\figWidthWide]{figures/BiomartFilter.pdf}
+\caption[New Biomart Filter]{\textbf{New Biomart Filter.} explain the figure more}
+\label{fig:BiomartFilter}
+\end{figure}
+
+\paragraph{table}
+The future table where your result will be stored. Column annotation is display under the Inspector Tab (\inspectorTabIcon).
 \section{Example}
 %an internet connection 
