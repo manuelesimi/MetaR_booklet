@@ -22,7 +22,6 @@ The \texttt{query biomart} statement has the following parameters.
 \item filters
 \end{itemize} 
 
-
  \begin{figure}[h!tbp]
   \centering
   \includegraphics[width=\figWidthWide]{figures/NewBiomart.pdf}
@@ -34,8 +33,8 @@ The \texttt{query biomart} statement has the following parameters.
 \paragraph{database}
 The first time you will create the \texttt{query biomart} statement, you will automatically download the available Biomart databases. To choose one of them, go to the text \textit{select a database}. Then, press \keys{\ctrl+\space} to display all available databases. Select one of them by pressing \keys{\return}. 
 
- 
-\paragraph{dataset} 
+
+ \paragraph{dataset} 
 Once a database is selected, you need to choose a dataset. To choose one, press \keys{\ctrl+\space} to display all available datasets, on the text \textit{select a dataset}. Then, press \keys{\return}, to select your dataset. \newline
 A dataset as two childrens:
 \begin{itemize}
@@ -83,5 +82,21 @@ Filters allow you to restrict your result for some criteria. this criteria are l
 
 \paragraph{table}
 The future table where your result will be stored. Column annotation is display under the Inspector Tab (\inspectorTabIcon).
-\section{Example}
-%an internet connection 
+\section{Examples}
+\subsection{Example 1}
+Figure~\ref{fig:BiomartExample1} show how to obtain a table from the Ensembl database and Human dataset. The result table "resultFromBiomart" contains 2 columns, the Ensembl Gene and Exon ID, where the first column is annotated as a group "ID". This result are filters from a list of gene and which do not contains a Mirbase ID.
+ \begin{figure}[h!tbp]
+  \centering
+  \includegraphics[width=\figWidthWide]{figures/BiomartExample1.pdf}
+\caption[Biomart Example 1]{\textbf{ Biomart Example 1.}}
+\label{fig:BiomartExample1}
+\end{figure}
+
+\subsection{Example 2}
+Figure~\ref{fig:BiomartExample2} show how to obtain a table from the Paramecium bibliography. The result table "resultFromBiomart" contains 2 columns, the PubMed ID and the abstract, where the publication year is upper 2000.
+ \begin{figure}[h!tbp]
+  \centering
+  \includegraphics[width=\figWidthWide]{figures/BiomartExample2.pdf}
+\caption[Biomart Example 2]{\textbf{ Biomart Example 2.}}
+\label{fig:BiomartExample2}
+\end{figure}
