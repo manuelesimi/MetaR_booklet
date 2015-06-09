@@ -38,7 +38,7 @@ The first time you will create the \texttt{query biomart} statement, you will au
 Once a database is selected, you need to choose a dataset. To choose one, press \keys{\ctrl+\space} to display all available datasets, on the text \textit{select a dataset}. Then, press \keys{\return}, to select your dataset. \newline
 A dataset as two childrens:
 \begin{itemize}
-\item attributes, which will be the column of your result table.
+\item attributes, which will be the columns of your result table.
 \item filters, which allow you to restrict your result table for some criteria.
 \end{itemize}
 \begin{remark}
@@ -49,7 +49,7 @@ Sometimes, a dataset cannot be associated with attributes or filters. In this ca
 Attributes are columns of your result table. Figure~\ref{fig:attributeBiomart} presents a new biomart attribute. An attribute has three parameters:
 \begin{itemize}
 \item attribute, a column you want to retrieve on your result table. Press \keys{\ctrl+\space} to display the available column.
-\item type, the value type of the attribute. It exist three  value types
+\item type, of  the attribute rows values. It exist three  types
 boolean, numeric and string (\textit{ by default}). To change the type, press \keys{\ctrl+\space}.
 \item column group, an attribute can have a group such as "ID". The user can display the autocompletion menu by pressing \keys{\ctrl+\space}. Group must be defined in the Column Group Container to be added to the result table.
 \end{itemize}
@@ -69,14 +69,14 @@ Filters allow you to restrict your result for some criteria. this criteria are l
 \begin{itemize}
 \item boolean, you want to retrieve or excluded only data which have an information. \textit{For example, if this gene has or has not a Mirbase ID.}
 \item text, you have to enter a text in this area. the query will return only informations which match your text. \textit{For example  a specific GO term.}
-\item list,  you need to choose a value from a define biomart list. \textit{For example a specific chromosome in a specie.}
+\item list,  you need to choose a value from a define list. \textit{For example a specific chromosome in a specie.}
 \item id list, you can restrict your results from a set of ids. This ids can come from a set of ids define before the statement, or directly from an annotated table with an (ID group).  
 \end{itemize}
 
  \begin{figure}[h!tbp]
   \centering
   \includegraphics[width=\figWidthWide]{figures/BiomartFilter.pdf}
-\caption[New Biomart Filter]{\textbf{New Biomart Filter.} A filter allow you to apply constraints to you results. It exist four filters categories: boolean, text,list and id list. Filters are related to a specific dataset.}
+\caption[New Biomart Filter]{\textbf{New Biomart Filter.} A filter allow you to apply constraints to you results. It exist four filters categories: boolean, text, list and id list. Filters are related to a specific dataset.}
 \label{fig:BiomartFilter}
 \end{figure}
 
