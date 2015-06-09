@@ -65,11 +65,11 @@ You must select at least one attribute before you can execute the \texttt{query 
 \caption[Select an attribute in a biomart dataset.]{\textbf{Select an attribute in a biomart dataset.} An attribute contains any information you want to retrieve to populate the result table. Attributes have a name, a type and a column group annotation. The set of available attributes depends on the specific dataset selected.}
 \label{fig:attributeBiomart}
 \end{figure}
-\paragraph{Filters}
+\paragraph{filters}
 Filters make it possible to restrict the result with some criteria. The types of filter available depend on the dataset selected in the statement. Figure~\ref{fig:BiomartFilter} presents a new biomart filter. There are four kinds of filters: 
 \begin{itemize}
 
-\item \texttt{boolean filters} select rows for which a value is either true or false. For example, if a gene has or does not have a Mirbase identitier.
+\item \texttt{boolean filters} select rows for which a value is either true or false. For example, if a gene has or does not have a miRBase identifier.
 \item \texttt{text filters} select rows which match some text in some attribute. The query will return only rows of the dataset that contain which match the text. For example, you can use a text filter to query rows that include a specific GO term.
 \item \texttt{list filters} select rows that include an element among those of a finite list. Available list elements are determined by the mart dataset.  For example, a specific chromosome in a specie can be selected with a list filter.
 \item \texttt{id list filters} select rows that contain a specific set of identifiers. These ids can be obtained either in a MetaR \texttt{SetOfIds} node, defined before the \texttt{query biomart} statement, or directly from an annotated table, where one column has an ID group.  
