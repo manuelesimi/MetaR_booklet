@@ -11,6 +11,9 @@
 % introduction
 \section{Overview}
 The BioMart project develops software and data services that are made available to the international scientific community. Users of MetaR can access data marts provided by BioMart, providing access to a wide range of research data . Similarly to EdgeR and Limma, BioMart support is provided in a MetaR language extension. This means that in order to access BioMart with MetaR, you first need to add the \textit{Biomart} language to the model where you create the analysis. To do so, you can press~\keys{\ctrl+L} and add language \textit{org\allowbreak.campagnelab\allowbreak.metar\allowbreak.biomart}. After adding the \textit{biomart} language to the model, you can create \texttt{query biomart} statements, described in the following sections. 
+\begin{remark}
+The Biomart language in MetaR was developed by William ER Digan and was introduced in MetaR 1.4.
+\end{remark}
 
 \section{The Biomart Statement}\index{query biomart statement},\index{Biomart}
 The \texttt{query biomart} statement makes it possible to interactively specify which data should be retrieved from a mart (using attributes and filters). Data downloaded from Biomart will be stored in a new table. Figure~\ref{fig:NewBiomart} presents a newly created \texttt{query biomart} statement.

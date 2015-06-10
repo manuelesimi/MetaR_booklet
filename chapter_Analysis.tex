@@ -340,16 +340,17 @@ Use this attribute to select a table to transform. You can press \keys{\ctrl+\sp
 \paragraph{operations}
 A set of table operations, which can be used to transform the input table. See Figure~\ref{fig:TransformTable} for a list of operations  available to transform a table. Operations include: 
 
-\subparagraph{drop column} This operation allows to delete a specific column. Press \keys{\ctrl+\space} to open the autocompletion menu and display all available columns. Then press  \keys{\return} to select one column. This column will be removed/dropped in the result table.
+\subparagraph{drop column} This operation allows to delete a specific column. Press \keys{\ctrl+\space} to open the autocompletion menu and display all available columns. Then press  \keys{\return} to select one column. This column will be removed/dropped in the result table.\index{drop column}
 
-\subparagraph{drop columns which match} This operation allows to delete columns which contains a specific pattern. Type the pattern after the \texttt{match} keyword.
+\subparagraph{drop columns which match} This operation allows to delete columns which contains a specific pattern. Type the pattern after the \texttt{match} keyword.\index{drop columns which match}
 
-\subparagraph{drop columns which have group} This operation allow to delete columns which have a specific group. To do so, press first \keys{\ctrl+space} to display the available group and \keys{\return} to select one group.
+\subparagraph{drop columns which have group} This operation allow to delete columns which have a specific group. To do so, press first \keys{\ctrl+space} to display the available group and \keys{\return} to select one group.\index{drop columns which have group}
+
 
 \subparagraph{add column}
-This operations allows to add a column in the result table. Start by entering the name of the new column. The second argument must contain the expression that will calculate the value that the new column will take for each row of the result table. You may reference columns of the input table in the expression using the \texttt{\$} column selection helper.  
+This operations allows to add a column in the result table. Start by entering the name of the new column. The second argument must contain the expression that will calculate the value that the new column will take for each row of the result table. You may reference columns of the input table in the expression using the \texttt{\$} column selection helper.\index{add column}  
 
-\subparagraph{rename} this operation allows to rename a specific column from the input table. Once you have selected your column of interest, you just need to type a new name under the \textit{(newName)} argument.
+\subparagraph{rename} this operation allows to rename a specific column from the input table. Once you have selected your column of interest, you just need to type a new name under the \textit{(newName)} argument.\index{rename column}
 
 \paragraph{result}
 The output table is called TransformedTable by default, but can be renamed as needed. Use the inspector to see which columns will be produced when the transform statement is executed.
