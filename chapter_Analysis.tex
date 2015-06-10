@@ -305,54 +305,60 @@ Looking at the table's content, we note that:
 
 
 \subsection{Example Join}\index{Example}\index{Join}
-\begin{SCfigure}
-  \centering
-  \includegraphics[width=\figWidthNarrow]{figures/ExampleJoin.pdf}
-\caption[Example of Join Statement.]{\textbf{Example of Join Statement.}}
-\label{fig:ExampleJoinStatement}
-\end{SCfigure}
-
-Figure~\ref{fig:ExampleJoinStatement} presents an example of join statement. The statement joins two tables and creates the Result table. If you open the \inspectorTabIcon{}, you will see a preview of the columns for the result table (shown in Figure~\ref{fig:ColumnPreviewExample}). 
 
 \begin{figure}[h!tbp]
   \centering
-  \includegraphics[width=\figWidthNarrow]{figures/ExampleJoinColumnPreview.pdf}
+  \includegraphics[width=\figWidthWide]{figures/ExampleJoin.pdf}
+\caption[Example of Join Statement.]{\textbf{Example of Join Statement.}}
+\label{fig:ExampleJoinStatement}
+\end{figure}
+
+\begin{figure}[h!bp]
+  \centering
+  \includegraphics[width=\figWidthWide]{figures/ExampleJoinColumnPreview.pdf}
 \caption[Column Preview for Result Table.]{\textbf{Column Preview for Result Table.} Notice that all these columns were shared across the input tables because their name follows the pattern ``colName.tableName''.}
 \label{fig:ColumnPreviewExample}
 \end{figure}
 
+Figure~\ref{fig:ExampleJoinStatement} presents an example of join statement. The statement joins two tables and creates the Result table. If you open the \inspectorTabIcon{}, you will see a preview of the columns for the result table (shown in Figure~\ref{fig:ColumnPreviewExample}). 
+
+
 
 \section{Transform Table}\index{Transform Table}
-The statement transform table (alias \texttt{transform})  allow you to transform columns of an input table and produce a new table. Figure~\ref{fig:NewTransformTable} shows a new \texttt{transform} statement.
+The statement transform table (alias \texttt{transform})  allows to transform columns of an input table and produce a new table. Figure~\ref{fig:NewTransformTable} shows a new \texttt{transform} statement.
 
-\begin{SCfigure}
+\begin{figure}[h!tbp]
   \centering
   \includegraphics[width=\figWidthNarrow]{figures/NewTransformTable.pdf}
-\caption[New Transform Table  Statement.]{\textbf{New Transform Table Statement.} Use this statement to transform columns of an input table.}
+\caption[New Transform Table  Statement.]{\textbf{New Transform Table Statement.} Use this statement to transform a table by applying column operations.}
 \label{fig:NewTransformTable}
-\end{SCfigure}
+\end{figure}
 
 \paragraph{table}
 Use this attribute to select a table to transform. You can press \keys{\ctrl+\space} to open the autocompletion menu and display all available tables.
 
 \paragraph{operations}
-A set of table operations,  Figure~\ref{fig:TransformTable} which allow you to transfrom your result table.
+A set of table operations, which can be used to transform the input table. See Figure~\ref{fig:TransformTable} for a list of operations  available to transform a table. Operations include: 
 
-\subparagraph{drop column} This operation allow you to delete a specific column. Press \keys{\ctrl+\space} to open the autocompletion menu and display all available columns. Then press  \keys{\return} to select one column.
-\subparagraph{drop columns which match} This operation allow you to delete columns which contains a specific pattern. Type you pattern after the text \textit{match}.
-\subparagraph{drop columns which have group} This operation allow you to delete columns which have a specific group. To do so, press first \keys{\ctrl+space} to display the available group and \keys{\return} to select one group.
+\subparagraph{drop column} This operation allows to delete a specific column. Press \keys{\ctrl+\space} to open the autocompletion menu and display all available columns. Then press  \keys{\return} to select one column. This column will be removed/dropped in the result table.
+
+\subparagraph{drop columns which match} This operation allows to delete columns which contains a specific pattern. Type the pattern after the \texttt{match} keyword.
+
+\subparagraph{drop columns which have group} This operation allow to delete columns which have a specific group. To do so, press first \keys{\ctrl+space} to display the available group and \keys{\return} to select one group.
+
 \subparagraph{add column}
-This operations allow you to add a column in your result table. First you have to write the name of your column. The second argument allow you to write the expression of the new column.  
-\subparagraph{rename} this operation allow you to rename a specific column from the input table. Once you have selected your column of interest, you just need to type a new name under the \textit{(newName)} argument.
+This operations allows to add a column in the result table. Start by entering the name of the new column. The second argument must contain the expression that will calculate the value that the new column will take for each row of the result table. You may reference columns of the input table in the expression using the \texttt{\$} column selection helper.  
+
+\subparagraph{rename} this operation allows to rename a specific column from the input table. Once you have selected your column of interest, you just need to type a new name under the \textit{(newName)} argument.
 
 \paragraph{result}
-The output table is called TransformedTable by default. 
+The output table is called TransformedTable by default, but can be renamed as needed. Use the inspector to see which columns will be produced when the transform statement is executed.
 
 
 \begin{SCfigure}
   \centering
   \includegraphics[width=\figWidthNarrow]{figures/TransformTable.pdf}
-\caption[Transform Table  Statement.]{\textbf{Example of Transform Table Statement.} This example show various table operation available in  the Transform Table.}
+\caption[Example of Transform Table Statement.]{\textbf{Example of Transform Table Statement.} This example show various table operations available with \texttt{transform table}.}
 \label{fig:TransformTable}
 \end{SCfigure}
 
@@ -363,24 +369,24 @@ Figure~\ref{fig:NewWithTablesStatement} presents a newly created \texttt{with ta
 The statement has two attributes: the list of input tables and a statement list. Figure~\ref{fig:ExampleWithTablesStatement} shows an example of the \texttt{with tables} statement.
 
 \paragraph{input tables}
-Use this attribute to select the tables you want to see inside the block. To do so, you can use auto-completion and select tables defined in your analysis up to that point.
+Use this attribute to select the tables you want to see inside the block. To do so, you can use auto-completion and select tables defined in your analysis up to that point. The statements included in the statement list will only see the tables defined in this list. 
 
 \paragraph{statement list}
-Here you can used all statements defined in MetaR.
+Here you can use all statements defined in MetaR. Any tables or plots created in the statement list will be visible after the block ends.
  
-\begin{SCfigure}
+\begin{figure}[h!tbp]
   \centering
   \includegraphics[width=\figWidthNarrow]{figures/NewWithTablesStatement.pdf}
 \caption[New With Tables Statement.]{\textbf{New With Tables Statement.} Use this statement to work with a restricted set of tables.}
 \label{fig:NewWithTablesStatement}
-\end{SCfigure}
+\end{figure}
 
- \begin{SCfigure}
+ \begin{figure}[h!tbp]
   \centering
   \includegraphics[width=\figWidthWide]{figures/ExampleWithTablesStatement.pdf}
 \caption[Example of With Tables Statement.]{\textbf{Example of With Tables Statement.}}
 \label{fig:ExampleWithTablesStatement}
-\end{SCfigure}
+\end{figure}
 
 \section{Plotting Data}
 MetaR provides simple plotting capabilities\footnote{These capabilities are simple, but can be extended very easily by adding new statements to draw other types of visualization. This is a key advantage of using Language Workbench technology.}. The following types of plots are currently supported: 
