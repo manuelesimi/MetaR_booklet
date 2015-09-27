@@ -63,6 +63,9 @@ An MPS editor customizes how a node appears in the editor. Create an editor for 
 In order to generate the statement to R code, we will use the MPS Generator aspect. 
 
 In the first step, we create a reduction rule, see Figure~\ref{fig:GeneratorHowToStep1} and~\cite{campagne2014mps} (Generator Aspect chapter). The rule indicates that nodes of the \texttt{Heatmap2} concept will be transformed with the \texttt{reduce\_Heatmap2} template. The template was created using the \textbf{New Template} intention found on the reduction rule node. See detailed instructions in~\cite{campagne2014mps}. When configuring the type of the output node (under \texttt{content node:}), use \texttt{Lines}, from the language \textit{org.campagnelab.textoutput} to produce text with the MPS Generator aspect.
+\begin{remark}
+As an alternative, and since MetaR 1.5 supports a full R language implementation in MPS, you could also use the concept \texttt{Expr} from the  language \textit{org.campagnelab.R}. Doing so would allow using the R language editor to define the output of the reduction rule.  
+\end{remark}
 
 \begin{figure}[h!tbp]
   \centering

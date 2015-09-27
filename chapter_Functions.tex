@@ -10,7 +10,7 @@
 \section{Overview}
 Since version 1.4, MetaR supports calling R functions directly. This Chapter describes how you can use this feature to take advantage of the many functions available in R packages to transform data in your MetaR Analyses. 
 
-\subsection{Function Stubs}
+\subsection{Function w}
 Function stubs\index{Function stubs} are provided that represent functions offered by different packages. Stubs do not provide the code associated with the function, but describe the function name and the arguments of the function and its default values. This information is used to support auto-completion for R functions. 
 
 We provide pre-imported stubs for the packages used during the MetaR training sessions, namely: \textit{base}, \textit{graphics}, \textit{data.table}, \textit{pheatmap}, \textit{biomaRt}, \textit{edgeR} and \textit{limma}. While stubs are provided, they are not immediately available in a MetaR analysis. In order to use R function stubs, you need to 
@@ -61,7 +61,7 @@ Importing a bioconductor package is very similar to importing a regular R packag
 \label{fig:NewBioconductorImportPackage}
 \end{figure}
 
-\section{Stubs}\index{Stubs}
+\section{Stubs}\index{Stubs}\label{sec:Stubs}
 Stubs represent functions from R regular or bioconductor packages. We do not recommend creating Stubs manually. The easiest way to create Stub root nodes is by using the \texttt{import package} and \texttt{import bioconductor package} statements. Figure~\ref{fig:StubsExample} presents a snapshot showing a few functions located in the base Stubs root node (R version 3.1.3).
 \begin{remark}
 Stubs distributed with MetaR are packaged in models named after the version of R which provided the package, in an effort to help track differences between major R versions.

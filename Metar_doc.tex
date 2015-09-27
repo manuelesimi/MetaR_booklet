@@ -49,7 +49,7 @@
 \newboolean{fullBook}
 \newboolean{includeCover}
 % Change the boolean below from true to false to disactivate tablet output.
-\setboolean{tablet}{true} 
+\setboolean{tablet}{false} 
 \setboolean{fullBook}{true}
 \setboolean{includeCover}{true}
 \newcommand{\ignore}[1]{ %ignored
@@ -207,7 +207,7 @@ See \url{http://www.jetbrains.com/mps/download/license.html} and\\
 \vspace*{0.5cm}
 
 
-\noindent \textit{Version 1.4.0 June 2015}
+\noindent \textit{Version 1.5.0 Sept 2015}
 
 % Add an empty page in print edition to put credit on a new leaf
 \ifthenelse {\boolean{tablet}}{} 
@@ -300,7 +300,8 @@ We also thank the many people who have taken the MetaR training sessions at the 
 \input{chapter_Biomart}
 \input{chapter_Functions}
 \input{chapter_SimulateDatasets}
-\input{chapter_ExtendingMetaR.tex}
+\input{chapter_ExtendingMetaR}
+\input{chapter_ComposableR}
 }{
 
 }
