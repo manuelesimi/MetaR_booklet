@@ -602,7 +602,7 @@ The \texttt{<no name>} attribute listed after \texttt{->} makes it possible to n
 Figure~\ref{fig:Plot3SetsVennDiagram} presents an example of a Venn Diagram showing three sets.
 
 
-\subsection{multiplot}\index{Multiplot}
+\subsection{multiplot}\index{Multiplot}\label{subsec:Multiplot}
 This statement (alias \texttt{multiplot}) makes it possible to assemble a plot as a matrix of $m$ x $n$ plots. This is convenient if you would like to create a figure from panels of individual plots. In addition, multiplot provides a preview of the multi-panel plot that you can turn on and off at the click of a button. Figure~\ref{fig:NewMultiplot} presents a new Multiplot.
 
 
@@ -656,8 +656,8 @@ The rendering format is the format in which the plot will be stored on the file 
 \paragraph{path}
 The \texttt{<no path>} attribute has to be set to a filename where you want the rendering is stored. Its extension must be compatible with the selected format (e.g. ".pdf" for PDF). If only a filename is specified
 
-\section{UpSet plot}\index{UpSet plot}
-UpSet plots have been introduced in~\cite{Lex2014} and are supported in MetaR since release 1.8. Such plots make it effective to compare set intersection for many sets. Figure~\ref{fig:UpsetPlotExample} presents an illustration.
+\section{UpSet plot}\index{UpSet plot}\index{New in MetaR 1.8}
+UpSet plots have been introduced in~\cite{Lex2014} and are supported in MetaR since release 1.8. Such plots make it effective to get a sense of the intersection among many sets. Figure~\ref{fig:UpsetPlotExample} presents an illustration.
 In MetaR, UpSet plots can be created with the UpSet statement. The statement accepts the definition of an arbitrary number of sets to be compared, and produces a plot. The sets can be defined as sets of IDs, or as predicated over a table (see Figure~\ref{fig:AnalysisWithUpset}).
 
 \begin{figure}[h!tbp]
@@ -674,6 +674,41 @@ In MetaR, UpSet plots can be created with the UpSet statement. The statement acc
 \label{fig:AnalysisWithUpset}
 \end{figure}
 
+\section{MA Plot}\index{MA Plot}\index{New in MetaR 1.8}
+MA plots are a useful quality control type of plot. An MA plot is a scatterplot of log fold change versus intensity of expression. The plot is useful to detect systematic bias in fold change across genes. It has been popularized with microarray technology which used to have regions of the array that could affect many gene expression estimates and show bias. Figure~\ref{fig:MAPlot} (top) presents an MA plot constructed in MetaR. Such a plot can be created with the \texttt{MA Plot} alias, available when you import the \textit{org.campagnelab.metar.plots} language. See Figure~\ref{fig:NewMAPlot} for a newly created MA Plot statement. The bottom of Figure~\ref{fig:MAPlot} illustrates how individual points of an MA Plot can be labeled.
 
 
-  
+\begin{figure}[h!tbp]
+  \centering
+  \includegraphics[width=\figWidthWide]{figures/NewMAPlot-1.pdf}
+\caption[MA Plot Statement.]{\textbf{MA Plot Statement.} A new MA Plot statement is shown before configuration.}
+\label{fig:NewMAPlot}
+\end{figure}
+ 
+\paragraph{Table}
+ MA plots take data from a MetaR table. Enter a reference to a table imported in the analysis.
+\paragraph{FDR threshold}
+You can adjust this threshold to determine which genes/elements of measurement are considered significantly changes, and should be colored red on the MA plot. 
+
+\paragraph{Label set}
+Use this attribute to reference a gene list (MetaR set of ids) that identifies genes to be labeled. The identifiers provided in the gene list must match those found in the table marked with group \texttt{ID}.
+\paragraph{Plot}
+The attribute shown as \texttt{<no name>} in Figure~\ref{fig:NewMAPlot} let you define a name for the plot that will be produced by the statement. This name can be used to combine the MA Plot with other plots in a multiplot statement (see Section~\ref{subsec:Multiplot}).
+
+\paragraph{Style}
+See Section~\ref{styles} for an introduction to styles.
+The MA plot accepts the following style items:
+
+\begin{itemize}
+  \item \texttt{XRange} Determines the range of the X axis.
+  \item \texttt{YRange} Determines the range of the Y axis.
+  \item \texttt{Title} Let's you configure the title of the plot
+\end{itemize}
+
+  \begin{figure}[bpt!]
+  \centering
+  \includegraphics[width=\figWidthNarrow]{figures/MAPlot-1.pdf}
+   \includegraphics[width=\figWidthWide]{figures/MAPlotConstruction-1.pdf}
+\caption[Example of MA Plot.]{\textbf{Example of MA Plot.} An MA plot constructed with MetaR is shown. The top part of the figure shows the plot. The second part shows how the plot is created in MetaR. Note that in this example, a gene list is used to identify a gene to be labeled on the MA Plot. The horizontal dashed line represents no change in gene expression (fold change = 1, $log_2$ fold change $=0$). The vertical dashed line represents the minimum gene expression threshold filter}
+\label{fig:MAPlot}
+\end{figure}

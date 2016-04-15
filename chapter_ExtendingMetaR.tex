@@ -64,7 +64,10 @@ In order to generate the statement to R code, we will use the MPS Generator aspe
 
 In the first step, we create a reduction rule, see Figure~\ref{fig:GeneratorHowToStep1} and~\cite{campagne2014mps} (Generator Aspect chapter). The rule indicates that nodes of the \texttt{Heatmap2} concept will be transformed with the \texttt{reduce\_Heatmap2} template. The template was created using the \textbf{New Template} intention found on the reduction rule node. See detailed instructions in~\cite{campagne2014mps}. When configuring the type of the output node (under \texttt{content node:}), use \texttt{Lines}, from the language \textit{org.campagnelab.textoutput} to produce text with the MPS Generator aspect.
 \begin{remark}
-As an alternative, and since MetaR 1.5 supports a full R language implementation in MPS, you could also use the concept \texttt{Expr} from the  language \textit{org.campagnelab.R}. Doing so would allow using the R language editor to define the output of the reduction rule.  
+As an alternative, and since MetaR 1.5 supports a full R language implementation in MPS, you could also use the concepts \texttt{Expr} or \texttt{Exprlist} from the  language \textit{org.campagnelab.R}. Doing so would allow using the R language editor to define the output of the reduction rule.  
+\end{remark}
+\begin{remark}
+MetaR 1.8 has introduced the language \textit{org.campagnelab.metar.R.inspect}, which you can use when writing generation rules with the \textit{org.campagnelab.R} language. This language facilitates generation for common operations in MetaR. See the \texttt{sleuth}, \texttt{MA Plot} and \texttt{UpSet} statements for examples in the code base that take advantage of the composable R language in the generator.\index{New in MetaR 1.8}\index{Sleuth}\index{MA Plot}\index{UpSet}\index{org.campagnelab.metar.R.inspect}
 \end{remark}
 
 \begin{figure}[h!tbp]
@@ -157,6 +160,9 @@ For instance, the \texttt{\$[plot.png]} macro will expand to
 new RPath(node.plot.getPath()).toString();
 \end{lstlisting}
 
+\begin{remark}
+If you use composable R to write the generator, you can reuse the \texttt{DrawPlot} expression provided by \textit{org.campagnelab.metar.R.inspect}. This expression more conveniently generates to the png, plot and ignore expressions.
+\end{remark}\index{New in MetaR 1.8}
 
 \subsection{Handling errors}
 Accurate error reporting is important to the end-user. When things do not go well and the R code fails, it is useful to know precisely which MetaR statement generated the error. In MetaR, this is done by taking advantage of the \texttt{tryCatch} R functions (see \url{http://mazamascience.com/WorkingWithData/?p=912}). 
@@ -166,6 +172,9 @@ Because \texttt{tryCatch} is not particularly intuitive and is rather verbose, M
 The statement \texttt{tryForNode} takes an ID, which is the result of the \texttt{id()} method defined for each MetaR statement. The value of the ID can be set as usual with a property macro (its value should be \texttt{node.id()}). Figure~\ref{fig:Heatmap2GeneratorComplete} shows the completed template for \texttt{Heatmap2}. While the statement only needs to call the \texttt{heatmap.2} function, handling possible errors and producing plots that can be reused to build multi-panel figures have added quite a few lines to the output.
 \begin{remark}
 MetaR 1.3.1.1 makes it easier to wrap \textit{TextOutput} \texttt{Lines} into a \texttt{tryForNode} block. Select a node of type \texttt{Lines} (highlighted in blue braces) and invoke the intention \texttt{Wrap Lines in a TryForNode Block}. Note that this intention is not available for lines already inside a \texttt{tryForNode} block.
+\end{remark}
+\begin{remark}
+If you use composable R to write the generator of a statement, you can find the equivalent of \texttt{tryCatch} and \texttt{tryForNode} in the \textit{org.campagnelab.metar.R.inspect} language.
 \end{remark}
 
 \begin{figure}[h!tbp]
