@@ -15,7 +15,7 @@ When the workflow completes, you will be able to download Kallisto result direct
 \section{Sleuth statement}
 The \texttt{Sleuth} statement, alias \texttt{sleuth} is provided in the \textit{org.campagnelab.metar.sleuth} language. Import this language in a model where you want to Sleuth for data analysis.
 
-After downloading Kallisto results, create or open a MetaR analysis and type sleuth. A new statement such as shown in Figure~\ref{NewSleuthStatement} will be created.
+After downloading Kallisto results, create or open a MetaR analysis and type sleuth. A new statement such as shown in Figure~\ref{fig:NewSleuthStatement} will be created.
 
 \begin{figure}[h!tbp]
   \centering
@@ -26,7 +26,7 @@ After downloading Kallisto results, create or open a MetaR analysis and type sle
 
 The statement has three attributes:
 \paragraph{Kallisto Result Base Directory}
-This is a string attribute where you can paste path to \texttt{KALLISTO\_RESULTS}. Once pasted, if the directory contains Kallisto result sub-directories, the information is organized into a MetaR Table, that will appear in the model. An import statement is added to the analysis and the table becomes referenced by the sleuth statement. A sleuth statement bound to a table is shown in Figure~\ref{fig:KallistoBoundToTable}. At this point, you can annotate the table as you would for a Limma voom or EdgeR analysis: add column groups to columns corresponding to samples and annotate the groups with usages to define factors that you would like to include the analysis (see Chapter~\ref{chap:Tables} to learn how to do this).
+This is a string attribute where you can paste the path to \texttt{KALLISTO\_RESULTS}. Once pasted, if the directory contains Kallisto result sub-directories, the information is organized into a MetaR Table, that will appear in the model. An import statement is added to the analysis and the table becomes referenced by the sleuth statement. A sleuth statement bound to a table is shown in Figure~\ref{fig:KallistoBoundToTable}. At this point, you can annotate the table as you would for a Limma voom or EdgeR analysis: add column groups to columns corresponding to samples and annotate the groups with usages to define factors that you would like to include the analysis (see Chapter~\ref{chap:Tables} to learn how to do this).
 For instance, using the Kallisto results from the Sleuth tutorial, the ColumnGroupContainer and Table would look as shown on Figure~\ref{fig:AnnotatedTable}.
 
 

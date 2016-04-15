@@ -709,6 +709,16 @@ The MA plot accepts the following style items:
   \centering
   \includegraphics[width=\figWidthNarrow]{figures/MAPlot-1.pdf}
    \includegraphics[width=\figWidthWide]{figures/MAPlotConstruction-1.pdf}
-\caption[Example of MA Plot.]{\textbf{Example of MA Plot.} An MA plot constructed with MetaR is shown. The top part of the figure shows the plot. The second part shows how the plot is created in MetaR. Note that in this example, a gene list is used to identify a gene to be labeled on the MA Plot. The horizontal dashed line represents no change in gene expression (fold change = 1, $log_2$ fold change $=0$). The vertical dashed line represents the minimum gene expression threshold filter}
+\caption[Example of MA Plot.]{\textbf{Example of MA Plot.} An MA plot constructed with MetaR is shown. The top part of the figure shows the plot. The second part shows how the plot is created in MetaR. Note that in this example, a gene list is used to identify a gene to be labeled on the MA Plot. The horizontal dashed line represents no change in gene expression (fold change = 1, $log_2$ fold change $=0$). The vertical dashed line represents the minimum gene expression threshold filter.}
 \label{fig:MAPlot}
 \end{figure}
+
+\subsection{Inspector}
+
+The inspector offers several attributes to customize the MA Plot:
+
+\paragraph{Columns}
+A first group of attributes help customize the columns the plot is built from. Default columns are set for a table of statistics produced with Limma Voom, but if you use another statistical test, you can adjust the $log_2$ fold-change, average expression columns, and significance columns.
+\paragraph{minExpressionThreshold}
+You can configure the position of the vertical dashed line by changing the value in the \texttt{minimum AverageExpression} attribute.
+
