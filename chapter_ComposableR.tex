@@ -81,7 +81,7 @@ To create a composable R script in a model, make sure \textit{org.campagnelab.me
 \begin{figure}[tbhp]
   \centering
   \includegraphics[width=\figWidthTiny]{figures/NewRScriptRootNode.pdf}
-\caption[New RScript Root Node]{\textbf{New RScript Root Node.}Press \keys{\return} over the \mpsplaceholder{} to enter new expressions in the script. Enter at least a single new line before pasting code.}
+\caption[New RScript Root Node]{\textbf{New RScript Root Node.} Press \keys{\return} over the \mpsplaceholder{} to enter new expressions in the script. Enter at least a single new line before pasting code.}
 \label{fig:NewRScriptRootNode}
 \end{figure}
 
@@ -102,22 +102,29 @@ Figure~\ref{fig:UnitedNationPlotScript} shows an example of an RScript written w
 \subsection{Execution}
 RScript root nodes can be executed directly from within MPS. Select an RScript, right-click and do Run 'Script <name>', where name is the name of the RScript you wish to execute. Notice that you can provide program parameters in the Run Configuration dialog. Docker execution (see Chapter~\ref{chap:DockerIntegration} is also supported).
 
-Since MetaR 2.0\index{New in MetaR 2.0}, composable R scripts support instant refresh. Changing the script will trigger re-runs of the script in the background and will update plots and tables in real time. See Chapter~\ref{chapter:instantRefresh} for details. 
-\section{installOrLoad statement}\index{installOrLoad}
+Since MetaR 2.0\index{New in MetaR 2.0}, composable R scripts support instant refresh. Changing the script will trigger re-runs of the script in the background and will update plots and tables in real time. See Chapter~\ref{chap:InstantRefresh} for details. 
+
+\section{installOrLoad statement}\index{installOrLoad}\label{sec:installOrLoad}
 This statements conveniently loads a package, or installs and loads it if the package was not present in the R distribution used to execute the script. This statement takes a single argument: the name of the package/library to load. The inspector also offer the ability to customize the CRAN repository/mirror used to download and install  the package. 
 The following statement:
 \begin{lstlisting}
 installOrLoad session
 installOrLoad ggplot2
 \end{lstlisting}
-Will generate the following R code:
+will generate the following R code:
 
 \begin{lstlisting}
-installOrLoad<-function (lib,repo="http://cran.us.r-project.org"){if(!require(lib,character.only=TRUE)){install.packages(lib,repos=repo)
-  library(lib,character.only=TRUE)}}
+installOrLoad<-function (lib,
+		repo="http://cran.us.r-project.org")   {
+		if(!require(lib,character.only=TRUE)){
+			install.packages(lib,repos=repo)
+  			library(lib,character.only=TRUE)
+  		}
+  }
 installOrLoad("session")
 installOrLoad("ggplot2")
 \end{lstlisting}
+and result in installing and or loading the session and ggplot2 packages.
 
 \section{Package Stubs}
 The composable R language also defines the Stub root node, discussed in Section~\ref{sec:Stubs}. Stubs contain description of the functions and function paramters offered by R packages and can be created automatically from the name of the package.
