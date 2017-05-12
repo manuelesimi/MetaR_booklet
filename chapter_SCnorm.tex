@@ -1,0 +1,47 @@
+%	CHAP EdgeR
+%----------------------------------------------------------------------------------------
+
+\chapterimage{blue-chapter-head_4-reduced.pdf} % Chapter heading image
+
+\chapter{SCnorm}\label{chap:SCnorm}
+\section{Single Cell Normalization}
+SCnorm is a method developed to normalize single cell RNA-Seq data~\cite{bacher2017scnorm}. It is integrated into MetaR to facilitate normalization of bulk or single cell RNA-Seq data. In order to use SCnorm in MetaR, you need to import the \textit{org.campagnelab.metar.scnorm} language. Once imported, you will be able to use two statements in a MetaR analysis:
+
+\subsection{check count depth}
+This statement (alias \texttt{check count depth}) will produce a PDF with diagnostic plots showing the density of slopes for  the curves log gene expression vs. log depth of sequencing (as shown in Figure 1 of~\cite{bacher2017scnorm}. Figure~\ref{fig:NewSCnormCheckCellCounts} shows a newly created statement.
+
+\begin{figure}[h!tbp]
+  \centering
+  \includegraphics[width=\figWidthWide]{figures/NewCheckCountDepth.pdf}
+\caption[New Check Count Depth Statement.]{\textbf{New Check Count Depth Statement.} This statement produces diagnostic PDF with density of slopes for gene expression vs depth of sequencing. The statement indicates where the PDF will be written (somewhere under the directory indicated in the \texttt{R\_RESULTS} path variable.}
+\label{fig:NewSCnormCheckCellCounts}
+\end{figure}
+\paragraph{input table}
+A table of data, with some columns marked with the counts attribute. Only counts columns will be normalized and available in the output in normalized form. One column should have the ID attribute and will also be copied to the normalized table.
+\paragraph{prefix}
+The prefix is a string used to name the PDF output. The name of the PDF is derived from the prefix, followed by ``\_count-depth-evaluation.pdf''. You can see the filename where the PDF will be written in parenthesis following the string ``result in''.
+\paragraph{Inspector}
+Attributes available under the inspector include:
+
+\subparagrah filter cell proportion parameter. This parameter controls the threshold that determines when the normalization process has converged. A default value of 0.1 is suggested, but can be adjusted if the process fails to converge.
+
+\subsection{SCnorm}
+The \texttt{SCnorm} statement  normalizes data with the R SCnorm package to bring slopes back to zero. The SCnorm statement has the following attributes:
+\paragraph{input table}
+A table of data, with some columns marked with the counts attribute. Only counts columns will be normalized and available in the output in normalized form. One column should have the ID attribute and will also be copied to the normalized table.
+
+\paragraph{condition}
+You may specify an optional column usage. This usage must annotate a group specific on a counts column of the table. If specified, normalization will be performed in the groups defined by values of the usage.
+\paragraph{K/Scan}
+The attribute whose default value reads ``Scan values of K'' is the default and recommended option. It will scan values of K until one is found that results in slope smaller than the threshold (see inspector attributes).
+
+ You can specify a fixed value of K by switching this attribute to the value \texttt{K=} and entering a value of K. This can speed up processing when you know which value should be used.
+ \paragraph{output table}
+The output table can be named. The output table will contain the normalized data for counts columns as well as the identifier (group ID) column.
+ 
+\begin{figure}[h!tbp]
+  \centering
+  \includegraphics[width=\figWidthWide]{figures/NewSCnorm.pdf}
+\caption[New SCnorm statement.]{\textbf{New SCnorm statement.} This statement is used to normalize data with SCnorm.}
+\label{fig:NewSCnorm.pdf}
+\end{figure}

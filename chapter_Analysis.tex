@@ -390,17 +390,18 @@ Here you can use all statements defined in MetaR. Any tables or plots created in
 \end{figure}
 
 \section{Plotting Data}\index{Plotting data}
-MetaR provides simple plotting capabilities\footnote{These capabilities are simple, but can be extended very easily by adding new statements to draw other types of visualization. This is a key advantage of using Language Workbench technology.}. The following types of plots are currently supported: 
+MetaR provides simple plotting capabilities\footnote{These capabilities are simple, but can be extended very easily by adding new statements to draw other types of visualization. This is a key advantage of using Language Workbench technology. See Section~\ref{chap:ExtendingMetaR} to learn how to create new statements.}. The following types of plots are currently supported: 
 \begin{itemize}
   \item boxplot alias \texttt{boxplot}
   \item histogram alias \texttt{histogram}
-  \item scatterplot: alias \texttt{fit}
+  \item scatterplot: alias \texttt{scatterplot} and \texttt{fit}
   \item heatmap, alias \texttt{heatmap}
 
   \item multiplot alias \texttt{multiplot}, makes it possible to organize other plots in a matrix of n columns by n rows.
   \item Venn Diagrams, alias \texttt{venn}
   \item  UpSet plot, alias \texttt{UpSet} are a modern alternative to Venn Diagrams and make it easy and effective to compare intersection of several sets of items. 
   \item MA Plot, alias \texttt{MA Plot} are a type of quality control plot useful when looking at high-throughput gene expression assays.
+  \item T-SNE plots, alias \texttt{t-SNE}, are scatter plots following T-SNE dimensionality reduction.
 \end{itemize}
 Each type of plot statement will create a plot, identified with the \includegraphics[height=2ex]{figures/plot.png} icon when you are trying to auto-complete a reference to a plot. Plot names are also colored with the same dark blue as the icon.
 
@@ -460,8 +461,24 @@ The attribute after \texttt{->} is a plot. Enter a name for the histogram here. 
 \paragraph{style}
 The statement uses a \texttt{Color\allowbreak{}Palette} item (see \ref{ColorPaletteDesc}) from the associated style (see section \ref{styles}) to draw the plot. 
 
+\subsection{scatterplot}
+Use this statement (alias \texttt{scatterplot}) to render a scatter plot of y (one column) vs x (another column). This will create a simple scatter plot with the option of using a column of the table to set the color of the points. Figure~\ref{fig:NewScatterplot} presents a new \texttt{scatterplot} statement.
+\begin{figure}[h!tbp]
+  \includegraphics[width=\figWidthWide]{figures/Scatterplot.pdf}
+  \caption[New Scatterplot.]{New Scatterplot.}
+  \label{fig:NewScatterplot}
+\end{figure}
+
+\paragraph{x, y}
+Indicate which columns should be plotted. Use auto-completion to locate the x and y columns from the imported tables, or the tables created by prior statements. 
+
+\paragraph{plot}
+The attribute after \texttt{->} is a plot. Enter a name for the scatterplot here. Plot names are colored blue to make them easier to recognize.
+\paragraph{color}
+The color attribute is optional. Choose a column whose value will determine the color of each point. 
+
 \subsection{fit x by y}
-Use this statement (alias \texttt{fit}) to plot a scatter plot of x (one column) vs y (another column). A fit is performed, and the R2 adjusted, and P-value corresponding to the linear regression is shown on the plot. Figure~\ref{fig:NewFitXByY} presents a new \texttt{fit} statement.
+Use this statement (alias \texttt{fit}) to plot a scatter plot of y (one column) vs x (another column). A linear fit is performed, and the $r^{2}$ adjusted, and P-value corresponding to the linear regression is shown on the plot. Figure~\ref{fig:NewFitXByY} presents a new \texttt{fit} statement.
 
 \begin{figure}[h!tbp]
   \centering
@@ -656,7 +673,7 @@ The rendering format is the format in which the plot will be stored on the file 
 \paragraph{path}
 The \texttt{<no path>} attribute has to be set to a filename where you want the rendering is stored. Its extension must be compatible with the selected format (e.g. ".pdf" for PDF). If only a filename is specified
 
-\section{UpSet plot}\index{UpSet plot}\index{New in MetaR 1.8}
+\subsection{UpSet plot}\index{UpSet plot}\index{New in MetaR 1.8}
 UpSet plots have been introduced in~\cite{Lex2014} and are supported in MetaR since release 1.8. Such plots make it effective to get a sense of the intersection among many sets. Figure~\ref{fig:UpsetPlotExample} presents an illustration.
 In MetaR, UpSet plots can be created with the UpSet statement. The statement accepts the definition of an arbitrary number of sets to be compared, and produces a plot. The sets can be defined as sets of IDs, or as predicated over a table (see Figure~\ref{fig:AnalysisWithUpset}).
 
@@ -674,7 +691,7 @@ In MetaR, UpSet plots can be created with the UpSet statement. The statement acc
 \label{fig:AnalysisWithUpset}
 \end{figure}
 
-\section{MA Plot}\index{MA Plot}\index{New in MetaR 1.8}
+\subsection{MA Plot}\index{MA Plot}\index{New in MetaR 1.8}
 MA plots are a useful quality control type of plot. An MA plot is a scatterplot of log fold change versus intensity of expression. The plot is useful to detect systematic bias in fold change across genes. It has been popularized with microarray technology which used to have regions of the array that could affect many gene expression estimates and show bias. Figure~\ref{fig:MAPlot} (top) presents an MA plot constructed in MetaR. Such a plot can be created with the \texttt{MA Plot} alias, available when you import the \textit{org.campagnelab.metar.plots} language. See Figure~\ref{fig:NewMAPlot} for a newly created MA Plot statement. The bottom of Figure~\ref{fig:MAPlot} illustrates how individual points of an MA Plot can be labeled.
 
 
@@ -721,4 +738,36 @@ The inspector offers several attributes to customize the MA Plot:
 A first group of attributes help customize the columns the plot is built from. Default columns are set for a table of statistics produced with Limma Voom, but if you use another statistical test, you can adjust the $log_2$ fold-change, average expression columns, and significance columns.
 \paragraph{minExpressionThreshold}
 You can configure the position of the vertical dashed line by changing the value in the \texttt{minimum AverageExpression} attribute.
+
+\subsection{t-SNE}
+The t-SNE statement performs dimensionality reduction on a table and plots a  projection (where each row of the table is represented as a point on a 2D page). t-SNE plots are frequently  used to cluster and visualize high-dimensional data. They are a strong alternative to Principal Component Analysis (PCA). See~cite{VanDerMaaten2008} for details about the t-SNE approach.  
+
+In order to use the \texttt{t-SNE} statement, you first need to import the language \textit{org.campagnelab.metar.plots}. You can do this by pressing \keys{cmd+L} and typing the \textit{metar.plots} to locate the language.
+After importing the language, you can locate the statement by typing \texttt{t-SNE}. Figure~\ref{fig:NewTSNE} presents a newly created \texttt{tSNE} statement. 
+A t-SNE statement offers the following editable attributes:
+
+\paragraph{input table} You must link this attribute to a table of data. The table must contain some columns annotated with the group "counts". This group is used to identify which columns to consider for dimensionality reduction. Any other columns of the table will be removed before running the t-SNE approach on the table.
+\paragraph{plot} The first attribute to the right of \texttt{->} is a plot. You can use this slot to anem  name the t-SNE plot produced by the statement.
+
+\paragraph{result table}
+The second attribute to the right of \texttt{->} is a result table. The table will contain the coordinates TSNE1 and TSNE2 for each row of the table, a row identifier (in a column caller \texttt{sample}) and a cluster identifier. Using the table is optional since you may find it sufficient to use the plot, with colors determined automatically by clustering, but the table makes it possible to prepare scatterplots where the color is controlled by other data attributes. It is for instance common to use the sample id to join the tSNE result table with an annotation table that also contains the sample/row identifiers.
+ 
+\begin{figure}[bpt!]
+  \centering
+  \includegraphics[width=\figWidthNarrow]{figures/tSNE.pdf}
+\caption[New t-SNE statement.]{\textbf{New t-SNE statement.}}
+\label{fig:NewTSNE}
+\end{figure}
+
+\paragraph{speed/accuracy} This attribute controls the tradeoff between speed and accuracy. Use zero for the exact method, larger values for faster convergence.
+
+\paragraph{perplexity} This attribute controls the t-SNE perplexity parameter. See \url{http://distill.pub/2016/misread-tsne/}.
+
+\paragraph{number of iterations} How many iteration to run before stopping.
+
+\paragraph{check duplicates} It is not recommended to include exact duplicates in the input table. This attribute controls checks for exact duplicates. Note that the check can be slow for large table, so you can disable it.
+
+\paragraph{random seed} A random seed to make the analysis reproducible.
+
+\paragraph{number of clusters} Following t-SNE reduction, a k-means clustering is done with the specified number of cluster to assign each row a cluster id. The coordinates TSNE1 and TSNE2 are used for k-means features. After looking at the plot with a number of cluster set to 1 you should be able to determine how many clusters you see in the data. Setting this number in this attribute and re-running will label each row with a cluster id in the  output table.
 
