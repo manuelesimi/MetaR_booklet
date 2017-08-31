@@ -3,3 +3,5 @@ bibliography.bib.blg
 main.pdf
 Metar_doc.pdf
 main.tex.blg
+*.swp
+.DS_Store
