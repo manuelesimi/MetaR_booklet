@@ -50,8 +50,26 @@ To start writing analyses using Seurat, you need to import devkit
 and language \texttt{org\allowbreak.campagne\allowbreak{}lab\allowbreak.metar\allowbreak.seurat}.
 \noindent The following sections describe the kinds of statements offered by the MetaR
 \texttt{org\allowbreak.campagne\allowbreak{}lab\allowbreak.metar\allowbreak.seurat} language.
-In these sections, we talk about Seurat objects, but you have to keep in mind that a Seurat
-object is a structure that stores scRNA-seq data.
+
+\section{The Seurat object}
+A Seurat object is a structure that stores scRNA-seq data and associated information. Many of
+the Seurat statements result in the creation of a new Seurat object. Seurat objects and
+references to these objects are represented with a purple foreground. Moreover, you can
+study the associated information of a Seurat object in the inspector window, when clicking
+on any such object or a reference to it. Figure~\ref{fig:PropertiesSeurat} shows the
+information (properties) associated with a newly created Seurat object. These properties
+are used by some statements to assess whether the input Seurat object is ready for the computations
+required by the statement.
+
+\begin{SCfigure}
+  \centering
+  \includegraphics[width=\figWidthTiny]{figures/PropertiesSeurat.png}
+    \caption[Properties view of a newly created Seurat object.]
+    {\textbf{Properties view of a newly created Seurat object.} Many of the properties
+    of this Seurat object are not yet computed. These properties are created automatically
+    at the creation of the object.}
+\label{fig:PropertiesSeurat}
+\end{SCfigure}
 
 \section{Loading Seurat objects}
 There are two statements in the Seurat language for loading a Seurat object, one directly
@@ -153,20 +171,71 @@ it, or by obtaining it from other statements; see Section~\ref{chap:Tables}).
 \label{fig:ExampleLoadTable}
 \end{figure}
 
-
 \section{Cleaning up Seurat objects}\label{sec:CleanupSeurat}
+One important step in the analysis of scRNA-seq data is quality control on the data. In
+Seurat, you can do that with the \texttt{cleanup seurat} statement. Usually, this
+quality control step is done after observing some diagnostic plots on the data (
+see Section~\ref{subsec:DiagnosticPlots} for diagnostic plots).
+
+You can create this statement by clicking \menu{Cleanup} in the context assistant,
+or by typing the alias \texttt{cleanup seurat} on an empty line of Analysis (see
+Figure~\ref{fig:CleanupSeurat} for a new \texttt{cleanup seurat} statement). Note that in
+the context assistant, you always need to specify a strategy that is going to be instantiated
+in the \texttt{cleanup seurat} statement.
+
+\begin{figure}[h!tbp]
+  \centering
+  \includegraphics[width=\figWidthWide]{figures/CleanupSeurat.png}
+    \caption[New cleanup seurat statement.]{\textbf{New cleanup seurat statement.}
+    Use this statement to perform quality control on a Seurat object.}
+\label{fig:CleanupSeurat}
+\end{figure}
+
+\paragraph{input Seurat} You need to specify the Seurat object on which quality control
+is done. Only Seurat objects that are defined in previous statements are visible in the
+current cleanup statement, due to scoping rules.
+
+\paragraph{output Seurat} The statement creates a new Seurat object that represents the
+input Seurat object with the modifications prescribed in the cleanup statement. The
+\texttt{cleanup seurat} statement creates a default name for the output Seurat object,
+but this name can be modified.
+
+\paragraph{strategies} To introduce a strategy, you have to press \keys{\ctrl+\space}
+in the red space on the second line of the statement. All the available strategies will
+subsequently appear in the menu. In the next sections, we explain these strategies. Two
+of these strategies are only available in the initial cleanup section of the loading
+statements: the reject gene strategy and the normalization strategy.
+
 \subsection{Reject gene strategy}
+The \texttt{by rejecting gene when} strategy specifies a comparison operation where the
+\texttt{number of cells where gene is expressed in} is compared to a threshold.
+This strategy filters the input Seurat object by dropping the genes for which
+the comparison is true. For this strategy, the left-hand side of the comparison can be
+only \texttt{number of cells where gene is expressed in}.
+
 \subsection{Reject cell strategy}
+Another strategy is when you reject cells based on whether certain conditions are fulfilled.
+Pressing \keys{\ctrl+\space} on the left-hand side of a condition in this strategy gives you
+three possibilities: number of UMIs (unique molecular identifiers), number of genes and
+percentage of mithocondrial genes in cell. This strategy filters the input Seurat object
+by dropping the cells for which any of the comparisons is true. You can specify multiple
+conditions in this strategy (see Figure~\ref{fig:ExampleCleanupSeurat} for an example).
+
 \subsection{Regress out strategy}
+Because single cell datasets often contain technical noise, batch effects, or even undesired
+biological sources of variation, the cleanup statement offers a strategy to regress out
+these sources of variation.
+
 \subsection{Accept highly variable genes strategy}
 \subsection{Normalization strategy}
+One strategy is to normalize
 
 \section{Adjusting Seurat objects}
 \subsection{Normalize Seurat object}
 \subsection{Scale Seurat object}
 
 \section{Plotting Seurat objects}
-\subsection{Diagnostic plots}
+\subsection{Diagnostic plots}\label{subsec:DiagnosticPlots}
 \subsection{Features plot}
 \subsection{Features and total plot}
 
