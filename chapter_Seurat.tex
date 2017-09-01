@@ -185,7 +185,7 @@ in the \texttt{cleanup seurat} statement.
 
 \begin{figure}[h!tbp]
   \centering
-  \includegraphics[width=\figWidthWide]{figures/CleanupSeurat.png}
+  \includegraphics[width=\figWidthWide]{figures/CleanupSeurat.pdf}
     \caption[New cleanup seurat statement.]{\textbf{New cleanup seurat statement.}
     Use this statement to perform quality control on a Seurat object.}
 \label{fig:CleanupSeurat}
@@ -224,11 +224,42 @@ conditions in this strategy (see Figure~\ref{fig:ExampleCleanupSeurat} for an ex
 \subsection{Regress out strategy}
 Because single cell datasets often contain technical noise, batch effects, or even undesired
 biological sources of variation, the cleanup statement offers a strategy to regress out
-these sources of variation.
+these sources of variation. You can write a list of such sources to be regressed out;
+after introducing one element inside the square brackets of the regress out strategy, just
+press \keys{\return} to introduce a new element (see Figure~\ref{fig:ExampleCleanupSeurat}
+for an example). Note that this strategy also scales the data after regressing out the
+variation, so it is adviced that it is the last strategy in the cleanup statement. As a result,
+we obtain scaled data after the cleanup.
 
 \subsection{Accept highly variable genes strategy}
+It is common that you focus on the highly variable genes for downstream analysis; for this end,
+you can use the \texttt{by accepting highly variable genes when} strategy. This will mark
+the highly variable genes in the Seurat object. The highly variable genes are used by further Seurat
+statements. To compute the higly variable genes, Seurat makes use of the average expression
+and dispersion of each gene. The strategy allows you to set the cutoff for the average expression
+and dispersion axis. The cutoff can be typed inside the square brackets of the strategy. To
+introduce a new cutoff, just type \keys{\return} after the last one introduced, and press
+\keys{\ctrl+\space} to see the available choices (see Figure~\ref{fig:ExampleCleanupSeurat}
+for an example).
+
 \subsection{Normalization strategy}
-One strategy is to normalize
+Another strategy that can be used only in the cleanup section of the loading statements is the
+normalization strategy. This strategy log normalizes the data using the scale factor provided
+in the strategy. There is also a separate statement for normalization (see
+Subsection~\ref{fig:ExampleCleanupSeurat}).
+
+\paragraph{Example} Figure~\ref{fig:ExampleCleanupSeurat} presents an example of a
+\texttt{cleanup seurat} statement.
+
+\begin{figure}[h!tbp]
+  \centering
+  \includegraphics[width=\figWidthWide]{figures/ExampleCleanupSeurat.png}
+    \caption[Example of cleanup seurat statement.]{\textbf{Example of cleanup seurat statement.}
+    This illustrates almost all the features of the cleanup statement. We set a cutoff for
+    all the axis, we reject cells based on three different conditions and we regress out
+    unwanted variations for two different variables.}
+\label{fig:ExampleCleanupSeurat}
+\end{figure}
 
 \section{Adjusting Seurat objects}
 \subsection{Normalize Seurat object}
