@@ -1,4 +1,4 @@
-
+Narrow
 %----------------------------------------------------------------------------------------
 %	CHAP Seurat
 %----------------------------------------------------------------------------------------
@@ -217,9 +217,10 @@ only \texttt{number of cells where gene is expressed in}.
 Another strategy is when you reject cells based on whether certain conditions are fulfilled.
 Pressing \keys{\ctrl+\space} on the left-hand side of a condition in this strategy gives you
 three possibilities: number of UMIs (unique molecular identifiers), number of genes and
-percentage of mithocondrial genes in cell. This strategy filters the input Seurat object
+percentage of mitochondrial genes in cell. This strategy filters the input Seurat object
 by dropping the cells for which any of the comparisons is true. You can specify multiple
-conditions in this strategy (see Figure~\ref{fig:ExampleCleanupSeurat} for an example).
+conditions in this strategy (see Figure~\ref{fig:ExampleCleanupSeurat} for an example). Note
+that the threshold for mitochondrial genes is an integer number representing the percentage. 
 
 \subsection{Regress out strategy}
 Because single cell datasets often contain technical noise, batch effects, or even undesired
@@ -318,8 +319,8 @@ The input Seurat object can be any Seurat object created in a previous statement
 The output is a scaled Seurat object. You need to introduce a name for it.
 
 \section{Plotting Seurat objects}
-While there are statements in Seurat that create plots as an auxiliary function,
-there are also dedicated statements to create plots from Seurat objects. These plots are
+While there are statements in Seurat that create plots as an auxiliary artifact,
+there are also dedicated statements to create plots. These plots are
 usually used to interactively explore the data and decide on parameters for the next
 statements in the analysis.
 
@@ -390,7 +391,7 @@ You can create this statement by clicking
 the alias \texttt{Feature plot and total} on an empty line of Analysis (see Figure~\ref{fig:FeaturesPlotTotal}
 for an example of a new \texttt{Feature plot and total} statement). The output plot
 for such a statement where features ``PLEK" and ``SDPR" are given as input, can be seen in
-Figure~\ref{fig:TwoFeaturesPlot.pdf}.
+Figure~\ref{fig:TwoFeaturesPlot}.
 
 \begin{figure}[h!tbp]
   \centering
@@ -401,26 +402,199 @@ Figure~\ref{fig:TwoFeaturesPlot.pdf}.
 \label{fig:FeaturesPlotTotal}
 \end{figure}
 
-\begin{figure}[h!tbp]
+\begin{SCfigure}
   \centering
-    \includegraphics[width=\figWidthWide]{figures/TwoFeaturesPlot.pdf}
+    \includegraphics[width=\figWidthNarrow]{figures/TwoFeaturesPlot.pdf}
     \caption[Two features and their cumulated expression highlighted.]{\textbf{Two features
     and their cumulated expression highlighted.} This figure shows plots for two features (genes),
     and their cumulated expression (Total).}
 \label{fig:TwoFeaturesPlot}
-\end{figure}
+\end{SCfigure}
 
 The parameters for this statement are identical to the parameters for the \texttt{Feature plot}
 statement.
 
 \section{Adding information to Seurat objects}
+Another important step in the analysis of scRNA-seq data is the computation of principal
+components, of tsne clusters and of the markers per cluster. There are three dedicated
+statements in Seurat, for the three functionalities.
+
 \subsection{Add principal component information}
+The \texttt{add principal components} statement computes the principal components for the expression
+data in the input Seurat object. You can create this statement by clicking
+\menu{Add > Principal component info} in the context assistant, or by typing
+the alias \texttt{add principal components} on an empty line of Analysis (see Figure~\ref{fig:AddPCA}
+for an example of a new \texttt{add principal component} statement).
+
+\begin{figure}[h!tbp]
+  \centering
+    \includegraphics[width=\figWidthWide]{figures/AddPCA.pdf}
+    \caption[New add principal components statement.]{\textbf{New add principal components statement.} A new
+    \texttt{add principal components} statement expects an input Seurat object, a name for the output Seurat object
+    and a name for the auxiliary plot produced.}
+\label{fig:AddPCA}
+\end{figure}
+
+\paragraph{input Seurat} The input Seurat object for which principal component analysis is added.
+
+\paragraph{output Seurat} The output Seurat object will have the principal component analysis
+property set to true. You can change the name of this object.
+
+\paragraph{plot} This statement produces a plot as an auxiliary artifact. The plot shows the
+standard deviations of the principal components. This plot helps you decide which PCs to use
+further in the analysis, by choosing the cutoff where there is an elbow in the plot. For
+an example, see Figure~\ref{fig:ElbowView}.
+
+\begin{SCfigure}
+  \centering
+    \includegraphics[width=\figWidthNarrow]{figures/ElbowView.pdf}
+    \caption[The standard deviations of principal components plot.]{\textbf{The standard deviations of
+    principal components plot.} Given this figure, we would choose 17 as the cutoff value,
+    because it resides at the elbow of the plot.}
+\label{fig:ElbowView}
+\end{SCfigure}
+
 \subsection{Add clusters information}
+The \texttt{add clusters} statement computes the tsne clusters for the expression
+data in the input Seurat object. This statement needs PC information, so it needs to be
+run after the \texttt{add principal components} statement. You can create this statement by clicking
+\menu{Add > Clusters info} in the context assistant, or by typing
+the alias \texttt{add clusters} on an empty line of Analysis (see Figure~\ref{fig:AddClusters}
+for an example of a new \texttt{add clusters} statement).
+
+\begin{figure}[h!tbp]
+  \centering
+    \includegraphics[width=\figWidthWide]{figures/AddClusters.png}
+    \caption[New add clusters statement.]{\textbf{New add clusters statement.} A new
+    \texttt{add clusters} statement produces an auxiliary plot showing the tsne clusters
+    and uses information from the principal components analysis via the parameters captured
+    in range of PC.}
+\label{fig:AddClusters}
+\end{figure}
+
+\paragraph{input Seurat} The input Seurat object for which tsne clusters information is added.
+
+\paragraph{range of PCs} Based on the cutoff you see in the plot produced by the principal
+component analysis statement, you fill in the range of PCs to use in the tsne analysis.
+
+\paragraph{resolution} This parameter affects the number of clusters the tsne analysis will
+produce (the larger the resolution, the more clusters it produces).
+A typical value for this parameter is 0.6.
+
+\paragraph{output Seurat} The output Seurat object will have the tsne property set to true.
+
+\paragraph{plot} This statement also produces a plot that shows the tsne clusters.
+
 \subsection{Add markers information}
+The \texttt{add markers} statement computes the markers per cluster, so it needs to be
+run on an input Seurat object that has tsne clustering information.
+You can create this statement by clicking
+\menu{Add > Markers per cluster info} in the context assistant, or by typing
+the alias \texttt{add markers} on an empty line of Analysis (see Figure~\ref{fig:AddMarkers}
+for an example of a new \texttt{add markers} statement).
+
+\begin{figure}[h!tbp]
+  \centering
+    \includegraphics[width=\figWidthWide]{figures/AddMarkers.png}
+    \caption[New add markers statement.]{\textbf{New add markers statement.} A new
+    \texttt{add markers} statement produces an auxiliary table to visualize the markers
+    per cluster.}
+\label{fig:AddMarkers}
+\end{figure}
+
+\paragraph{input Seurat} The input Seurat object for which markers information is added.
+
+\paragraph{output Seurat} The output Seurat object that will have the markers information.
+
+\paragraph{number of markers} This parameters allows you to specify how many markers per cluster
+you want to compute.
+
+\paragraph{xFold} This parameter specifies the minimum log-fold difference between
+the two compared groups of cells when computing the markers.
+
+\paragraph{percentage} This parameter specifies what is the minimum percentage of cells
+in either of the two groups of cells, where genes need to be detected when computing
+the markers.
+
+\paragraph{table} This statement also produces a table that contains the markers per cluster.
+You can see the columns of the table by clicking on it and looking in the inspector
+window.
 
 \section{Aligning Seurat objects}
-\subsection{Pre-align Seurat objects}
+One common scenario in the scRNA-seq data analysis, is the comparison of different
+samples. Before doing comparisons between these different samples, it is important to align them.
+To this end, we have statements that allow you to align the data from two different Seurat
+objects.
+
+\subsection{Prealign Seurat objects}
+The pre-align statement prepares the Seurat objects for alignment and it outputs a plot that
+is used to decide on parameters for the alignment statement. You can create this statement by clicking
+\menu{Align > Prealign} in the context assistant, or by typing
+the alias \texttt{prealign seurats} on an empty line of Analysis (see Figure~\ref{fig:PrealignSeurat}
+for an example of a new \texttt{prealign seurats} statement).
+
+\begin{figure}[h!tbp]
+  \centering
+    \includegraphics[width=\figWidthWide]{figures/PrealignSeurat.pdf}
+    \caption[New prealign statement.]{\textbf{New prealign statement.} The \texttt{prealign
+    seurats} statement outputs a plot showing the state of the first two canonical correlation vectors
+    (used under the hood), and also heatmaps for as many of these vectors as you specify in the input
+    parameter.}
+\label{fig:PrealignSeurat}
+\end{figure}
+
+\paragraph{input seurats} This statement expects two input Seurat objects that will be aligned
+by this statement.
+
+\paragraph{heatmaps for canonical correlation vectors up to} The canonical correlation (CC) vectors specified in the
+range of this statement are shown in heatmaps so that you can assess what CCs to use further
+in the analysis, in particular, for the alignment. You can decide to choose up to the latest CC
+that shows some variation. Figure~\ref{fig:HeatmapxsCCs} shows an example.
+
+\begin{SCfigure}
+  \centering
+    \includegraphics[width=\figWidthNarrow]{figures/HeatmapCCs.pdf}
+    \caption[Heatmaps showing the CC vectors and their scores per gene.]{\textbf{Heatmaps showing
+    the CC vectors and their scores per gene.} For this particular example, we choose CCs
+    up to 13, because this is where the signal starts to fade.}
+\label{fig:HeatmapCCs}
+\end{SCfigure}
+
+\paragraph{output Seurat} The Seurat object that is going to contain the information
+from both input Seurat objects.
+
+\paragraph{CCA plot} This plot shows information from the first two CC vectors so that
+you can assess whether the alignment can be made.
+
+\paragraph{heatmaps plot} This plot  contains the heatmaps for the CC vectors specified at
+the input. These heatmaps can be used to decide what CCs to use further down in the analysis.
+
 \subsection{Align Seurat object}
+The \texttt{align seurat} statement aligns the two Seurat objects provided in the pre-alignment.
+You can create this statement by clicking
+\menu{Align > Align} in the context assistant, or by typing
+the alias \texttt{align seurat} on an empty line of Analysis (see Figure~\ref{fig:AlignSeurat}
+for an example of a new \texttt{add markers} statement).
+
+\begin{figure}[h!tbp]
+  \centering
+    \includegraphics[width=\figWidthWide]{figures/AlignSeurat.pdf}
+    \caption[New align statement.]{\textbf{New align statement.}}
+\label{fig:AlignSeurat}
+\end{figure}
+
+\paragraph{input Seurat} The input Seurat should be the Seurat object obtained from the
+\texttt{prealign seurats} statement.
+
+\paragraph{CCA dimensions from - to} In these parameters, you specify the CCs that you have
+chosen as a result of inspecting the heatmaps from the \texttt{prealign seurats} statement.
+
+\paragraph{output Seurat} The output Seurat contains aligned data from the two Seurat objects
+given as input to the prealign statement.
+
+\paragraph{tsne plots} This statement generates two plots with the tsne clusters, one where
+the two datasets from the two input Seurat objects are highlighted, and one where the clusters
+themselves are highlighted.
 
 \section{Limma for Seurat objects}\label{sec:LimmaSeurat}
 \subsection{Pre-limma Seurat object}
