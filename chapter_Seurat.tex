@@ -579,7 +579,9 @@ for an example of a new \texttt{add markers} statement).
 \begin{figure}[h!tbp]
   \centering
     \includegraphics[width=\figWidthWide]{figures/AlignSeurat.pdf}
-    \caption[New align statement.]{\textbf{New align statement.}}
+    \caption[New align statement.]{\textbf{New align statement.} A new align statement
+    needs information obtained from the prealign statement and outputs two auxiliary
+    tsne plots.}
 \label{fig:AlignSeurat}
 \end{figure}
 
@@ -597,9 +599,107 @@ the two datasets from the two input Seurat objects are highlighted, and one wher
 themselves are highlighted.
 
 \section{Limma for Seurat objects}\label{sec:LimmaSeurat}
+In Seurat, there are special statements used for the differential expression analysis
+using the limma package.
+
 \subsection{Pre-limma Seurat object}
+The pre-limma statement extracts an aggregated count table from the Seurat object given as input.
+We aggregate columns per individual Seurat object (we kept track of Seurat objects that were merged, or aligned)
+and per tsne cluster. You can create this statement by clicking
+\menu{Limma > Prelimma} in the context assistant, or by typing
+the alias \texttt{pre limma} on an empty line of Analysis (see Figure~\ref{fig:PreLimmaSeurat}
+for an example of a new \texttt{pre limma} statement).
+
+\begin{figure}[h!tbp]
+  \centering
+    \includegraphics[width=\figWidthWide]{figures/PreLimmaSeurat.pdf}
+    \caption[New pre limma statement.]{\textbf{New pre limma statement.} The \texttt{pre
+    limma} statement generates an aggregated count table and needs tsne cluster information
+    as input.}
+\label{fig:PreLimmaSeurat}
+\end{figure}
+
+\paragraph{input Seurat} The input is a Seurat object for which we want to compute the
+differentially expressed genes.
+
+\paragraph{tsne clusters from - to} These parameters need to be filled in with the clusters
+that result from the tsne computation.
+
+\paragraph{output table} The aggregated count table contains one column per input Seurat
+object and per cluster. For instance, if we merged $\mathit{P1C}$ and
+$\mathit{P1D}$ into $\mathit{P1}$, $\mathit{P2C}$ and $\mathit{P2D}$ into $\mathit{P2}$, we aligned
+$\mathit{P1}$ and $\mathit{P2}$ into $\mathit{P1P2}$, and we have obtained clusters
+$\mathit{0}$ and $\mathit{1}$, then we get columns $\mathit{P1C0}$, $\mathit{P1C1}$, $\mathit{P1D0}$, etc.
+Besides these columns, the output table contains a column with gene names and has also row names.
+
+The annotations that were introduced were loading the Seurat objects will appear as group
+usages in this output table.
+
 \subsection{Limma voom}
+The limma statement computes the differentially expressed genes for the input count table and outputs
+a table with results per contrast. You can create this statement by clicking
+\menu{Limma > Limma} in the context assistant, or by typing
+the alias \texttt{limma voom} on an empty line of Analysis (see Figure~\ref{fig:LimmaSeurat}
+for an example of a new \texttt{limma voom} statement).
+
+\begin{figure}[h!tbp]
+  \centering
+    \includegraphics[width=\figWidthWide]{figures/LimmaSeurat.pdf}
+    \caption[New limma statement.]{\textbf{New limma statement.} A limma statement applied on
+    a table containing expression data.}
+\label{fig:LimmaSeurat}
+\end{figure}
+
+\paragraph{input table} The input table should be a table containing expression data. Moreover,
+the table needs to be annotated with some group usages that will subsequently be used in the
+model formula and in contrasts.
+
+\paragraph{output tables} For each contrast specified in this statement, there will be one
+output results table containing information such as the log-fold change and adjusted P-value.
+
+For the explanation of the other parameters of the limma statement, look at the parameters described in the
+main limma statement provided by MetaR in Chapter~\ref{chap:LimmaVoom}. The only difference is that
+in the Seurat statement, one can specify multiple contrasts.
 
 \section{Other Seurat statements}\label{sec:OtherSeuratStatements}
+There are two more Seurat statements that are useful at various places in the analysis: the
+merge and the delete statements.
+
 \subsection{Merge Seurat objects}
+The merge statement takes two Seurat objects as input and creates one single output Seurat
+object as output. Under the hood, this statement merges the genes in the two Seurat objects
+and keeps all the cells from the two objects.
+You can create this statement by clicking \menu{Merge} in the context assistant, or by typing
+the alias \texttt{merge seurat object} on an empty line of Analysis (see Figure~\ref{fig:MergeSeurat}
+for an example of a new \texttt{merge seurat objects} statement).
+
+\begin{figure}[h!tbp]
+  \centering
+    \includegraphics[width=\figWidthWide]{figures/MergeSeurat.pdf}
+    \caption[New merge seurat objects statement.]{\textbf{New merge seurat objects statement.} A merge statement
+    needs two input Seurat objects and returns them merged in the output Seurat object.}
+\label{fig:MergeSeurat}
+\end{figure}
+
+\paragraph{input Seurat objects} You need to provide two input Seurat objects.
+
+\paragraph{output Seurat object} The output Seurat objects contains all the information
+from both input Seurat objects.
+
 \subsection{Delete Seurat object}
+This statement deletes the provided Seurat object. After this statement, the input Seurat
+object is not available as input anymore. This statement was introduced to save memory.
+You can create this statement by clicking
+\menu{Delete} in the context assistant, or by typing
+the alias \texttt{delete seurat} on an empty line of Analysis (see Figure~\ref{fig:DeleteSeurat}
+for an example of a new \texttt{delete} statement).
+
+\begin{SCfigure}
+  \centering
+    \includegraphics[width=\figWidthTiny]{figures/DeleteSeurat.pdf}
+    \caption[New delete statement.]{\textbf{New delete statement.} A delete statement needs only the
+    Seurat object to be deleted as input.}
+\label{fig:DeleteSeurat}
+\end{SCfigure}
+
+\paragraph{input Seurat} You need to introduce the Seurat object that needs to be deleted.
