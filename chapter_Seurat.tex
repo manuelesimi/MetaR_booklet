@@ -318,9 +318,100 @@ The input Seurat object can be any Seurat object created in a previous statement
 The output is a scaled Seurat object. You need to introduce a name for it.
 
 \section{Plotting Seurat objects}
+While there are statements in Seurat that create plots as an auxiliary function,
+there are also dedicated statements to create plots from Seurat objects. These plots are
+usually used to interactively explore the data and decide on parameters for the next
+statements in the analysis.
+
 \subsection{Diagnostic plots}\label{subsec:DiagnosticPlots}
+One important statement, that is usually used directly after loading a Seurat object, is the
+\texttt{Diagnostic plots} statement. You can create this statement by clicking
+\menu{Plots > Diagnostic plots} in the context assistant, or by typing
+the alias \texttt{Diagnostic plots} on an empty line of Analysis (see Figure~\ref{fig:DiagnosticPlots}
+for an example of a new \texttt{Diagnostic plots} statement).
+
+\begin{figure}[h!tbp]
+  \centering
+  \includegraphics[width=\figWidthWide]{figures/DiagnosticPlots.pdf}
+    \caption[New Diagnostic Plots statement.]{\textbf{New Diagnostic Plots statement}}
+\label{fig:DiagnosticPlots}
+\end{figure}
+
+\paragraph{input Seurat} You need to specify the name of the input Seurat object. Press
+\keys{\ctrl+\space} to see the available Seurat objects.
+
+\paragraph{width and height} You can also specify the width and height of the five plots,
+all at once, by modifying these two parameters.
+
+\paragraph{output plots} There are five output plots from this statement. Three of them
+are violin plots for the number of genes in the cell (nGene), number of unique molecular identifier
+in the cell (nUMI) and the percentage of mitochondrial genes in the cell (percent.mito). The other two are
+scatter plots showing percent.mito versus nUMI, and nGene versus nUMI. These five plots
+have default names, but you can change these names by clicking on the name and typing. To
+visualize these plots, you can use the \texttt{multiplot} statement (see Subsection~\ref{subsec:Multiplot}).
+
+Based on the output of these five plots, you can decide on a threshold for the rejection
+of cells in the cleanup statement, for instance.
+
 \subsection{Features plot}
+The features plot highlights the specified features on a plot with tsne clusters. This statement
+is useful in exploring markers for the clusters.
+You can create this statement by clicking
+\menu{Plots > Features plot} in the context assistant, or by typing
+the alias \texttt{Feature plot} on an empty line of Analysis (see Figure~\ref{fig:FeaturesPlot}
+for an example of a new \texttt{Feature plot} statement).
+
+\begin{figure}[h!tbp]
+  \centering
+  \includegraphics[width=\figWidthWide]{figures/FeaturesPlot.png}
+    \caption[New feature plot statement.]{\textbf{New feature plot statement.} A new
+    \texttt{Feature plot} statement expects a list of features, an input Seurat object
+    and a name for the output Seurat object.}
+\label{fig:FeaturesPlot}
+\end{figure}
+
+\paragraph{input Seurat} The input Seurat object that has the tsne computed already. If this
+is not the case, an error will be reported.
+
+\paragraph{features} You need to specify a list of features that will be highlighted in the
+clusters. The output plot is actually a collection of smaller plots, one per feature; each
+smaller plot highlights one feature in the clusters. To enter feature names, press \keys{\return}
+inside the square brackets of the statement, and type in a name. To introduce another
+feature in the list, press \keys{\return} at the end of a feature.
+
+\paragraph{output plot} You need to introduce the name of the output plot.
+
 \subsection{Features and total plot}
+The features and total plot highlights the specified features and their cumulated effect
+(obtained by multiplying the expressions of these genes) on a plot with tsne clusters. This statement
+is useful to see whether the specified features characterize a cluster together.
+You can create this statement by clicking
+\menu{Plots > Features and total plot} in the context assistant, or by typing
+the alias \texttt{Feature plot and total} on an empty line of Analysis (see Figure~\ref{fig:FeaturesPlotTotal}
+for an example of a new \texttt{Feature plot and total} statement). The output plot
+for such a statement where features ``PLEK" and ``SDPR" are given as input, can be seen in
+Figure~\ref{fig:TwoFeaturesPlot.pdf}.
+
+\begin{figure}[h!tbp]
+  \centering
+    \includegraphics[width=\figWidthWide]{figures/FeaturesPlotTotal.png}
+    \caption[New feature plot and total statement.]{\textbf{New feature plot and total statement.} A new
+    \texttt{Feature plot and total} statement expects a list of features, an input Seurat object
+    and a name for the output Seurat object.}
+\label{fig:FeaturesPlotTotal}
+\end{figure}
+
+\begin{figure}[h!tbp]
+  \centering
+    \includegraphics[width=\figWidthWide]{figures/TwoFeaturesPlot.pdf}
+    \caption[Two features and their cumulated expression highlighted.]{\textbf{Two features
+    and their cumulated expression highlighted.} This figure shows plots for two features (genes),
+    and their cumulated expression (Total).}
+\label{fig:TwoFeaturesPlot}
+\end{figure}
+
+The parameters for this statement are identical to the parameters for the \texttt{Feature plot}
+statement.
 
 \section{Adding information to Seurat objects}
 \subsection{Add principal component information}
