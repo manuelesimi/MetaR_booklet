@@ -240,12 +240,14 @@ and dispersion of each gene. The strategy allows you to set the cutoff for the a
 and dispersion axis. The cutoff can be typed inside the square brackets of the strategy. To
 introduce a new cutoff, just type \keys{\return} after the last one introduced, and press
 \keys{\ctrl+\space} to see the available choices (see Figure~\ref{fig:ExampleCleanupSeurat}
-for an example).
+for an example). Note that once you specify this strategy in the cleanup statement, an
+output plot is pops up, that represents the dispersion versus average expression plot. You
+need to provide a name for this plot.
 
 \subsection{Normalization strategy}
 Another strategy that can be used only in the cleanup section of the loading statements is the
-normalization strategy. This strategy log normalizes the data using the scale factor provided
-in the strategy. There is also a separate statement for normalization (see
+normalization strategy. This strategy normalizes the data using the scale factor provided
+in the strategy and log-transforms the result. There is also a separate statement for normalization (see
 Subsection~\ref{fig:ExampleCleanupSeurat}).
 
 \paragraph{Example} Figure~\ref{fig:ExampleCleanupSeurat} presents an example of a
@@ -262,8 +264,58 @@ Subsection~\ref{fig:ExampleCleanupSeurat}).
 \end{figure}
 
 \section{Adjusting Seurat objects}
+There are two statements in Seurat that are meant for standard adjusting
+(pre-processing) the data: normalization and scaling. Some statements require that the
+Seurat object is already normalized or scaled. For instance, the calculation of highly
+variable genes needs a normalized Seurat object as input.
+
 \subsection{Normalize Seurat object}
+The normalization statement normalizes the expression data stored in the Seurat object and
+log-transforms the result. You can create this statement by clicking
+\menu{Adjust > Normalize} in the context assistant, or by typing
+the alias \texttt{normalize seurat} on an empty line of Analysis (see Figure~\ref{fig:NormalizeSeurat}
+for an example of a new \texttt{normalize seurat} statement).
+
+\begin{figure}[h!tbp]
+  \centering
+  \includegraphics[width=\figWidthWide]{figures/NormalizeSeurat.pdf}
+    \caption[New normalize seurat statement.]{\textbf{New normalize seurat statement.}
+    A new \texttt{normalize seurat} statement with three fields to be completed.}
+\label{fig:NormalizeSeurat}
+\end{figure}
+
+\paragraph{input Seurat}
+The input Seurat object can be any Seurat object created in a previous statement, but it
+should not be an already normalized Seurat object. You will receive an error if that is the
+case.
+
+\paragraph{scale factor}
+You also need to specify the scaling factor for the normalization.
+
+\paragraph{output Seurat}
+The output is a normalized Seurat object. You need to introduce a name for
+it.
+
 \subsection{Scale Seurat object}
+The scaling statement scales the data stored in the Seurat object.
+You can create this statement by clicking \menu{Adjust > Scale} in the context assistant,
+or by typing the alias \texttt{scale seurat} on an empty line of Analysis (see Figure~\ref{fig:ScaleSeurat}
+for an example of a new \texttt{scale seurat} statement).
+
+\begin{figure}[h!tbp]
+  \centering
+  \includegraphics[width=\figWidthWide]{figures/ScaleSeurat.pdf}
+    \caption[New scale seurat statement.]{\textbf{New scale seurat statement.}
+    A new \texttt{scale seurat} statement with two fields to be completed.}
+\label{fig:ScaleSeurat}
+\end{figure}
+
+\paragraph{input Seurat}
+The input Seurat object can be any Seurat object created in a previous statement. Press
+\keys{\ctrl+\space} to see the available choices.
+
+\paragraph{output Seurat}
+The output is a scaled Seurat object. You need to introduce a name for it.
 
 \section{Plotting Seurat objects}
 \subsection{Diagnostic plots}\label{subsec:DiagnosticPlots}
