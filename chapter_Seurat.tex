@@ -9,26 +9,33 @@ Narrow
 
 \section{The Seurat language}
 
-The Seurat language consists of statements that help with the analysis of
-single cell RNA-sequencing data (scRNA-seq data). These statements cover a wide range of
-functionality: loading scRNA-seq data, cleaning up the data, adjusting it (by normalization
+Since release 2.3.0, MetaR offers support for Single Cell RNA-Seq analysis with the Seurat 2.0 R package~\cite{butler2017integrated}. This functionality is implemented in the \textit{org.campagnelab.metar.seurat} language .
+
+The \textit{org.campagnelab.metar.seurat} (Seurat) language consists of statements that help with the analysis of
+single cell RNA sequencing data (scRNA-seq data). These statements cover a wide range of
+functionality: loading scRNA-seq data, quality control/cleanup steps, adjusting data (by normalization
 or scaling), plotting it, computing extra information based on the data (principal components, markers,
 etc.), aligning data from multiple samples, performing limma analysis on it and other
 functionality.
 
 Seurat statements can be typed in an Analysis script (see Chapter~\ref{chap:Analyses}).
-The simplest way to see what Seurat statements are valid at a given line in an
-analysis file, is to look at the suggestions offered by the context assistant. Figure~\ref{fig:ContextAssistantBeg}
+The simplest way to see what Seurat statements are valid at a given context in an
+analysis, is to look at the suggestions offered by the context assistant. Figure~\ref{fig:ContextAssistantBeg}
 and Figure~\ref{fig:ContextAssistantMid} show two examples of context assistants.
 To activate the context assistant, just press
 \keys{\return} in the script to generate an empty line. Placing the cursor on the empty line should
-bring up the context assistant; in case you do not see it, press \keys{\space} on the empty line.
+bring up the context assistant. 
+
+\begin{remark}
+If you do not see the context assistant, try pressing the space bar with the cursor positioned on an empty line.
 Moreover, to see all possible statements, you can use auto-completion like for all other
-statements in a script (see Chapter~\ref{chap:Analyses}).
+statements in an analysis (see Chapter~\ref{chap:Analyses}).
+\end{remark}
+
 
 \begin{SCfigure}
   \centering
-  \includegraphics[width=\figWidthTiny]{figures/ContextAssistantBeg.png}
+  \includegraphics[width=\figWidthSmall]{figures/ContextAssistantBeg.png}
     \caption[Context assistant at beginning of script.]{\textbf{Context assistant at
     beginning of script.} At the beginning of the script, the
     context assistant suggests loading a Seurat object either directly from the output
@@ -63,7 +70,7 @@ required by the statement.
 
 \begin{SCfigure}
   \centering
-  \includegraphics[width=\figWidthTiny]{figures/PropertiesSeurat.png}
+  \includegraphics[width=\figWidthSmall]{figures/PropertiesSeurat.png}
     \caption[Properties view of a newly created Seurat object.]
     {\textbf{Properties view of a newly created Seurat object.} Many of the properties
     of this Seurat object are not yet computed. These properties are created automatically
@@ -97,8 +104,8 @@ strategy and \texttt{by rejecting gene when} come prefilled by default with cert
 thresholds, but these strategies can be changed.
 
 \paragraph{input directory} This field of \texttt{load 10X dataset} should point to
-the directory produced by 10X Genomics that contains the following three files: ``barcodes.tsv",
-``genes.tsv" and ``matrix.mtx". Unless the directory you specify exists on the disk and it contains
+the directory produced by 10X Genomics cell ranger count output. Cellranger produces a directory structure which contains the following three files: ``barcodes.tsv'',
+``genes.tsv'' and ``matrix.mtx''. Unless the directory you specify exists on the disk and it contains
 these three files, the input directory field will be shown on a red background. Notice that
 this field has a button to let you select the directory.
 
@@ -113,7 +120,7 @@ These annotations are used by the expression tables generated from the Seurat ob
 in the limma statements (see Section~\ref{sec:LimmaSeurat}). Note that you
 need to create groups and group usages in a Column Group Container root node
 in the model of your solution. If a Column Group Container does not exist in
-the model, than you have to create one (see Section~\ref{sec:ColumnGroupContainer}).
+the model, see Section~\ref{sec:ColumnGroupContainer} to learn how to create one.
 
 \paragraph{cleanup strategies}
 There are three possible strategies available when loading data from 10X Genomics: rejecting
@@ -136,7 +143,7 @@ You need to set the name of this object.
     tubules tissue. As a result, we annotate this Seurat object with ``Patient1" and
     ``Collapsed". Furthermore, we reject the cells with less than 1000 genes expressed in
     them, and the genes that can only be found in less than 3 cells. Finally, we normalize
-    the data using a scale factor of 10000.}
+    the data using a scale factor of 10,000.}
 \label{fig:ExampleLoad10XDataset}
 \end{figure}
 
@@ -148,6 +155,7 @@ the alias \texttt{load dataset from table} on an empty line of Analysis. This st
 is identical in fields and behavior to the \texttt{load 10X dataset} statement, except
 for the place of input (one is a directory generated by 10X Genomics, and one is a table).
 Thus, we refer you to Subsection~\ref{subsec:Load10XDataset} for further details on the common fields.
+% TODO: describe input table format.
 
 \paragraph{input table}
 The input table should have genes on the rows and cells on the columns.
@@ -162,7 +170,7 @@ it, or by obtaining it from other statements; see Section~\ref{chap:Tables}).
   \centering
   \includegraphics[width=\figWidthWide]{figures/ExampleLoadTable.png}
     \caption[Example of load data from table statement.]{\textbf{Example of load data from table statement.}
-    In this example, we load data from a table with simulated data for a pacient
+    In this example, we load data from a table with simulated data for a patient
     denoted ``Patient1", and from a sample of collapsed tubules tissue.
     As a result, we annotate the Seurat object with ``Patient1" and
     ``Collapsed". Furthermore, we reject the cells with less than 1500 genes expressed in
@@ -171,11 +179,11 @@ it, or by obtaining it from other statements; see Section~\ref{chap:Tables}).
 \label{fig:ExampleLoadTable}
 \end{figure}
 
-\section{Cleaning up Seurat objects}\label{sec:CleanupSeurat}
+\section{QC and Clean Up}\label{sec:CleanupSeurat}
 One important step in the analysis of scRNA-seq data is quality control on the data. In
 Seurat, you can do that with the \texttt{cleanup seurat} statement. Usually, this
-quality control step is done after observing some diagnostic plots on the data (
-see Section~\ref{subsec:DiagnosticPlots} for diagnostic plots).
+quality control step is done after observing some diagnostic plots on the data 
+(see Section~\ref{subsec:DiagnosticPlots} for diagnostic plots).
 
 You can create this statement by clicking \menu{Cleanup} in the context assistant,
 or by typing the alias \texttt{cleanup seurat} on an empty line of Analysis (see
@@ -236,7 +244,7 @@ we obtain scaled data after the cleanup.
 It is common that you focus on the highly variable genes for downstream analysis; for this end,
 you can use the \texttt{by accepting highly variable genes when} strategy. This will mark
 the highly variable genes in the Seurat object. The highly variable genes are used by further Seurat
-statements. To compute the higly variable genes, Seurat makes use of the average expression
+statements. To compute the highly variable genes, Seurat makes use of the average expression
 and dispersion of each gene. The strategy allows you to set the cutoff for the average expression
 and dispersion axis. The cutoff can be typed inside the square brackets of the strategy. To
 introduce a new cutoff, just type \keys{\return} after the last one introduced, and press
@@ -249,7 +257,7 @@ need to provide a name for this plot.
 Another strategy that can be used only in the cleanup section of the loading statements is the
 normalization strategy. This strategy normalizes the data using the scale factor provided
 in the strategy and log-transforms the result. There is also a separate statement for normalization (see
-Subsection~\ref{fig:ExampleCleanupSeurat}).
+Subsection~\ref{sec:NormalizeSeurat}).
 
 \paragraph{Example} Figure~\ref{fig:ExampleCleanupSeurat} presents an example of a
 \texttt{cleanup seurat} statement.
@@ -259,7 +267,7 @@ Subsection~\ref{fig:ExampleCleanupSeurat}).
   \includegraphics[width=\figWidthWide]{figures/ExampleCleanupSeurat.png}
     \caption[Example of cleanup seurat statement.]{\textbf{Example of cleanup seurat statement.}
     This illustrates almost all the features of the cleanup statement. We set a cutoff for
-    all the axis, we reject cells based on three different conditions and we regress out
+    all the axes, we reject cells based on three different conditions and we regress out
     unwanted variations for two different variables.}
 \label{fig:ExampleCleanupSeurat}
 \end{figure}
@@ -270,7 +278,7 @@ There are two statements in Seurat that are meant for standard adjusting
 Seurat object is already normalized or scaled. For instance, the calculation of highly
 variable genes needs a normalized Seurat object as input.
 
-\subsection{Normalize Seurat object}
+\subsection{Normalize Seurat object}\label{sec:NormalizeSeurat}
 The normalization statement normalizes the expression data stored in the Seurat object and
 log-transforms the result. You can create this statement by clicking
 \menu{Adjust > Normalize} in the context assistant, or by typing
@@ -351,11 +359,11 @@ scatter plots showing percent.mito versus nUMI, and nGene versus nUMI. These fiv
 have default names, but you can change these names by clicking on the name and typing. To
 visualize these plots, you can use the \texttt{multiplot} statement (see Subsection~\ref{subsec:Multiplot}).
 
-Based on the output of these five plots, you can decide on a threshold for the rejection
-of cells in the cleanup statement, for instance.
+These five plots are typically used to decide on thresholds for the rejection
+of cells or other parameters of the cleanup statement.
 
 \subsection{Features plot}
-The features plot highlights the specified features on a plot with tsne clusters. This statement
+The features plot highlights the specified features on a plot with tSNE clusters. This statement
 is useful in exploring markers for the clusters.
 You can create this statement by clicking
 \menu{Plots > Features plot} in the context assistant, or by typing
@@ -371,7 +379,7 @@ for an example of a new \texttt{Feature plot} statement).
 \label{fig:FeaturesPlot}
 \end{figure}
 
-\paragraph{input Seurat} The input Seurat object that has the tsne computed already. If this
+\paragraph{input Seurat} The input Seurat object that has the tSNE computed already. If this
 is not the case, an error will be reported.
 
 \paragraph{features} You need to specify a list of features that will be highlighted in the
@@ -384,7 +392,7 @@ feature in the list, press \keys{\return} at the end of a feature.
 
 \subsection{Features and total plot}
 The features and total plot highlights the specified features and their cumulated effect
-(obtained by multiplying the expressions of these genes) on a plot with tsne clusters. This statement
+(obtained by multiplying the expressions of these genes) on a plot with tSNE clusters. This statement
 is useful to see whether the specified features characterize a cluster together.
 You can create this statement by clicking
 \menu{Plots > Features and total plot} in the context assistant, or by typing
@@ -416,7 +424,7 @@ statement.
 
 \section{Adding information to Seurat objects}
 Another important step in the analysis of scRNA-seq data is the computation of principal
-components, of tsne clusters and of the markers per cluster. There are three dedicated
+components, of tSNE clusters and of the markers per cluster. There are three dedicated
 statements in Seurat, for the three functionalities.
 
 \subsection{Add principal component information}
@@ -455,7 +463,7 @@ an example, see Figure~\ref{fig:ElbowView}.
 \end{SCfigure}
 
 \subsection{Add clusters information}
-The \texttt{add clusters} statement computes the tsne clusters for the expression
+The \texttt{add clusters} statement computes the tSNE clusters for the expression
 data in the input Seurat object. This statement needs PC information, so it needs to be
 run after the \texttt{add principal components} statement. You can create this statement by clicking
 \menu{Add > Clusters info} in the context assistant, or by typing
@@ -466,28 +474,28 @@ for an example of a new \texttt{add clusters} statement).
   \centering
     \includegraphics[width=\figWidthWide]{figures/AddClusters.png}
     \caption[New add clusters statement.]{\textbf{New add clusters statement.} A new
-    \texttt{add clusters} statement produces an auxiliary plot showing the tsne clusters
+    \texttt{add clusters} statement produces an auxiliary plot showing the tSNE clusters
     and uses information from the principal components analysis via the parameters captured
     in range of PC.}
 \label{fig:AddClusters}
 \end{figure}
 
-\paragraph{input Seurat} The input Seurat object for which tsne clusters information is added.
+\paragraph{input Seurat} The input Seurat object for which tSNE clusters information is added.
 
 \paragraph{range of PCs} Based on the cutoff you see in the plot produced by the principal
-component analysis statement, you fill in the range of PCs to use in the tsne analysis.
+component analysis statement, you fill in the range of PCs to use in the tSNE analysis.
 
-\paragraph{resolution} This parameter affects the number of clusters the tsne analysis will
+\paragraph{resolution} This parameter affects the number of clusters the tSNE analysis will
 produce (the larger the resolution, the more clusters it produces).
 A typical value for this parameter is 0.6.
 
-\paragraph{output Seurat} The output Seurat object will have the tsne property set to true.
+\paragraph{output Seurat} The output Seurat object will have the tSNE property set to true.
 
-\paragraph{plot} This statement also produces a plot that shows the tsne clusters.
+\paragraph{plot} This statement also produces a plot that shows the tSNE clusters.
 
 \subsection{Add markers information}
-The \texttt{add markers} statement computes the markers per cluster, so it needs to be
-run on an input Seurat object that has tsne clustering information.
+Once clusters of cells have been identified, you might want to find genes whose expression is specific of the cluster. Seurat calls these genes cluster markers. The \texttt{add markers} statement computes the markers for each cluster, so it needs to be
+run on an input Seurat object that has tSNE clustering information.
 You can create this statement by clicking
 \menu{Add > Markers per cluster info} in the context assistant, or by typing
 the alias \texttt{add markers} on an empty line of Analysis (see Figure~\ref{fig:AddMarkers}
@@ -497,8 +505,7 @@ for an example of a new \texttt{add markers} statement).
   \centering
     \includegraphics[width=\figWidthWide]{figures/AddMarkers.png}
     \caption[New add markers statement.]{\textbf{New add markers statement.} A new
-    \texttt{add markers} statement produces an auxiliary table to visualize the markers
-    per cluster.}
+    \texttt{add markers} statement produces an auxiliary table with the identified markers, for each cluster.}
 \label{fig:AddMarkers}
 \end{figure}
 
@@ -517,15 +524,12 @@ in either of the two groups of cells, where genes need to be detected when compu
 the markers.
 
 \paragraph{table} This statement also produces a table that contains the markers per cluster.
-You can see the columns of the table by clicking on it and looking in the inspector
-window.
+You can see the columns of the table by clicking on it and looking in the \inspectorTabIcon tab.
 
 \section{Aligning Seurat objects}
 One common scenario in the scRNA-seq data analysis, is the comparison of different
 samples. Before doing comparisons between these different samples, it is important to align them.
-To this end, we have statements that allow you to align the data from two different Seurat
-objects.
-
+To this end, Seurat 2.0+ provides an approach to align cells found in two Seurat objects. MetaR wraps this functionality in the following analysis statements. 
 \subsection{Prealign Seurat objects}
 The pre-align statement prepares the Seurat objects for alignment and it outputs a plot that
 is used to decide on parameters for the alignment statement. You can create this statement by clicking
@@ -551,17 +555,16 @@ range of this statement are shown in heatmaps so that you can assess what CCs to
 in the analysis, in particular, for the alignment. You can decide to choose up to the latest CC
 that shows some variation. Figure~\ref{fig:HeatmapxsCCs} shows an example.
 
-\begin{SCfigure}
+\begin{figure}[h!tbp]
   \centering
     \includegraphics[width=\figWidthNarrow]{figures/HeatmapCCs.pdf}
     \caption[Heatmaps showing the CC vectors and their scores per gene.]{\textbf{Heatmaps showing
     the CC vectors and their scores per gene.} For this particular example, we choose CCs
     up to 13, because this is where the signal starts to fade.}
-\label{fig:HeatmapCCs}
-\end{SCfigure}
+\label{fig:HeatmapxsCCs}
+\end{figure}
 
-\paragraph{output Seurat} The Seurat object that is going to contain the information
-from both input Seurat objects.
+\paragraph{output Seurat} The Seurat object that is going to contain the aligned result.
 
 \paragraph{CCA plot} This plot shows information from the first two CC vectors so that
 you can assess whether the alignment can be made.
@@ -574,14 +577,14 @@ The \texttt{align seurat} statement aligns the two Seurat objects provided in th
 You can create this statement by clicking
 \menu{Align > Align} in the context assistant, or by typing
 the alias \texttt{align seurat} on an empty line of Analysis (see Figure~\ref{fig:AlignSeurat}
-for an example of a new \texttt{add markers} statement).
+for an example of a new \texttt{align seurat} statement).
 
 \begin{figure}[h!tbp]
   \centering
     \includegraphics[width=\figWidthWide]{figures/AlignSeurat.pdf}
     \caption[New align statement.]{\textbf{New align statement.} A new align statement
     needs information obtained from the prealign statement and outputs two auxiliary
-    tsne plots.}
+    tSNE plots.}
 \label{fig:AlignSeurat}
 \end{figure}
 
@@ -594,7 +597,7 @@ chosen as a result of inspecting the heatmaps from the \texttt{prealign seurats}
 \paragraph{output Seurat} The output Seurat contains aligned data from the two Seurat objects
 given as input to the prealign statement.
 
-\paragraph{tsne plots} This statement generates two plots with the tsne clusters, one where
+\paragraph{tSNE plots} This statement generates two plots with the tSNE clusters, one where
 the two datasets from the two input Seurat objects are highlighted, and one where the clusters
 themselves are highlighted.
 
@@ -603,18 +606,13 @@ In Seurat, there are special statements used for the differential expression ana
 using the limma package.
 
 \subsection{Pre-limma Seurat object}
-The pre-limma statement extracts an aggregated count table from the Seurat object given as input.
-We aggregate columns per individual Seurat object (we kept track of Seurat objects that were merged, or aligned)
-and per tsne cluster. You can create this statement by clicking
-\menu{Limma > Prelimma} in the context assistant, or by typing
-the alias \texttt{pre limma} on an empty line of Analysis (see Figure~\ref{fig:PreLimmaSeurat}
-for an example of a new \texttt{pre limma} statement).
+The pre-limma statement extracts an aggregated count table from the Seurat object given as input. This is needed to obtain counts for genes in individual clusters. The procedure simply sums the counts of a gene across cells of a cluster, while preserving experimental conditions. To this end, we aggregate columns per individual Seurat object (we kept track of Seurat objects that were merged, or aligned)and per tSNE cluster. You can create this statement by clicking \menu{Limma > Prelimma} in the context assistant, or by typing the alias \texttt{pre limma} on an empty line of Analysis (see Figure~\ref{fig:PreLimmaSeurat} for an example of a new \texttt{pre limma} statement).
 
 \begin{figure}[h!tbp]
   \centering
     \includegraphics[width=\figWidthWide]{figures/PreLimmaSeurat.pdf}
     \caption[New pre limma statement.]{\textbf{New pre limma statement.} The \texttt{pre
-    limma} statement generates an aggregated count table and needs tsne cluster information
+    limma} statement generates an aggregated count table and needs tSNE cluster information
     as input.}
 \label{fig:PreLimmaSeurat}
 \end{figure}
@@ -622,8 +620,8 @@ for an example of a new \texttt{pre limma} statement).
 \paragraph{input Seurat} The input is a Seurat object for which we want to compute the
 differentially expressed genes.
 
-\paragraph{tsne clusters from - to} These parameters need to be filled in with the clusters
-that result from the tsne computation.
+\paragraph{tSNE clusters from - to} These parameters need to be filled in with the clusters
+that result from the tSNE computation.
 
 \paragraph{output table} The aggregated count table contains one column per input Seurat
 object and per cluster. For instance, if we merged $\mathit{P1C}$ and
@@ -632,8 +630,7 @@ $\mathit{P1}$ and $\mathit{P2}$ into $\mathit{P1P2}$, and we have obtained clust
 $\mathit{0}$ and $\mathit{1}$, then we get columns $\mathit{P1C0}$, $\mathit{P1C1}$, $\mathit{P1D0}$, etc.
 Besides these columns, the output table contains a column with gene names and has also row names.
 
-The annotations that were introduced were loading the Seurat objects will appear as group
-usages in this output table.
+The annotations that were introduced when loading the Seurat objects will be propagated to the output table.
 
 \subsection{Limma voom}
 The limma statement computes the differentially expressed genes for the input count table and outputs
@@ -661,7 +658,7 @@ web plot is generated.
 
 For the explanation of the other parameters of the limma statement, look at the parameters described in the
 main limma statement provided by MetaR in Chapter~\ref{chap:LimmaVoom}. The only difference is that
-in the Seurat statement, one can specify multiple contrasts.
+in the Seurat statement, one can specify multiple contrasts (under the \texttt{comparisons} attribute).
 
 \section{Other Seurat statements}\label{sec:OtherSeuratStatements}
 There are two more Seurat statements that are useful at various places in the analysis: the
